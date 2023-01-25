@@ -1,4 +1,4 @@
-from acsets import Ob, Hom, Attr, AttrType, Schema, ACSet
+from acsets import ACSet, Attr, AttrType, Hom, Ob, Schema
 
 Species = Ob("S")
 Transition = Ob("T")
@@ -11,11 +11,9 @@ hom_ot = Hom("ot", Output, Transition)
 hom_os = Hom("os", Output, Species)
 
 SchPetri = Schema(
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [],
-    []
+    [Species, Transition, Input, Output], [hom_it, hom_is, hom_ot, hom_os], [], []
 )
+
 
 class Petri(ACSet):
     def __init__(self, schema=SchPetri):
@@ -31,7 +29,7 @@ class Petri(ACSet):
                 arc = self.add_part(Input)
                 self.set_subpart(arc, hom_it, t)
                 self.set_subpart(arc, hom_is, s)
-            for t in ins:
+            for s in outs:
                 arc = self.add_part(Output)
                 self.set_subpart(arc, hom_ot, t)
                 self.set_subpart(arc, hom_os, s)
