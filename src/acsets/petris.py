@@ -10,9 +10,7 @@ hom_is = Hom("is", Input, Species)
 hom_ot = Hom("ot", Output, Transition)
 hom_os = Hom("os", Output, Species)
 
-SchPetri = Schema(
-    [Species, Transition, Input, Output], [hom_it, hom_is, hom_ot, hom_os], [], []
-)
+SchPetri = Schema([Species, Transition, Input, Output], [hom_it, hom_is, hom_ot, hom_os], [], [])
 
 
 class Petri(ACSet):
