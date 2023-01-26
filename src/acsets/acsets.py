@@ -83,7 +83,7 @@ class ACSet:
         elif f in self.schema.attrs:
             assert isinstance(x, f.codom.ty)
         else:
-            raise (f"{f} not found in schema")
+            raise ValueError(f"{f} not found in schema")
 
     def set_subpart(self, i: int, f: Property, x: any):
         self._check_type(f, x)
