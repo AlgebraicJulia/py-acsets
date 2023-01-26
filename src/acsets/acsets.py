@@ -15,7 +15,7 @@ class Property:
 class Hom(Property):
     name: str
     dom: Ob
-    hom: Ob
+    codom: Ob
 
 
 @dataclass(eq=True, frozen=True)
