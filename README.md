@@ -21,7 +21,7 @@
     <a href="https://github.com/AlgebraicJulia/py-acsets/blob/main/LICENSE">
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/acsets" />
     </a>
-    <a href='https://acsets.readthedocs.io/en/latest/?badge=latest'>
+    <a href='https://py-acsets.readthedocs.io/en/latest/?badge=latest'>
         <img src='https://readthedocs.org/projects/acsets/badge/?version=latest' alt='Documentation Status' />
     </a>
     <a href="https://codecov.io/gh/AlgebraicJulia/py-acsets/branch/main">
@@ -32,9 +32,6 @@
     </a>
     <a href='https://github.com/psf/black'>
         <img src='https://img.shields.io/badge/code%20style-black-000000.svg' alt='Code style: black' />
-    </a>
-    <a href="https://github.com/AlgebraicJulia/py-acsets/blob/main/.github/CODE_OF_CONDUCT.md">
-        <img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg" alt="Contributor Covenant"/>
     </a>
 </p>
 
