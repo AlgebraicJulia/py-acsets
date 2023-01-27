@@ -10,10 +10,30 @@ hom_is = Hom("is", Input, Species)
 hom_ot = Hom("ot", Output, Transition)
 hom_os = Hom("os", Output, Species)
 
-SchPetri = Schema([Species, Transition, Input, Output], [hom_it, hom_is, hom_ot, hom_os], [], [])
+Name = AttrType("Name", str)
 
+attr_sname = Attr("sname", Species, Name)
+attr_sname = Attr("tname", Transition, Name)
+
+SchPetri = Schema(
+    [Species, Transition, Input, Output],
+    [hom_it, hom_is, hom_ot, hom_os],
+    [Name],
+    [attr_sname, attr_tname]
+)
 
 class Petri(ACSet):
+    """
+    A subclass of ACSet customized for petri nets.
+
+    .. code-block::
+
+        sir = Petri()
+        s,i,r = sir.add_species(3)
+        sir.set_subpart(s,attr_sname,"susceptible")
+        inf = sir.add_transitions([([s,i],[i,i])])
+        sir.set_subpart(inf,attr_tname,"infection")  sir = Petri()
+    """
     def __init__(self, schema=SchPetri):
         super(Petri, self).__init__(schema)
 
