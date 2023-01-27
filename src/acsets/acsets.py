@@ -1,44 +1,55 @@
 import json
-from dataclasses import dataclass
+from pydantic import BaseModel, create_model
 
 
-@dataclass(eq=True, frozen=True)
-class Ob:
+class Ob(BaseModel):
     name: str
 
+    class Config:
+        allow_mutation = False
 
-class Property:
-    pass
+
+class Property(BaseModel):
+    ty: int
 
 
-@dataclass(eq=True, frozen=True)
 class Hom(Property):
     name: str
     dom: Ob
     codom: Ob
+    ty = int
+
+    class Config:
+        allow_mutation = False
 
 
-@dataclass(eq=True, frozen=True)
-class AttrType:
+class AttrType(BaseModel):
     name: str
     ty: type
 
+    class Config:
+        allow_mutation = False
 
-@dataclass(eq=True, frozen=True)
+
 class Attr(Property):
     name: str
     dom: Ob
     codom: AttrType
 
+    class Config:
+        allow_mutation = False
 
-@dataclass(eq=True, frozen=True)
-class Schema:
+
+class Schema(BaseModel):
     """Schema for an acset"""
 
     obs: list[Ob]
     homs: list[Hom]
     attrtypes: list[AttrType]
     attrs: list[Attr]
+
+    class Config:
+        allow_mutation = False
 
     def props_outof(self, ob: Ob) -> list[Property]:
         return filter(lambda f: f.dom == ob, self.homs + self.attrs)
@@ -57,16 +68,32 @@ class Schema:
         if x != None:
             return x
 
+    def create_ob_model(self, name: str, ob: Ob):
+        return create_model(
+            ob.name,
+            **{prop.name: prop.ty for prop in self.props_outof(ob)}
+        )
+
+
+    def create_acset_model(self.name: str):
+        return create_model(
+            name,
+            **{ ob.name: list[self.create_ob_model(ob)] for ob in self.obs }
+        )
 
 class ACSet:
     schema: Schema
     _parts: dict[Ob, int]
     _subparts: dict[Property, dict[int, any]]
+    _model: BaseModel
+    _ob_models: dict[Ob, BaseModel]
 
-    def __init__(self, schema: Schema):
+    def __init__(self, name: str, schema: Schema):
         self.schema = schema
         self._parts = {ob: 0 for ob in schema.obs}
         self._subparts = {f: {} for f in schema.homs + schema.attrs}
+        self._model = schema.create_acset_model(name)
+        self._ob_models = {ob: schema.create_ob_model(ob) for ob in schema.obs}
 
     def add_parts(self, ob: Ob, n: int) -> range:
         assert ob in self.schema.obs
