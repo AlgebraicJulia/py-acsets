@@ -125,7 +125,7 @@ class Schema:
         self.ob_models = {
             ob: create_model(
                 ob.name,
-                **{prop.name: (prop.valtype() | None, None) for prop in self.props_outof(ob)},
+                **{prop.name: (Union[prop.valtype(), None], None) for prop in self.props_outof(ob)},
             )
             for ob in obs
         }
