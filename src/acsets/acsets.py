@@ -1,11 +1,14 @@
 import json
 from typing import Union
+
 from pydantic import BaseModel, create_model
 from pydantic.dataclasses import dataclass
+
 
 class HashableBaseModel(BaseModel):
     def __hash__(self):
         return hash((type(self),) + tuple(self.__dict__.values()))
+
 
 class Ob(HashableBaseModel):
     name: str
@@ -63,7 +66,9 @@ class Attr(HashableBaseModel):
     class Config:
         allow_mutation = False
 
+
 Property = Union[Hom, Attr]
+
 
 class VersionSpec(HashableBaseModel):
     ACSetSchema: str
@@ -72,7 +77,9 @@ class VersionSpec(HashableBaseModel):
     class Config:
         allow_mutation = False
 
+
 VERSION_SPEC = VersionSpec(ACSetSchema="0.0.1", Catlab="0.14.12")
+
 
 class CatlabSchema(HashableBaseModel):
     version: VersionSpec
@@ -82,23 +89,20 @@ class CatlabSchema(HashableBaseModel):
     attrs: list[Attr]
 
     def __init__(
-            self,
-            name: str,
-            obs: list[Ob],
-            homs: list[Hom],
-            attrtypes: list[AttrType],
-            attrs: list[Attr]
+        self,
+        name: str,
+        obs: list[Ob],
+        homs: list[Hom],
+        attrtypes: list[AttrType],
+        attrs: list[Attr],
     ) -> None:
         super(CatlabSchema, self).__init__(
-            version = VERSION_SPEC,
-            obs=obs,
-            homs=homs,
-            attrtypes=attrtypes,
-            attrs=attrs
+            version=VERSION_SPEC, obs=obs, homs=homs, attrtypes=attrtypes, attrs=attrs
         )
 
     class Config:
         allow_mutation = False
+
 
 class Schema:
     """Schema for an acset"""
@@ -109,25 +113,24 @@ class Schema:
     ob_models: dict[Ob, type[BaseModel]]
 
     def __init__(
-            self,
-            name: str,
-            obs: list[Ob],
-            homs: list[Hom],
-            attrtypes: list[AttrType],
-            attrs: list[Attr]
+        self,
+        name: str,
+        obs: list[Ob],
+        homs: list[Hom],
+        attrtypes: list[AttrType],
+        attrs: list[Attr],
     ) -> None:
         self.name = name
         self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
         self.ob_models = {
             ob: create_model(
                 ob.name,
-                **{prop.name: (prop.valtype() | None, None) for prop in self.props_outof(ob)}
+                **{prop.name: (prop.valtype() | None, None) for prop in self.props_outof(ob)},
             )
             for ob in obs
         }
         self.model = create_model(
-            self.name,
-            **{ ob.name: (list[self.ob_models[ob]],...) for ob in self.obs }
+            self.name, **{ob.name: (list[self.ob_models[ob]], ...) for ob in self.obs}
         )
 
     @property
@@ -169,6 +172,7 @@ class Schema:
         if x != None:
             return x
 
+
 class ACSet:
     name: str
     schema: Schema
@@ -195,7 +199,7 @@ class ACSet:
             if self.has_subpart(i, f):
                 del self._subparts[f][i]
         else:
-            assert(f.valid_value(x))
+            assert f.valid_value(x)
             self._subparts[f][i] = x
 
     def has_subpart(self, i: int, f: Property):
@@ -215,7 +219,7 @@ class ACSet:
         return range(0, self.nparts(ob))
 
     def incident(self, x: any, f: Property) -> list[int]:
-        assert(f.valid_value(x))
+        assert f.valid_value(x)
         return filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, any]:
@@ -227,8 +231,12 @@ class ACSet:
 
     def export_pydantic(self):
         return self.schema.model(
-            **{ob.name: [self.schema.ob_models[ob](**self.prop_dict(ob, i)) for i in self.parts(ob)]
-               for ob in self.schema.obs}
+            **{
+                ob.name: [
+                    self.schema.ob_models[ob](**self.prop_dict(ob, i)) for i in self.parts(ob)
+                ]
+                for ob in self.schema.obs
+            }
         )
 
     @classmethod
