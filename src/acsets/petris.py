@@ -20,8 +20,9 @@ SchPetri = Schema(
     [Species, Transition, Input, Output],
     [hom_it, hom_is, hom_ot, hom_os],
     [Name],
-    [attr_sname, attr_tname]
+    [attr_sname, attr_tname],
 )
+
 
 class Petri(ACSet):
     """
@@ -35,6 +36,7 @@ class Petri(ACSet):
         inf = sir.add_transitions([([s,i],[i,i])])
         sir.set_subpart(inf,attr_tname,"infection")  sir = Petri()
     """
+
     def __init__(self, schema=SchPetri):
         super(Petri, self).__init__("Petri", schema)
 
