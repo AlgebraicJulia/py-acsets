@@ -13,9 +13,10 @@ hom_os = Hom("os", Output, Species)
 Name = AttrType("Name", str)
 
 attr_sname = Attr("sname", Species, Name)
-attr_sname = Attr("tname", Transition, Name)
+attr_tname = Attr("tname", Transition, Name)
 
 SchPetri = Schema(
+    "Petri",
     [Species, Transition, Input, Output],
     [hom_it, hom_is, hom_ot, hom_os],
     [Name],
@@ -35,7 +36,7 @@ class Petri(ACSet):
         sir.set_subpart(inf,attr_tname,"infection")  sir = Petri()
     """
     def __init__(self, schema=SchPetri):
-        super(Petri, self).__init__(schema)
+        super(Petri, self).__init__("Petri", schema)
 
     def add_species(self, n: int) -> range:
         return self.add_parts(Species, n)
