@@ -13,7 +13,7 @@ hom_os = Hom("os", Output, Species)
 Name = AttrType("Name", str)
 
 attr_sname = Attr("sname", Species, Name)
-attr_sname = Attr("tname", Transition, Name)
+attr_tname = Attr("tname", Transition, Name)
 
 SchPetri = Schema(
     [Species, Transition, Input, Output],
