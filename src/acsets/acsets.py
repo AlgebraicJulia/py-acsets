@@ -1,5 +1,5 @@
 import json
-from typing import Union
+from typing import Union, Any
 
 from pydantic import BaseModel, create_model
 
@@ -52,7 +52,7 @@ class Hom(HashableBaseModel):
         """
         super(Hom, self).__init__(name=name, dom=dom, codom=codom)
 
-    def valid_value(self, x: any) -> bool:
+    def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
 
         Args:
@@ -126,7 +126,7 @@ class Attr(HashableBaseModel):
         """
         super(Attr, self).__init__(name=name, dom=dom, codom=codom)
 
-    def valid_value(self, x: any) -> bool:
+    def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
 
         Args:
@@ -228,15 +228,16 @@ class Schema:
         """
         self.name = name
         self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
-        self.ob_models = {
+        ob_models = {
             ob: create_model(
                 ob.name,
                 **{prop.name: (Union[prop.valtype(), None], None) for prop in self.props_outof(ob)},
             )
             for ob in obs
         }
+        self.ob_models = ob_models
         self.model = create_model(
-            self.name, **{ob.name: (list[self.ob_models[ob]], ...) for ob in self.obs}
+            self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs} # type: ignore
         )
 
     @property
@@ -284,7 +285,7 @@ class Schema:
         Returns:
             A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.
         """
-        return filter(lambda f: f.dom == ob, self.homs + self.attrs)
+        return list(filter(lambda f: f.dom == ob, self.homs + self.attrs))
 
     def homs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the morphisms that the given object `ob` maps to in the schema.
@@ -295,7 +296,7 @@ class Schema:
         Returns:
             A list of `Hom` objects where `ob` is in the domain of the morphism.
         """
-        return filter(lambda f: f.dom == ob, self.homs)
+        return list(filter(lambda f: f.dom == ob, self.homs))
 
     def attrs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the attributes that the given object `ob` maps to in the schema.
@@ -306,7 +307,7 @@ class Schema:
         Returns:
             A list of `Attr` objects where `ob` is in the domain of the attribute.
         """
-        return filter(lambda f: f.dom == ob, self.attrs)
+        return list(filter(lambda f: f.dom == ob, self.attrs))
 
     def from_string(self, s: str):
         """Get the appropriate object, morphism, attribute type, or attribute from the schema by name.
@@ -344,7 +345,7 @@ class ACSet:
     name: str
     schema: Schema
     _parts: dict[Ob, int]
-    _subparts: dict[Property, dict[int, any]]
+    _subparts: dict[Property, dict[int, Any]]
 
     def __init__(self, name: str, schema: Schema):
         """Initialize a new ACSet.
@@ -384,7 +385,7 @@ class ACSet:
         """
         return self.add_parts(ob, 1)[0]
 
-    def set_subpart(self, i: int, f: Property, x: any):
+    def set_subpart(self, i: int, f: Property, x: Any):
         """Modify a morphism or attribute for a row in a table of the ACSet.
 
         Args:
@@ -450,7 +451,7 @@ class ACSet:
         """
         return range(0, self.nparts(ob))
 
-    def incident(self, x: any, f: Property) -> list[int]:
+    def incident(self, x: Any, f: Property) -> list[int]:
         """Get all of the subparts incident to a part in the ACset.
 
         Args:
@@ -461,9 +462,9 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom))
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))
 
-    def prop_dict(self, ob: Ob, i: int) -> dict[str, any]:
+    def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.
 
         Args:
@@ -495,7 +496,7 @@ class ACSet:
         )
 
     @classmethod
-    def import_pydantic(cls, schema: Schema, d: any):
+    def import_pydantic(cls, name: str, schema: Schema, d: Any):
         """Deserialize a pydantic model to an ACSet with a given `Schema`
 
         Args:
@@ -505,7 +506,7 @@ class ACSet:
         Returns:
             The deserialized ACSet object.
         """
-        acs = cls(schema)
+        acs = cls(name, schema)
 
         assert type(d) == schema.model
 
@@ -528,7 +529,7 @@ class ACSet:
         return self.export_pydantic().json()
 
     @classmethod
-    def read_json(cls, schema: Schema, s: str):
+    def read_json(cls, name: str, schema: Schema, s: str):
         """Deserialize a JSON string to an ACSet with a given `Schema`.
 
         Args:
@@ -538,4 +539,4 @@ class ACSet:
         Returns:
             The deserialized ACSet object.
         """
-        return cls.import_pydantic(schema, schema.model.parse_obj(json.loads(s)))
+        return cls.import_pydantic(name, schema, schema.model.parse_obj(json.loads(s)))

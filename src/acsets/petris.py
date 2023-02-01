@@ -37,9 +37,9 @@ class Petri(ACSet):
         sir.set_subpart(inf,attr_tname,"infection")  sir = Petri()
     """
 
-    def __init__(self, schema=SchPetri):
+    def __init__(self, name="Petri", schema=SchPetri):
         """Initialize a new petri net."""
-        super(Petri, self).__init__("Petri", schema)
+        super(Petri, self).__init__(name, schema)
 
     def add_species(self, n: int) -> range:
         """Add `n` number of species to the petri net
