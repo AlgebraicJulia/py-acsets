@@ -1,3 +1,7 @@
+"""
+In this module, we define schemas and acsets.
+"""
+
 import json
 from typing import Union, Any
 
@@ -5,6 +9,8 @@ from pydantic import BaseModel, create_model
 
 
 class HashableBaseModel(BaseModel):
+    """An extension of BaseModel with an implementation of __hash__
+    """
     def __hash__(self):
         return hash((type(self),) + tuple(self.__dict__.values()))
 
@@ -21,9 +27,15 @@ class Ob(HashableBaseModel):
     name: str
 
     def __init__(self, name: str) -> None:
+        """Initialize a new object for a schema
+
+        Args:
+            name: The name of the object
+        """
         super(Ob, self).__init__(name=name)
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 
@@ -72,6 +84,7 @@ class Hom(HashableBaseModel):
         return int
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 
@@ -100,6 +113,7 @@ class AttrType(HashableBaseModel):
         super(AttrType, self).__init__(name=name, ty=ty)
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 
@@ -146,6 +160,7 @@ class Attr(HashableBaseModel):
         return self.codom.ty
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 
@@ -163,6 +178,7 @@ class VersionSpec(HashableBaseModel):
     Catlab: str
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 
@@ -190,11 +206,13 @@ class CatlabSchema(HashableBaseModel):
         attrtypes: list[AttrType],
         attrs: list[Attr],
     ) -> None:
+        """Creates a CatlabSchema: this should not be called directly, see the docs for Schema"""
         super(CatlabSchema, self).__init__(
             version=VERSION_SPEC, obs=obs, homs=homs, attrtypes=attrtypes, attrs=attrs
         )
 
     class Config:
+        """pydandic config"""
         allow_mutation = False
 
 

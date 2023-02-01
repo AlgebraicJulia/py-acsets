@@ -1,3 +1,7 @@
+"""
+In this model, we define a schema for petri nets, and then a subclass of acset
+with some convenience methods.
+"""
 from acsets import ACSet, Attr, AttrType, Hom, Ob, Schema
 
 Species = Ob("S")
