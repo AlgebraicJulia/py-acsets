@@ -15,6 +15,7 @@ class Ob(HashableBaseModel):
     For instance, in the schema for graphs, there are two objects, `Ob("V")` and
     `Ob("E")` for the tables of vertices and edges, respectively
     """
+
     name: str
 
     def __init__(self, name: str) -> None:
@@ -34,17 +35,38 @@ class Hom(HashableBaseModel):
     For instance, in the schema for graphs, there are two morphisms `Hom("src", E, V)`
     and `Hom("tgt", E, V)`.
     """
+
     name: str
     dom: Ob
     codom: Ob
 
     def __init__(self, name: str, dom: Ob, codom: Ob) -> None:
+        """Initialize a new morphism for a schema.
+
+        Args:
+            name: The name of the morphism.
+            dom: The object of the domain.
+            codom: The object of the codomain.
+        """
         super(Hom, self).__init__(name=name, dom=dom, codom=codom)
 
     def valid_value(self, x: any) -> bool:
+        """Check if a variable is a valid object in the morphism.
+
+        Args:
+            x: The variable of any type that you want to check.
+
+        Returns:
+            `True` if `x` is a valid object in the morphism and `False` otherwise.
+        """
         return type(x) == int
 
     def valtype(self) -> type:
+        """Get the valid type of the schema's objects.
+
+        Returns:
+            The type that is valid for objects in the schema.
+        """
         return int
 
     class Config:
@@ -62,9 +84,15 @@ class AttrType(HashableBaseModel):
     for single names. However, we might also want a Petri net where each
     transition, for instance, has a tuple of strings as its name.
     """
+
     name: str
 
     def __init__(self, name: str) -> None:
+        """Initialize a new attribute type for a schema.
+
+        Args:
+            name: The name of the attribute.
+        """
         super(AttrType, self).__init__(name=name)
 
     class Config:
@@ -79,17 +107,38 @@ class Attr(HashableBaseModel):
     For instance, in the schema for Petri nets, we have `Attr("sname", Species, Name)`
     which is the attribute that stores the name of a species in a Petri net.
     """
+
     name: str
     dom: Ob
     codom: AttrType
 
     def __init__(self, name: str, dom: Ob, codom: AttrType) -> None:
+        """Initialize a new attribute for a schema.
+
+        Args:
+            name: The name of the attribute.
+            dom: The object in the domain.
+            codom: The attribute type in the codomain
+        """
         super(Attr, self).__init__(name=name, dom=dom, codom=codom)
 
     def valid_value(self, x: any) -> bool:
+        """Check if a variable is a valid type to be an attribute.
+
+        Args:
+            x: The variable of any type that you want to check.
+
+        Returns:
+            `True` if `x` is a valid attribute and `False` otherwise.
+        """
         return type(x) == self.codom.ty
 
     def valtype(self) -> type:
+        """Get the valid attribute type
+
+        Returns:
+            The type that the attribute maps to.
+        """
         return self.codom.ty
 
     class Config:
@@ -105,6 +154,7 @@ class VersionSpec(HashableBaseModel):
     change the serialization format, we can migrate old serializations into new
     ones.
     """
+
     ACSetSchema: str
     Catlab: str
 
@@ -121,6 +171,7 @@ class CatlabSchema(HashableBaseModel):
     compatible with Catlab schemas. However, the user should not use this; instead
     the user should use the Schema class, which is below.
     """
+
     version: VersionSpec
     obs: list[Ob]
     homs: list[Hom]
@@ -162,6 +213,15 @@ class Schema:
         attrtypes: list[AttrType],
         attrs: list[Attr],
     ) -> None:
+        """Initialize a schema object.
+
+        Args:
+            name: The name of the schema.
+            obs: A list of of objects (`Ob`).
+            homs: A list of morphisms (`Hom`).
+            attrtypes: A list of attribute types (`AttrType`).
+            attrs: A list of attributes (`Attr`).
+        """
         self.name = name
         self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
         self.ob_models = {
@@ -177,30 +237,82 @@ class Schema:
 
     @property
     def obs(self):
+        """Get the objects of the schema
+
+        Returns:
+            A list of of `Ob`s
+        """
         return self.schema.obs
 
     @property
     def homs(self):
+        """Get the morphisms of the schema
+
+        Returns:
+            A list of of `Hom`s
+        """
         return self.schema.homs
 
     @property
     def attrtypes(self):
+        """Get the attribute types of the schema
+
+        Returns:
+            A list of of `AttrType`s
+        """
         return self.schema.attrtypes
 
     @property
     def attrs(self):
+        """Get the attributes of the schema
+
+        Returns:
+            A list of of `Attr`s
+        """
         return self.schema.attrs
 
     def props_outof(self, ob: Ob) -> list[Property]:
+        """Get all of the properties that the given object `ob` maps to in the schema.
+
+        Args:
+            ob: An `Ob` object that is in the schema.
+
+        Returns:
+            A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.
+        """
         return filter(lambda f: f.dom == ob, self.homs + self.attrs)
 
     def homs_outof(self, ob: Ob) -> list[Property]:
+        """Get all of the morphisms that the given object `ob` maps to in the schema.
+
+        Args:
+            ob: An `Ob` object that is in the schema.
+
+        Returns:
+            A list of `Hom` objects where `ob` is in the domain of the morphism.
+        """
         return filter(lambda f: f.dom == ob, self.homs)
 
     def attrs_outof(self, ob: Ob) -> list[Property]:
+        """Get all of the attributes that the given object `ob` maps to in the schema.
+
+        Args:
+            ob: An `Ob` object that is in the schema.
+
+        Returns:
+            A list of `Attr` objects where `ob` is in the domain of the attribute.
+        """
         return filter(lambda f: f.dom == ob, self.attrs)
 
     def from_string(self, s: str):
+        """Get the appropriate object, morphism, attribute type, or attribute from the schema by name.
+
+        Args:
+            s: The name of the schema element that you want to retrieve.
+
+        Returns:
+            The `Ob`/`Hom`/`AttrType`/`Attr` object that has the name `s` or `None` if no names match.
+        """
         x = next((x for x in self.obs if x.name == s), None)
         if x != None:
             return x
@@ -224,6 +336,7 @@ class ACSet:
     One can get all of the parts corresponding to an object, add parts, get the subparts,
     and set the subparts. Removing parts is currently unsupported.
     """
+
     name: str
     schema: Schema
     _parts: dict[Ob, int]
