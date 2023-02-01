@@ -40,11 +40,6 @@ A Catlab-compatible implementation of acsets in python.
 Included also is an AlgebraicJulia-compatible implementation of petri nets.
 
 
-## 💪 Getting Started
-
-> TODO show in a very small amount of space the **MOST** useful thing your package can do.
-Make it as short as possible! You have an entire set of docs for later.
-
 
 ## 🚀 Installation
 
