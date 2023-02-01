@@ -2,15 +2,16 @@ import json
 from typing import Union
 
 from pydantic import BaseModel, create_model
-from pydantic.dataclasses import dataclass
-
-
-class HashableBaseModel(BaseModel):
-    def __hash__(self):
-        return hash((type(self),) + tuple(self.__dict__.values()))
 
 
 class Ob(HashableBaseModel):
+    """
+    This class represents objects in schemas. In an acset, there is a table for
+    each object in the schema.
+
+    For instance, in the schema for graphs, there are two objects, `Ob("V")` and
+    `Ob("E")` for the tables of vertices and edges, respectively
+    """
     name: str
 
     def __init__(self, name: str) -> None:
@@ -21,6 +22,15 @@ class Ob(HashableBaseModel):
 
 
 class Hom(HashableBaseModel):
+    """
+    This class represents morphisms in schemas. In an acset, the table corresponding
+    to an object `x` has a foreign key column for every morphism in the schema that
+    has a domain (`dom`) of `x`, that has ids that reference rows in the table for
+    the codomain (`codom`).
+
+    For instance, in the schema for graphs, there are two morphisms `Hom("src", E, V)`
+    and `Hom("tgt", E, V)`.
+    """
     name: str
     dom: Ob
     codom: Ob
@@ -39,17 +49,33 @@ class Hom(HashableBaseModel):
 
 
 class AttrType(HashableBaseModel):
-    name: str
-    ty: type
+    """
+    This class represents attribute types in schemas. An attribute type is the "codomain"
+    of attributes. In an acset, each attrtype is associated with a type. But in general,
+    acsets are "polymorphic" over the types of their attributes.
 
-    def __init__(self, name: str, ty: type) -> None:
-        super(AttrType, self).__init__(name=name, ty=ty)
+    For instance, in the schema for Petri nets, there is an attribute type `Name
+    = AttrType("Name")`. Typically, we might associate this to the type `str`,
+    for single names. However, we might also want a Petri net where each
+    transition, for instance, has a tuple of strings as its name.
+    """
+    name: str
+
+    def __init__(self, name: str) -> None:
+        super(AttrType, self).__init__(name=name)
 
     class Config:
         allow_mutation = False
 
 
 class Attr(HashableBaseModel):
+    """
+    This class represents attributes in schemas. An attribute corresponds to a
+    non-foreign-key column in the table for its domain (`dom`).
+
+    For instance, in the schema for Petri nets, we have `Attr("sname", Species, Name)`
+    which is the attribute that stores the name of a species in a Petri net.
+    """
     name: str
     dom: Ob
     codom: AttrType
@@ -71,6 +97,11 @@ Property = Union[Hom, Attr]
 
 
 class VersionSpec(HashableBaseModel):
+    """
+    We use this version spec to version the serialization format, so that if we
+    change the serialization format, we can migrate old serializations into new
+    ones.
+    """
     ACSetSchema: str
     Catlab: str
 
@@ -82,6 +113,11 @@ VERSION_SPEC = VersionSpec(ACSetSchema="0.0.1", Catlab="0.14.12")
 
 
 class CatlabSchema(HashableBaseModel):
+    """
+    This schema is carefully laid out so that the JSON produced/consumed will be
+    compatible with Catlab schemas. However, the user should not use this; instead
+    the user should use the Schema class, which is below.
+    """
     version: VersionSpec
     obs: list[Ob]
     homs: list[Hom]
@@ -105,7 +141,10 @@ class CatlabSchema(HashableBaseModel):
 
 
 class Schema:
-    """Schema for an acset"""
+    """
+    This is a schema for an acset. Every acset needs a schema, to restrict the allowed
+    operations to ensure consistency.
+    """
 
     name: str
     schema: CatlabSchema
@@ -174,6 +213,14 @@ class Schema:
 
 
 class ACSet:
+    """
+    An acset consists of a collection of tables, one for every object in the schema.
+
+    The rows of the tables are called "parts", and the cells of the rows are called "subparts".
+
+    One can get all of the parts corresponding to an object, add parts, get the subparts,
+    and set the subparts. Removing parts is currently unsupported.
+    """
     name: str
     schema: Schema
     _parts: dict[Ob, int]
