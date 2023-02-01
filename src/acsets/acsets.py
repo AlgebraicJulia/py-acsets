@@ -3,9 +3,11 @@ from typing import Union
 
 from pydantic import BaseModel, create_model
 
+
 class HashableBaseModel(BaseModel):
     def __hash__(self):
         return hash((type(self),) + tuple(self.__dict__.values()))
+
 
 class Ob(HashableBaseModel):
     """
@@ -343,21 +345,51 @@ class ACSet:
     _subparts: dict[Property, dict[int, any]]
 
     def __init__(self, name: str, schema: Schema):
+        """Initialize a new ACSet.
+
+        Args:
+            name: The name of the ACSset.
+            schema: The schema of the ACSet.
+        """
         self.name = name
         self.schema = schema
         self._parts = {ob: 0 for ob in schema.obs}
         self._subparts = {f: {} for f in schema.homs + schema.attrs}
 
     def add_parts(self, ob: Ob, n: int) -> range:
+        """Add `n` rows to the `ob` table in the ACset.
+
+        Args:
+            ob: The object table to add rows to.
+            n: The number of rows to be inserted.
+
+        Returns:
+            A range of the indexes of the rows that were inserted into the `ob` table.
+        """
         assert ob in self.schema.obs
         i = self._parts[ob]
         self._parts[ob] += n
         return range(i, i + n)
 
     def add_part(self, ob: Ob) -> int:
+        """Add a single row to the `ob` table in the ACSet
+
+        Args:
+            ob: The object table to add a row to.
+
+        Returns:
+            The index of the new row in the `ob` table.
+        """
         return self.add_parts(ob, 1)[0]
 
     def set_subpart(self, i: int, f: Property, x: any):
+        """Modify a morphism or attribute for a row in a table of the ACSet.
+
+        Args:
+            i: The row index for the property mapping to be added to.
+            f: The `Hom` or `Attr` to modify.
+            x: A valid type for the given `Hom` or `Attr` to set the value or `None` to delete the property.
+        """
         if x == None:
             if self.has_subpart(i, f):
                 del self._subparts[f][i]
@@ -366,26 +398,79 @@ class ACSet:
             self._subparts[f][i] = x
 
     def has_subpart(self, i: int, f: Property):
+        """Check if a property exists for a given row in a table of the ACSset.
+
+        Args:
+            i: The row index for the property mapping to be added to.
+            f: The `Hom` or `Attr` to check for.
+
+        Returns:
+            `True` if the property `f` exists on row `i` or `False` if it doesn't.
+        """
         return i in self._subparts[f].keys()
 
     def subpart(self, i: int, f: Property, oneindex=False):
+        """Get the subpart of a part in an ACSet
+
+        Args:
+            oneindex (boolean): Whether or not to return the index starting at 1 or 0, default is `False` which is zero-indexed
+            i: The part that you are indexing.
+            f: The `Hom` or `Attr` to retrieve.
+
+        Returns:
+            The subpart of the ACset.
+        """
         if oneindex and type(f) == Hom:
             return self._subparts[f][i] + 1
         else:
             return self._subparts[f][i]
 
     def nparts(self, ob: Ob) -> int:
+        """Get the number of rows in a given table of the ACSet.
+
+        Args:
+            ob: The `Ob` table in the ACSet.
+
+        Returns:
+            The number of rows in `ob`.
+        """
         assert ob in self.schema.obs
         return self._parts[ob]
 
     def parts(self, ob: Ob) -> range:
+        """Get all of the row indexes in a given table of the ACSet.
+
+        Args:
+            ob: The `Ob` table in the ACSet.
+
+        Returns:
+            The range of all of the rows in `ob`.
+        """
         return range(0, self.nparts(ob))
 
     def incident(self, x: any, f: Property) -> list[int]:
+        """Get all of the subparts incident to a part in the ACset.
+
+        Args:
+            x: The subpart to look for.
+            f: The `Hom` or `Attr` mapping to search.
+
+        Returns:
+            A list indexes.
+        """
         assert f.valid_value(x)
         return filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, any]:
+        """Get a dictionary of all subparts for a given row in a table.
+
+        Args:
+            ob: The `Ob` table to index into.
+            i: The row in `ob`.
+
+        Returns:
+            A dictionary mapping property name to the value
+        """
         return {
             f.name: self.subpart(i, f, oneindex=True)
             for f in self.schema.props_outof(ob)
@@ -393,6 +478,11 @@ class ACSet:
         }
 
     def export_pydantic(self):
+        """Serialize the ACset to a pydantic model.
+
+        Returns:
+            The pydantic model of the serialized ACSet.
+        """
         return self.schema.model(
             **{
                 ob.name: [
@@ -404,6 +494,15 @@ class ACSet:
 
     @classmethod
     def import_pydantic(cls, schema: Schema, d: any):
+        """Deserialize a pydantic model to an ACSet with a given `Schema`
+
+        Args:
+            schema: The `Schema` of the ACSet that is defined by the pydantic model.
+            d: The pydantic model object.
+
+        Returns:
+            The deserialized ACSet object.
+        """
         acs = cls(schema)
 
         assert type(d) == schema.model
@@ -419,8 +518,22 @@ class ACSet:
         return acs
 
     def write_json(self):
+        """Serialize the ACSet to a JSON string.
+
+        Returns:
+            The JSON string of the serialized ACSet.
+        """
         return self.export_pydantic().json()
 
     @classmethod
     def read_json(cls, schema: Schema, s: str):
+        """Deserialize a JSON string to an ACSet with a given `Schema`.
+
+        Args:
+            schema: The `Schema` of the ACSet that is defined in the given JSON.
+            s: The JSON string
+
+        Returns:
+            The deserialized ACSet object.
+        """
         return cls.import_pydantic(schema, schema.model.parse_obj(json.loads(s)))
