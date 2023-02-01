@@ -88,14 +88,16 @@ class AttrType(HashableBaseModel):
     """
 
     name: str
+    ty: type
 
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, ty: type) -> None:
         """Initialize a new attribute type for a schema.
 
         Args:
-            name: The name of the attribute.
+            name: The name of the attribute type.
+            ty: The type assigned to the attribute type.
         """
-        super(AttrType, self).__init__(name=name)
+        super(AttrType, self).__init__(name=name, ty=ty)
 
     class Config:
         allow_mutation = False
