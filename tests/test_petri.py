@@ -18,10 +18,10 @@ class TestSerialization(unittest.TestCase):
 
         pd_sir = sir.export_pydantic()
         serialized = sir.write_json()
-        deserialized = petris.Petri.import_pydantic(petris.SchPetri, pd_sir)
+        deserialized = petris.Petri.import_pydantic("Petri", petris.SchPetri, pd_sir)
         pd_sir2 = deserialized.export_pydantic()
         reserialized = deserialized.write_json()
-        deserialized2 = petris.Petri.read_json(petris.SchPetri, reserialized)
+        deserialized2 = petris.Petri.read_json("Petri", petris.SchPetri, reserialized)
         rereserialized = deserialized2.write_json()
 
         self.assertEqual(pd_sir2, pd_sir)
