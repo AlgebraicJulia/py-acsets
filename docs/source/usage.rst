@@ -1,4 +1,6 @@
 Usage
 =====
-.. automodule:: acsets.api
+.. automodule:: acsets
+    :members:
+.. automodule:: acsets.petris
     :members:
