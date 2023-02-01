@@ -276,7 +276,7 @@ class Schema:
         return self.schema.attrs
 
     def props_outof(self, ob: Ob) -> list[Property]:
-        """Get all of the properties that the given object `ob` maps to in the schema.
+        """Get all of the properties with the domain of `ob` in the schema.
 
         Args:
             ob: An `Ob` object that is in the schema.
@@ -359,14 +359,14 @@ class ACSet:
         self._subparts = {f: {} for f in schema.homs + schema.attrs}
 
     def add_parts(self, ob: Ob, n: int) -> range:
-        """Add `n` rows to the `ob` table in the ACset.
+        """Add `n` parts to an object in the ACset.
 
         Args:
-            ob: The object table to add rows to.
-            n: The number of rows to be inserted.
+            ob: The object in the ACSet to add parts to.
+            n: The number of parts to be added.
 
         Returns:
-            A range of the indexes of the rows that were inserted into the `ob` table.
+            A range of the indexes of the new parts added to the object.
         """
         assert ob in self.schema.obs
         i = self._parts[ob]
@@ -374,13 +374,13 @@ class ACSet:
         return range(i, i + n)
 
     def add_part(self, ob: Ob) -> int:
-        """Add a single row to the `ob` table in the ACSet
+        """Add a single part to an object in the ACSet
 
         Args:
-            ob: The object table to add a row to.
+            ob: The object in the ACSet to add a part to.
 
         Returns:
-            The index of the new row in the `ob` table.
+            The index of the new part added to the object.
         """
         return self.add_parts(ob, 1)[0]
 
@@ -431,7 +431,7 @@ class ACSet:
         """Get the number of rows in a given table of the ACSet.
 
         Args:
-            ob: The `Ob` table in the ACSet.
+            ob: The object in the ACSet.
 
         Returns:
             The number of rows in `ob`.
@@ -443,7 +443,7 @@ class ACSet:
         """Get all of the row indexes in a given table of the ACSet.
 
         Args:
-            ob: The `Ob` table in the ACSet.
+            ob: The object in the ACSet.
 
         Returns:
             The range of all of the rows in `ob`.
@@ -467,7 +467,7 @@ class ACSet:
         """Get a dictionary of all subparts for a given row in a table.
 
         Args:
-            ob: The `Ob` table to index into.
+            ob: The object in the ACSet to index.
             i: The row in `ob`.
 
         Returns:
