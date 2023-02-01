@@ -38,12 +38,29 @@ class Petri(ACSet):
     """
 
     def __init__(self, schema=SchPetri):
+        """Initialize a new petri net."""
         super(Petri, self).__init__("Petri", schema)
 
     def add_species(self, n: int) -> range:
+        """Add `n` number of species to the petri net
+
+        Args:
+            n:  The number of species to add to the petri net.
+
+        Returns:
+            A range of the indexes of the species that were inserted into the petri net.
+        """
         return self.add_parts(Species, n)
 
     def add_transitions(self, transitions: list[tuple[list[int], list[int]]]) -> range:
+        """Add transitions to the petri net
+
+        Args:
+            transitions: A list of tuples where each tuple has two items: the first is a list of the input species and the second is a list of the output species.
+
+        Returns:
+            A range of the of the indexes of the transitions that were inserted into the petri net.
+        """
         ts = self.add_parts(Transition, len(transitions))
         for (t, (ins, outs)) in zip(ts, transitions):
             for s in ins:
