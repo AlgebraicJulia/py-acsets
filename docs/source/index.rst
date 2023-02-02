@@ -37,7 +37,7 @@ Table of Contents
    :name: start
 
    installation
-   usage
+   usage/index
 
 
 Indices and Tables
