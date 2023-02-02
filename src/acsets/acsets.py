@@ -3,14 +3,14 @@ In this module, we define schemas and acsets.
 """
 
 import json
-from typing import Union, Any
+from typing import Any, Union
 
 from pydantic import BaseModel, create_model
 
 
 class HashableBaseModel(BaseModel):
-    """An extension of BaseModel with an implementation of __hash__
-    """
+    """An extension of BaseModel with an implementation of __hash__"""
+
     def __hash__(self):
         return hash((type(self),) + tuple(self.__dict__.values()))
 
@@ -36,6 +36,7 @@ class Ob(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -85,6 +86,7 @@ class Hom(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -114,6 +116,7 @@ class AttrType(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -161,6 +164,7 @@ class Attr(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -179,6 +183,7 @@ class VersionSpec(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -213,6 +218,7 @@ class CatlabSchema(HashableBaseModel):
 
     class Config:
         """pydandic config"""
+
         allow_mutation = False
 
 
@@ -255,7 +261,7 @@ class Schema:
         }
         self.ob_models = ob_models
         self.model = create_model(
-            self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs} # type: ignore
+            self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
 
     @property
@@ -263,7 +269,7 @@ class Schema:
         """Get the objects of the schema
 
         Returns:
-            A list of of `Ob`s
+            A list of of `Ob`\s
         """
         return self.schema.obs
 
@@ -272,7 +278,7 @@ class Schema:
         """Get the morphisms of the schema
 
         Returns:
-            A list of of `Hom`s
+            A list of of `Hom`\s
         """
         return self.schema.homs
 
@@ -281,7 +287,7 @@ class Schema:
         """Get the attribute types of the schema
 
         Returns:
-            A list of of `AttrType`s
+            A list of of `AttrType`\s
         """
         return self.schema.attrtypes
 
@@ -290,7 +296,7 @@ class Schema:
         """Get the attributes of the schema
 
         Returns:
-            A list of of `Attr`s
+            A list of of `Attr`\s
         """
         return self.schema.attrs
 
