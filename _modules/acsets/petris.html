@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>acsets.petris &mdash; acsets 0.0.1-dev documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> acsets
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Modules</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">acsets</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>acsets.petris</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for acsets.petris</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this model, we define a schema for petri nets, and then a subclass of acset</span>
+<span class="sd">with some convenience methods.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">acsets</span> <span class="kn">import</span> <span class="n">ACSet</span><span class="p">,</span> <span class="n">Attr</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">,</span> <span class="n">Hom</span><span class="p">,</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">Schema</span>
+
+<span class="n">Species</span> <span class="o">=</span> <span class="n">Ob</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
+<span class="n">Transition</span> <span class="o">=</span> <span class="n">Ob</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">Input</span> <span class="o">=</span> <span class="n">Ob</span><span class="p">(</span><span class="s2">&quot;I&quot;</span><span class="p">)</span>
+<span class="n">Output</span> <span class="o">=</span> <span class="n">Ob</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">)</span>
+
+<span class="n">hom_it</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Transition</span><span class="p">)</span>
+<span class="n">hom_is</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Species</span><span class="p">)</span>
+<span class="n">hom_ot</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="s2">&quot;ot&quot;</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Transition</span><span class="p">)</span>
+<span class="n">hom_os</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">Species</span><span class="p">)</span>
+
+<span class="n">Name</span> <span class="o">=</span> <span class="n">AttrType</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+<span class="n">attr_sname</span> <span class="o">=</span> <span class="n">Attr</span><span class="p">(</span><span class="s2">&quot;sname&quot;</span><span class="p">,</span> <span class="n">Species</span><span class="p">,</span> <span class="n">Name</span><span class="p">)</span>
+<span class="n">attr_tname</span> <span class="o">=</span> <span class="n">Attr</span><span class="p">(</span><span class="s2">&quot;tname&quot;</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Name</span><span class="p">)</span>
+
+<span class="n">SchPetri</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
+    <span class="s2">&quot;Petri&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">Name</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">],</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Petri"><a class="viewcode-back" href="../../usage/petris.html#acsets.petris.Petri">[docs]</a><span class="k">class</span> <span class="nc">Petri</span><span class="p">(</span><span class="n">ACSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A subclass of ACSet customized for petri nets.</span>
+
+<span class="sd">    .. code-block::</span>
+
+<span class="sd">        sir = Petri()</span>
+<span class="sd">        s,i,r = sir.add_species(3)</span>
+<span class="sd">        sir.set_subpart(s,attr_sname,&quot;susceptible&quot;)</span>
+<span class="sd">        inf = sir.add_transitions([([s,i],[i,i])])</span>
+<span class="sd">        sir.set_subpart(inf,attr_tname,&quot;infection&quot;)  sir = Petri()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Petri&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">SchPetri</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new petri net.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Petri</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Petri.add_species"><a class="viewcode-back" href="../../usage/petris.html#acsets.petris.Petri.add_species">[docs]</a>    <span class="k">def</span> <span class="nf">add_species</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add `n` number of species to the petri net</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n:  The number of species to add to the petri net.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A range of the indexes of the species that were inserted into the petri net.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parts</span><span class="p">(</span><span class="n">Species</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Petri.add_transitions"><a class="viewcode-back" href="../../usage/petris.html#acsets.petris.Petri.add_transitions">[docs]</a>    <span class="k">def</span> <span class="nf">add_transitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transitions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add transitions to the petri net</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            transitions: A list of tuples where each tuple has two items: the first is a list of the input species and the second is a list of the output species.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A range of the of the indexes of the transitions that were inserted into the petri net.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parts</span><span class="p">(</span><span class="n">Transition</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">transitions</span><span class="p">))</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">ins</span><span class="p">,</span> <span class="n">outs</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">transitions</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ins</span><span class="p">:</span>
+                <span class="n">arc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_part</span><span class="p">(</span><span class="n">Input</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="n">hom_it</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">outs</span><span class="p">:</span>
+                <span class="n">arc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_part</span><span class="p">(</span><span class="n">Output</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ts</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Owen Lynch.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

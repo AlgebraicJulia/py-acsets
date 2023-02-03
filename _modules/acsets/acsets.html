@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>acsets.acsets &mdash; acsets 0.0.1-dev documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> acsets
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Modules</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">acsets</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>acsets.acsets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for acsets.acsets</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this module, we define schemas and acsets.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">create_model</span>
+
+
+<div class="viewcode-block" id="HashableBaseModel"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.HashableBaseModel">[docs]</a><span class="k">class</span> <span class="nc">HashableBaseModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An extension of BaseModel with an implementation of __hash__&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
+
+
+<div class="viewcode-block" id="Ob"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob">[docs]</a><span class="k">class</span> <span class="nc">Ob</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents objects in schemas. In an acset, there is a table for</span>
+<span class="sd">    each object in the schema.</span>
+
+<span class="sd">    For instance, in the schema for graphs, there are two objects, `Ob(&quot;V&quot;)` and</span>
+<span class="sd">    `Ob(&quot;E&quot;)` for the tables of vertices and edges, respectively</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new object for a schema</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Ob.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="Hom"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom">[docs]</a><span class="k">class</span> <span class="nc">Hom</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents morphisms in schemas. In an acset, the table corresponding</span>
+<span class="sd">    to an object `x` has a foreign key column for every morphism in the schema that</span>
+<span class="sd">    has a domain (`dom`) of `x`, that has ids that reference rows in the table for</span>
+<span class="sd">    the codomain (`codom`).</span>
+
+<span class="sd">    For instance, in the schema for graphs, there are two morphisms `Hom(&quot;src&quot;, E, V)`</span>
+<span class="sd">    and `Hom(&quot;tgt&quot;, E, V)`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span>
+    <span class="n">codom</span><span class="p">:</span> <span class="n">Ob</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">codom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new morphism for a schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the morphism.</span>
+<span class="sd">            dom: The object of the domain.</span>
+<span class="sd">            codom: The object of the codomain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hom</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Hom.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a variable is a valid object in the morphism.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: The variable of any type that you want to check.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `True` if `x` is a valid object in the morphism and `False` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span></div>
+
+<div class="viewcode-block" id="Hom.valtype"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.valtype">[docs]</a>    <span class="k">def</span> <span class="nf">valtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the valid type of the schema&#39;s objects.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The type that is valid for objects in the schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span></div>
+
+<div class="viewcode-block" id="Hom.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="AttrType"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType">[docs]</a><span class="k">class</span> <span class="nc">AttrType</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents attribute types in schemas. An attribute type is the &quot;codomain&quot;</span>
+<span class="sd">    of attributes. In an acset, each attrtype is associated with a type. But in general,</span>
+<span class="sd">    acsets are &quot;polymorphic&quot; over the types of their attributes.</span>
+
+<span class="sd">    For instance, in the schema for Petri nets, there is an attribute type `Name</span>
+<span class="sd">    = AttrType(&quot;Name&quot;)`. Typically, we might associate this to the type `str`,</span>
+<span class="sd">    for single names. However, we might also want a Petri net where each</span>
+<span class="sd">    transition, for instance, has a tuple of strings as its name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new attribute type for a schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the attribute type.</span>
+<span class="sd">            ty: The type assigned to the attribute type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttrType</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="n">ty</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AttrType.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="Attr"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr">[docs]</a><span class="k">class</span> <span class="nc">Attr</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class represents attributes in schemas. An attribute corresponds to a</span>
+<span class="sd">    non-foreign-key column in the table for its domain (`dom`).</span>
+
+<span class="sd">    For instance, in the schema for Petri nets, we have `Attr(&quot;sname&quot;, Species, Name)`</span>
+<span class="sd">    which is the attribute that stores the name of a species in a Petri net.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span>
+    <span class="n">codom</span><span class="p">:</span> <span class="n">AttrType</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">codom</span><span class="p">:</span> <span class="n">AttrType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new attribute for a schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the attribute.</span>
+<span class="sd">            dom: The object in the domain.</span>
+<span class="sd">            codom: The attribute type in the codomain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Attr</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Attr.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a variable is a valid type to be an attribute.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: The variable of any type that you want to check.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `True` if `x` is a valid attribute and `False` otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">codom</span><span class="o">.</span><span class="n">ty</span></div>
+
+<div class="viewcode-block" id="Attr.valtype"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.valtype">[docs]</a>    <span class="k">def</span> <span class="nf">valtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the valid attribute type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The type that the attribute maps to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">codom</span><span class="o">.</span><span class="n">ty</span></div>
+
+<div class="viewcode-block" id="Attr.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<span class="n">Property</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Hom</span><span class="p">,</span> <span class="n">Attr</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="VersionSpec"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec">[docs]</a><span class="k">class</span> <span class="nc">VersionSpec</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    We use this version spec to version the serialization format, so that if we</span>
+<span class="sd">    change the serialization format, we can migrate old serializations into new</span>
+<span class="sd">    ones.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ACSetSchema</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">Catlab</span><span class="p">:</span> <span class="nb">str</span>
+
+<div class="viewcode-block" id="VersionSpec.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<span class="n">VERSION_SPEC</span> <span class="o">=</span> <span class="n">VersionSpec</span><span class="p">(</span><span class="n">ACSetSchema</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span> <span class="n">Catlab</span><span class="o">=</span><span class="s2">&quot;0.14.12&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CatlabSchema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema">[docs]</a><span class="k">class</span> <span class="nc">CatlabSchema</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This schema is carefully laid out so that the JSON produced/consumed will be</span>
+<span class="sd">    compatible with Catlab schemas. However, the user should not use this; instead</span>
+<span class="sd">    the user should use the Schema class, which is below.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">version</span><span class="p">:</span> <span class="n">VersionSpec</span>
+    <span class="n">obs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ob</span><span class="p">]</span>
+    <span class="n">homs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Hom</span><span class="p">]</span>
+    <span class="n">attrtypes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">AttrType</span><span class="p">]</span>
+    <span class="n">attrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Attr</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">obs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ob</span><span class="p">],</span>
+        <span class="n">homs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Hom</span><span class="p">],</span>
+        <span class="n">attrtypes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">AttrType</span><span class="p">],</span>
+        <span class="n">attrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Attr</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a CatlabSchema: this should not be called directly, see the docs for Schema&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CatlabSchema</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">VERSION_SPEC</span><span class="p">,</span> <span class="n">obs</span><span class="o">=</span><span class="n">obs</span><span class="p">,</span> <span class="n">homs</span><span class="o">=</span><span class="n">homs</span><span class="p">,</span> <span class="n">attrtypes</span><span class="o">=</span><span class="n">attrtypes</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="CatlabSchema.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
+
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="Schema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema">[docs]</a><span class="k">class</span> <span class="nc">Schema</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is a schema for an acset. Every acset needs a schema, to restrict the allowed</span>
+<span class="sd">    operations to ensure consistency.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="n">CatlabSchema</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span>
+    <span class="n">ob_models</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Ob</span><span class="p">,</span> <span class="nb">type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">obs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ob</span><span class="p">],</span>
+        <span class="n">homs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Hom</span><span class="p">],</span>
+        <span class="n">attrtypes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">AttrType</span><span class="p">],</span>
+        <span class="n">attrs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Attr</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a schema object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the schema.</span>
+<span class="sd">            obs: A list of of objects (`Ob`).</span>
+<span class="sd">            homs: A list of morphisms (`Hom`).</span>
+<span class="sd">            attrtypes: A list of attribute types (`AttrType`).</span>
+<span class="sd">            attrs: A list of attributes (`Attr`).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">CatlabSchema</span><span class="p">(</span><span class="n">VERSION_SPEC</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">homs</span><span class="p">,</span> <span class="n">attrtypes</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+        <span class="n">ob_models</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">ob</span><span class="p">:</span> <span class="n">create_model</span><span class="p">(</span>
+                <span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="o">**</span><span class="p">{</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">Union</span><span class="p">[</span><span class="n">prop</span><span class="o">.</span><span class="n">valtype</span><span class="p">(),</span> <span class="kc">None</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">props_outof</span><span class="p">(</span><span class="n">ob</span><span class="p">)},</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">obs</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ob_models</span> <span class="o">=</span> <span class="n">ob_models</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">ob_models</span><span class="p">[</span><span class="n">ob</span><span class="p">]],</span> <span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obs</span><span class="p">}</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">obs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the objects of the schema</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of of `Ob`\s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">obs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">homs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the morphisms of the schema</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of of `Hom`\s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">homs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attrtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the attribute types of the schema</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of of `AttrType`\s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">attrtypes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the attributes of the schema</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of of `Attr`\s</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">attrs</span>
+
+<div class="viewcode-block" id="Schema.props_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.props_outof">[docs]</a>    <span class="k">def</span> <span class="nf">props_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the properties with the domain of `ob` in the schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: An `Ob` object that is in the schema.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">homs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Schema.homs_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.homs_outof">[docs]</a>    <span class="k">def</span> <span class="nf">homs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the morphisms that the given object `ob` maps to in the schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: An `Ob` object that is in the schema.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of `Hom` objects where `ob` is in the domain of the morphism.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">homs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Schema.attrs_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.attrs_outof">[docs]</a>    <span class="k">def</span> <span class="nf">attrs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the attributes that the given object `ob` maps to in the schema.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: An `Ob` object that is in the schema.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of `Attr` objects where `ob` is in the domain of the attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Schema.from_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the appropriate object, morphism, attribute type, or attribute from the schema by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            s: The name of the schema element that you want to retrieve.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The `Ob`/`Hom`/`AttrType`/`Attr` object that has the name `s` or `None` if no names match.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obs</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">homs</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrtypes</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span></div></div>
+
+
+<div class="viewcode-block" id="ACSet"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet">[docs]</a><span class="k">class</span> <span class="nc">ACSet</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An acset consists of a collection of tables, one for every object in the schema.</span>
+
+<span class="sd">    The rows of the tables are called &quot;parts&quot;, and the cells of the rows are called &quot;subparts&quot;.</span>
+
+<span class="sd">    One can get all of the parts corresponding to an object, add parts, get the subparts,</span>
+<span class="sd">    and set the subparts. Removing parts is currently unsupported.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span>
+    <span class="n">_parts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Ob</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">_subparts</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Property</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new ACSet.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the ACSset.</span>
+<span class="sd">            schema: The schema of the ACSet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span> <span class="o">=</span> <span class="p">{</span><span class="n">ob</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">obs</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">homs</span> <span class="o">+</span> <span class="n">schema</span><span class="o">.</span><span class="n">attrs</span><span class="p">}</span>
+
+<div class="viewcode-block" id="ACSet.add_parts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_parts">[docs]</a>    <span class="k">def</span> <span class="nf">add_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add `n` parts to an object in the ACset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: The object in the ACSet to add parts to.</span>
+<span class="sd">            n: The number of parts to be added.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A range of the indexes of the new parts added to the object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">obs</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">[</span><span class="n">ob</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">[</span><span class="n">ob</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ACSet.add_part"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_part">[docs]</a>    <span class="k">def</span> <span class="nf">add_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a single part to an object in the ACSet</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: The object in the ACSet to add a part to.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The index of the new part added to the object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parts</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ACSet.set_subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.set_subpart">[docs]</a>    <span class="k">def</span> <span class="nf">set_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify a morphism or attribute for a row in a table of the ACSet.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i: The row index for the property mapping to be added to.</span>
+<span class="sd">            f: The `Hom` or `Attr` to modify.</span>
+<span class="sd">            x: A valid type for the given `Hom` or `Attr` to set the value or `None` to delete the property.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">f</span><span class="o">.</span><span class="n">valid_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span></div>
+
+<div class="viewcode-block" id="ACSet.has_subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.has_subpart">[docs]</a>    <span class="k">def</span> <span class="nf">has_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a property exists for a given row in a table of the ACSset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i: The row index for the property mapping to be added to.</span>
+<span class="sd">            f: The `Hom` or `Attr` to check for.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            `True` if the property `f` exists on row `i` or `False` if it doesn&#39;t.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ACSet.subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.subpart">[docs]</a>    <span class="k">def</span> <span class="nf">subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">oneindex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the subpart of a part in an ACSet</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            oneindex (boolean): Whether or not to return the index starting at 1 or 0, default is `False` which is zero-indexed</span>
+<span class="sd">            i: The part that you are indexing.</span>
+<span class="sd">            f: The `Hom` or `Attr` to retrieve.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The subpart of the ACset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">oneindex</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="n">Hom</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ACSet.nparts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.nparts">[docs]</a>    <span class="k">def</span> <span class="nf">nparts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the number of rows in a given table of the ACSet.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: The object in the ACSet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The number of rows in `ob`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">obs</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">[</span><span class="n">ob</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ACSet.parts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.parts">[docs]</a>    <span class="k">def</span> <span class="nf">parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the row indexes in a given table of the ACSet.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: The object in the ACSet.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The range of all of the rows in `ob`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nparts</span><span class="p">(</span><span class="n">ob</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ACSet.incident"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.incident">[docs]</a>    <span class="k">def</span> <span class="nf">incident</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the subparts incident to a part in the ACset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: The subpart to look for.</span>
+<span class="sd">            f: The `Hom` or `Attr` mapping to search.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list indexes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">f</span><span class="o">.</span><span class="n">valid_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">dom</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="ACSet.prop_dict"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.prop_dict">[docs]</a>    <span class="k">def</span> <span class="nf">prop_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of all subparts for a given row in a table.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ob: The object in the ACSet to index.</span>
+<span class="sd">            i: The row in `ob`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary mapping property name to the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">oneindex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">props_outof</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="ACSet.export_pydantic"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.export_pydantic">[docs]</a>    <span class="k">def</span> <span class="nf">export_pydantic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACset to a pydantic model.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The pydantic model of the serialized ACSet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
+            <span class="o">**</span><span class="p">{</span>
+                <span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">ob_models</span><span class="p">[</span><span class="n">ob</span><span class="p">](</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">prop_dict</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">obs</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ACSet.import_pydantic"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.import_pydantic">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">import_pydantic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize a pydantic model to an ACSet with a given `Schema`</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            schema: The `Schema` of the ACSet that is defined by the pydantic model.</span>
+<span class="sd">            d: The pydantic model object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The deserialized ACSet object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">acs</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="n">schema</span><span class="o">.</span><span class="n">model</span>
+
+        <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">obs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">props</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">]:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">acs</span><span class="o">.</span><span class="n">add_part</span><span class="p">(</span><span class="n">ob</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">homs_outof</span><span class="p">(</span><span class="n">ob</span><span class="p">):</span>
+                    <span class="n">acs</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">props</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">attrs_outof</span><span class="p">(</span><span class="n">ob</span><span class="p">):</span>
+                    <span class="n">acs</span><span class="o">.</span><span class="n">set_subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">props</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">acs</span></div>
+
+<div class="viewcode-block" id="ACSet.write_json"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.write_json">[docs]</a>    <span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACSet to a JSON string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The JSON string of the serialized ACSet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_pydantic</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ACSet.read_json"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.read_json">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize a JSON string to an ACSet with a given `Schema`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            schema: The `Schema` of the ACSet that is defined in the given JSON.</span>
+<span class="sd">            s: The JSON string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The deserialized ACSet object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">import_pydantic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parse_obj</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Owen Lynch.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
