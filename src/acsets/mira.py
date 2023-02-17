@@ -26,8 +26,8 @@ attr_concept = Attr("mira_concept", Species, JsonStr)
 attr_initial = Attr("mira_initial_value", Species, Value)
 
 # Transition attributes
-attr_pname = Attr("pname", Transition, Name)
-attr_pval = Attr("pval", Transition, Value)
+attr_pname = Attr("parameter_name", Transition, Name)
+attr_pval = Attr("parameter_value", Transition, Value)
 attr_tname = Attr("tname", Transition, Name)
 attr_rate_law = Attr("mira_rate_law", Transition, SymPyStr)
 attr_rate_mathml = Attr("mira_rate_law_mathml", Transition, XmlStr)
