@@ -26,9 +26,10 @@ attr_concept = Attr("mira_concept", Species, JsonStr)
 attr_initial = Attr("mira_initial_value", Species, Value)
 
 # Transition attributes
+attr_tname = Attr("tname", Transition, Name)
 attr_pname = Attr("parameter_name", Transition, Name)
 attr_pval = Attr("parameter_value", Transition, Value)
-attr_tname = Attr("tname", Transition, Name)
+attr_template_type = Attr("template_type", Transition, Name)
 attr_rate_law = Attr("mira_rate_law", Transition, SymPyStr)
 attr_rate_mathml = Attr("mira_rate_law_mathml", Transition, XmlStr)
 attr_template = Attr("mira_template", Transition, JsonStr)
@@ -41,7 +42,7 @@ SchMira = Schema(
     attrtypes=[Name, Value, JsonStr, XmlStr, SymPyStr],
     attrs=[attr_sname, attr_tname, attr_pname, attr_pval,
            attr_ids, attr_context, attr_concept, attr_initial,
-           attr_rate_law, attr_rate_mathml, attr_template,
+           attr_template_type, attr_rate_law, attr_rate_mathml, attr_template,
            attr_parameters],
 )
 
