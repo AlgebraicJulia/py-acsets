@@ -544,13 +544,25 @@ class ACSet:
 
         return acs
 
-    def write_json(self):
+    def to_json_obj(self):
+        """Serialize the ACSet to a JSON object.
+
+        Returns:
+            The JSON object of the serialized ACSet.
+        """
+        return self.export_pydantic().dict()
+
+    def to_json_file(self, fname, *args, **kwargs):
+        with open(fname, 'w') as fh:
+            fh.write(self.write_json(*args, **kwargs))
+
+    def write_json(self, *args, **kwargs):
         """Serialize the ACSet to a JSON string.
 
         Returns:
             The JSON string of the serialized ACSet.
         """
-        return self.export_pydantic().json()
+        return self.export_pydantic().json(*args, **kwargs)
 
     @classmethod
     def read_json(cls, name: str, schema: Schema, s: str):
