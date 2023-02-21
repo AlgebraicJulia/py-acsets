@@ -2,6 +2,8 @@
 
 """Test serialization."""
 
+import os
+import tempfile
 import unittest
 
 from acsets import Hom, Ob, petris
@@ -34,3 +36,9 @@ class TestSerialization(unittest.TestCase):
         hom1 = Hom(name="hom1", dom=ob1, codom=ob2)
         self.assertIsInstance(hom1.dom, str)
         self.assertIsInstance(hom1.codom, str)
+
+    def test_write_schema(self):
+        """Test writing the schema does not error."""
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "petri.json")
+            petris.SchPetri.write_schema(path)
