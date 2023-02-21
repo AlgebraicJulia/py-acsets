@@ -5,6 +5,7 @@ In this module, we define schemas and acsets.
 import json
 from typing import Any, Union
 
+import pydantic.schema
 from pydantic import BaseModel, create_model
 
 
@@ -262,6 +263,20 @@ class Schema:
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
+
+    def make_schema(self, uri: Optional[str] = None, description: Optional[str] = None):
+        """Make a JSON schema dictionary object representing this schema.
+
+        :param uri: The URI where the JSON file that corresponds to this schema lives
+        :param description: A description of this schema
+        :returns: A dictionary with the JSON schema inside it that can be written with
+            :func:`json.dump`.
+        """
+        schema = pydantic.schema.schema([self.model], title=self.name, description=description)
+        schema["$schema"] = "http://json-schema.org/draft-07/schema#"
+        if uri is not None:
+            schema["$id"] = uri
+        return schema
 
     @property
     def obs(self):
