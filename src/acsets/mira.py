@@ -1,5 +1,10 @@
+"""
+This module implements a schema for what we call MiraNet, an extension
+of the Petri net model with additional attributes and metadata.
+"""
+
 from .petris import Petri
-from .acsets import ACSet, Attr, AttrType, Hom, Ob, Schema
+from .acsets import Attr, AttrType, Hom, Ob, Schema
 
 Species = Ob("S")
 Transition = Ob("T")
@@ -46,8 +51,11 @@ SchMira = Schema(
            attr_parameters],
 )
 
-class MiraNet(Petri):
 
+class MiraNet(Petri):
+    """A subclass of Petri customized for MiraNet."""
     schema = SchMira
+
     def __init__(self, name="MiraNet", schema=SchMira):
+        """Initialize a new MiraNet."""
         super(MiraNet, self).__init__(name, schema)
