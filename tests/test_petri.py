@@ -17,12 +17,12 @@ class TestSerialization(unittest.TestCase):
         inf, rec = sir.add_transitions([([s, i], [i, i]), ([i], [r])])
 
         pd_sir = sir.export_pydantic()
-        serialized = sir.write_json()
+        serialized = sir.to_json_str()
         deserialized = petris.Petri.import_pydantic("Petri", petris.SchPetri, pd_sir)
         pd_sir2 = deserialized.export_pydantic()
-        reserialized = deserialized.write_json()
+        reserialized = deserialized.to_json_str()
         deserialized2 = petris.Petri.read_json("Petri", petris.SchPetri, reserialized)
-        rereserialized = deserialized2.write_json()
+        rereserialized = deserialized2.to_json_str()
 
         self.assertEqual(pd_sir2, pd_sir)
         self.assertEqual(serialized, reserialized)
