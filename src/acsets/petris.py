@@ -4,20 +4,20 @@ with some convenience methods.
 """
 from acsets import ACSet, Attr, AttrType, Hom, Ob, Schema
 
-Species = Ob("S")
-Transition = Ob("T")
-Input = Ob("I")
-Output = Ob("O")
+Species = Ob(name="S")
+Transition = Ob(name="T")
+Input = Ob(name="I")
+Output = Ob(name="O")
 
-hom_it = Hom("it", Input, Transition)
-hom_is = Hom("is", Input, Species)
-hom_ot = Hom("ot", Output, Transition)
-hom_os = Hom("os", Output, Species)
+hom_it = Hom(name="it", dom=Input, codom=Transition)
+hom_is = Hom(name="is", dom=Input, codom=Species)
+hom_ot = Hom(name="ot", dom=Output, codom=Transition)
+hom_os = Hom(name="os", dom=Output, codom=Species)
 
-Name = AttrType("Name", str)
+Name = AttrType(name="Name", ty=str)
 
-attr_sname = Attr("sname", Species, Name)
-attr_tname = Attr("tname", Transition, Name)
+attr_sname = Attr(name="sname", dom=Species, codom=Name)
+attr_tname = Attr(name="tname", dom=Transition, codom=Name)
 
 SchPetri = Schema(
     "Petri",
