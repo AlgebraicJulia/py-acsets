@@ -417,7 +417,7 @@ class ACSet:
             f: The `Hom` or `Attr` to modify.
             x: A valid type for the given `Hom` or `Attr` to set the value or `None` to delete the property.
         """
-        if x == None:
+        if x is None:
             if self.has_subpart(i, f):
                 del self._subparts[f][i]
         else:
@@ -544,19 +544,37 @@ class ACSet:
 
         return acs
 
-    def write_json(self):
+    def to_json_obj(self):
+        """Serialize the ACSet to a JSON object.
+
+        Returns:
+            The JSON object of the serialized ACSet.
+        """
+        return self.export_pydantic().dict()
+
+    def to_json_file(self, fname, *args, **kwargs):
+        """Serialize the ACSet to a JSON file.
+
+        Args:
+            fname: The file name to write the JSON to.
+        """
+        with open(fname, 'w') as fh:
+            fh.write(self.to_json_str(*args, **kwargs))
+
+    def to_json_str(self, *args, **kwargs):
         """Serialize the ACSet to a JSON string.
 
         Returns:
             The JSON string of the serialized ACSet.
         """
-        return self.export_pydantic().json()
+        return self.export_pydantic().json(*args, **kwargs)
 
     @classmethod
     def read_json(cls, name: str, schema: Schema, s: str):
         """Deserialize a JSON string to an ACSet with a given `Schema`.
 
         Args:
+            name: The name of the ACSset.
             schema: The `Schema` of the ACSet that is defined in the given JSON.
             s: The JSON string
 
