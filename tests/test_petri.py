@@ -2,6 +2,8 @@
 
 """Test serialization."""
 
+import os
+import tempfile
 import unittest
 
 from acsets import petris
@@ -27,3 +29,9 @@ class TestSerialization(unittest.TestCase):
         self.assertEqual(pd_sir2, pd_sir)
         self.assertEqual(serialized, reserialized)
         self.assertEqual(reserialized, rereserialized)
+
+    def test_write_schema(self):
+        """Test writing the schema does not error."""
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "petri.json")
+            petris.SchPetri.write_schema(path)
