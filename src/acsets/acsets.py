@@ -2,10 +2,11 @@
 In this module, we define schemas and acsets.
 """
 
+import builtins
 import json
 from typing import Any, Optional, Union
 
-from pydantic import BaseModel, Field, create_model
+from pydantic import BaseModel, Field, create_model, validator
 
 
 class HashableBaseModel(BaseModel):
@@ -72,13 +73,14 @@ class Hom(HashableBaseModel):
         allow_mutation = False
 
 
-def _decoder(x: str) -> type:
+def _look_up_type(s: str) -> type:
+    """Look up the appropriate type from a string."""
     import builtins
 
-    if hasattr(builtins, x):
-        return getattr(builtins, x)
-    # how to handle more complex datatypes?
-    raise NotImplementedError
+    if hasattr(builtins, s):
+        return getattr(builtins, s)
+
+    raise NotImplementedError("non-builtin data types are not yet implemented")
 
 
 class AttrType(HashableBaseModel):
@@ -94,7 +96,16 @@ class AttrType(HashableBaseModel):
     """
 
     name: str = Field(description="The name of the attribute type.")
-    ty: type = Field(description="The type assigned to the attribute type.")
+    ty: Union[str, type] = Field(
+        description="The type assigned to the attribute type. Use a string referring to the Python type"
+    )
+    ty_cls: Optional[type] = Field(exclude=True)
+
+    @validator("ty_cls", always=True)
+    def populate_ty_cls(cls, v, values):
+        """Populate the parsed value of the type."""
+        ty = values["ty"]
+        return _look_up_type(ty) if isinstance(ty, str) else ty
 
     class Config:
         """pydandic config"""
@@ -102,9 +113,6 @@ class AttrType(HashableBaseModel):
         allow_mutation = False
         json_encoders = {
             type: lambda e: e.__qualname__,
-        }
-        json_decoders = {
-            type: _decoder,
         }
 
 
@@ -130,7 +138,7 @@ class Attr(HashableBaseModel):
         Returns:
             `True` if `x` is a valid attribute and `False` otherwise.
         """
-        return type(x) == self.codom.ty
+        return isinstance(x, self.valtype())
 
     def valtype(self) -> type:
         """Get the valid attribute type
@@ -138,12 +146,15 @@ class Attr(HashableBaseModel):
         Returns:
             The type that the attribute maps to.
         """
-        return self.codom.ty
+        return self.codom.ty_cls
 
     class Config:
         """pydandic config"""
 
         allow_mutation = False
+        json_encoders = {
+            type: lambda e: e.__qualname__,
+        }
 
 
 Property = Union[Hom, Attr]
@@ -187,9 +198,6 @@ class CatlabSchema(HashableBaseModel):
         allow_mutation = False
         json_encoders = {
             type: lambda e: e.__qualname__,
-        }
-        json_decoders = {
-            type: _decoder,
         }
 
 
@@ -531,7 +539,7 @@ class ACSet:
         Args:
             fname: The file name to write the JSON to.
         """
-        with open(fname, 'w') as fh:
+        with open(fname, "w") as fh:
             fh.write(self.to_json_str(*args, **kwargs))
 
     def to_json_str(self, *args, **kwargs):
