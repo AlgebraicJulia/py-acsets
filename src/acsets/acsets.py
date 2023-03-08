@@ -598,7 +598,7 @@ class ACSet:
         Args:
             fname: The file name to write the JSON to.
         """
-        with open(fname, 'w') as fh:
+        with open(fname, "w") as fh:
             fh.write(self.to_json_str(*args, **kwargs))
 
     def to_json_str(self, *args, **kwargs):
