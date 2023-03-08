@@ -146,6 +146,8 @@ class Attr(HashableBaseModel):
         Returns:
             The type that the attribute maps to.
         """
+        if self.codom.ty_cls is None:
+            raise RuntimeError
         return self.codom.ty_cls
 
     class Config:
