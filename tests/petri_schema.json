@@ -1,0 +1,86 @@
+{
+  "attrs": [
+    {
+      "codom": {
+        "name": "Name",
+        "ty": "str"
+      },
+      "dom": {
+        "name": "S"
+      },
+      "name": "sname"
+    },
+    {
+      "codom": {
+        "name": "Name",
+        "ty": "str"
+      },
+      "dom": {
+        "name": "T"
+      },
+      "name": "tname"
+    }
+  ],
+  "attrtypes": [
+    {
+      "name": "Name",
+      "ty": "str"
+    }
+  ],
+  "homs": [
+    {
+      "codom": {
+        "name": "T"
+      },
+      "dom": {
+        "name": "I"
+      },
+      "name": "it"
+    },
+    {
+      "codom": {
+        "name": "S"
+      },
+      "dom": {
+        "name": "I"
+      },
+      "name": "is"
+    },
+    {
+      "codom": {
+        "name": "T"
+      },
+      "dom": {
+        "name": "O"
+      },
+      "name": "ot"
+    },
+    {
+      "codom": {
+        "name": "S"
+      },
+      "dom": {
+        "name": "O"
+      },
+      "name": "os"
+    }
+  ],
+  "obs": [
+    {
+      "name": "S"
+    },
+    {
+      "name": "T"
+    },
+    {
+      "name": "I"
+    },
+    {
+      "name": "O"
+    }
+  ],
+  "version": {
+    "ACSetSchema": "0.0.1",
+    "Catlab": "0.14.12"
+  }
+}

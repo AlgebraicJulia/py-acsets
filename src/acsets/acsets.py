@@ -2,10 +2,11 @@
 In this module, we define schemas and acsets.
 """
 
+import builtins
 import json
-from typing import Any, Union
+from typing import Any, Optional, Union
 
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, Field, create_model, validator
 
 
 class HashableBaseModel(BaseModel):
@@ -24,15 +25,7 @@ class Ob(HashableBaseModel):
     `Ob("E")` for the tables of vertices and edges, respectively
     """
 
-    name: str
-
-    def __init__(self, name: str) -> None:
-        """Initialize a new object for a schema
-
-        Args:
-            name: The name of the object
-        """
-        super(Ob, self).__init__(name=name)
+    name: str = Field(..., description="The name of the object")
 
     class Config:
         """pydandic config"""
@@ -51,19 +44,9 @@ class Hom(HashableBaseModel):
     and `Hom("tgt", E, V)`.
     """
 
-    name: str
-    dom: Ob
-    codom: Ob
-
-    def __init__(self, name: str, dom: Ob, codom: Ob) -> None:
-        """Initialize a new morphism for a schema.
-
-        Args:
-            name: The name of the morphism.
-            dom: The object of the domain.
-            codom: The object of the codomain.
-        """
-        super(Hom, self).__init__(name=name, dom=dom, codom=codom)
+    name: str = Field(description="The name of the morphism.")
+    dom: Ob = Field(title="domain", description="The object of the domain.")
+    codom: Ob = Field(title="codomain", description="The object of the codomain.")
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -90,6 +73,16 @@ class Hom(HashableBaseModel):
         allow_mutation = False
 
 
+def _look_up_type(s: str) -> type:
+    """Look up the appropriate type from a string."""
+    import builtins
+
+    if hasattr(builtins, s):
+        return getattr(builtins, s)
+
+    raise NotImplementedError("non-builtin data types are not yet implemented")
+
+
 class AttrType(HashableBaseModel):
     """
     This class represents attribute types in schemas. An attribute type is the "codomain"
@@ -102,22 +95,25 @@ class AttrType(HashableBaseModel):
     transition, for instance, has a tuple of strings as its name.
     """
 
-    name: str
-    ty: type
+    name: str = Field(description="The name of the attribute type.")
+    ty: Union[str, type] = Field(
+        description="The type assigned to the attribute type. Use a string referring to the Python type"
+    )
+    ty_cls: Optional[type] = Field(exclude=True)
 
-    def __init__(self, name: str, ty: type) -> None:
-        """Initialize a new attribute type for a schema.
-
-        Args:
-            name: The name of the attribute type.
-            ty: The type assigned to the attribute type.
-        """
-        super(AttrType, self).__init__(name=name, ty=ty)
+    @validator("ty_cls", always=True)
+    def populate_ty_cls(cls, v, values):
+        """Populate the parsed value of the type."""
+        ty = values["ty"]
+        return _look_up_type(ty) if isinstance(ty, str) else ty
 
     class Config:
         """pydandic config"""
 
         allow_mutation = False
+        json_encoders = {
+            type: lambda e: e.__qualname__,
+        }
 
 
 class Attr(HashableBaseModel):
@@ -129,19 +125,9 @@ class Attr(HashableBaseModel):
     which is the attribute that stores the name of a species in a Petri net.
     """
 
-    name: str
-    dom: Ob
-    codom: AttrType
-
-    def __init__(self, name: str, dom: Ob, codom: AttrType) -> None:
-        """Initialize a new attribute for a schema.
-
-        Args:
-            name: The name of the attribute.
-            dom: The object in the domain.
-            codom: The attribute type in the codomain
-        """
-        super(Attr, self).__init__(name=name, dom=dom, codom=codom)
+    name: str = Field(title="name", description="The name of the attribute.")
+    dom: Ob = Field(title="domain", description="The object in the domain.")
+    codom: AttrType = Field(title="codomain", description="The attribute type in the codomain")
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
@@ -152,7 +138,7 @@ class Attr(HashableBaseModel):
         Returns:
             `True` if `x` is a valid attribute and `False` otherwise.
         """
-        return type(x) == self.codom.ty
+        return isinstance(x, self.valtype())
 
     def valtype(self) -> type:
         """Get the valid attribute type
@@ -160,12 +146,17 @@ class Attr(HashableBaseModel):
         Returns:
             The type that the attribute maps to.
         """
-        return self.codom.ty
+        if self.codom.ty_cls is None:
+            raise RuntimeError
+        return self.codom.ty_cls
 
     class Config:
         """pydandic config"""
 
         allow_mutation = False
+        json_encoders = {
+            type: lambda e: e.__qualname__,
+        }
 
 
 Property = Union[Hom, Attr]
@@ -197,29 +188,19 @@ class CatlabSchema(HashableBaseModel):
     the user should use the Schema class, which is below.
     """
 
-    version: VersionSpec
     obs: list[Ob]
     homs: list[Hom]
     attrtypes: list[AttrType]
     attrs: list[Attr]
-
-    def __init__(
-        self,
-        name: str,
-        obs: list[Ob],
-        homs: list[Hom],
-        attrtypes: list[AttrType],
-        attrs: list[Attr],
-    ) -> None:
-        """Creates a CatlabSchema: this should not be called directly, see the docs for Schema"""
-        super(CatlabSchema, self).__init__(
-            version=VERSION_SPEC, obs=obs, homs=homs, attrtypes=attrtypes, attrs=attrs
-        )
+    version: VersionSpec = Field(default=VERSION_SPEC)
 
     class Config:
         """pydandic config"""
 
         allow_mutation = False
+        json_encoders = {
+            type: lambda e: e.__qualname__,
+        }
 
 
 class Schema:
@@ -251,7 +232,9 @@ class Schema:
             attrs: A list of attributes (`Attr`).
         """
         self.name = name
-        self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
+        self.schema = CatlabSchema(
+            version=VERSION_SPEC, obs=obs, homs=homs, attrtypes=attrtypes, attrs=attrs
+        )
         ob_models = {
             ob: create_model(
                 ob.name,
@@ -558,7 +541,7 @@ class ACSet:
         Args:
             fname: The file name to write the JSON to.
         """
-        with open(fname, 'w') as fh:
+        with open(fname, "w") as fh:
             fh.write(self.to_json_str(*args, **kwargs))
 
     def to_json_str(self, *args, **kwargs):
