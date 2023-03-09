@@ -52,10 +52,10 @@ class Hom(HashableBaseModel):
     """
 
     name: str
-    dom: Ob
+    dom: str
     codom: Ob
 
-    def __init__(self, name: str, dom: Ob, codom: Ob) -> None:
+    def __init__(self, name: str, dom: Union[Ob, str], codom: Ob) -> None:
         """Initialize a new morphism for a schema.
 
         Args:
@@ -63,6 +63,8 @@ class Hom(HashableBaseModel):
             dom: The object of the domain.
             codom: The object of the codomain.
         """
+        if isinstance(dom, Ob):
+            dom = dom.name
         super(Hom, self).__init__(name=name, dom=dom, codom=codom)
 
     def valid_value(self, x: Any) -> bool:
