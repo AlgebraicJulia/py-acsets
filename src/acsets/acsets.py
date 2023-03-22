@@ -488,7 +488,7 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))  # type:ignore
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.
