@@ -86,7 +86,9 @@ class Hom(HashableBaseModel):
             title: The human-readable label for the morphism
             description: A long-form description of the morphism
         """
-        super(Hom, self).__init__(name=name, dom=dom.name, codom=codom.name, title=title, description=description)
+        super(Hom, self).__init__(
+            name=name, dom=dom.name, codom=codom.name, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -182,7 +184,9 @@ class Attr(HashableBaseModel):
             title: The human-readable label for the attribute
             description: A long-form description of the attribute
         """
-        super(Attr, self).__init__(name=name, dom=dom.name, codom=codom, title=title, description=description)
+        super(Attr, self).__init__(
+            name=name, dom=dom.name, codom=codom, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
