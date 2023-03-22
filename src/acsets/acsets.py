@@ -3,9 +3,14 @@ In this module, we define schemas and acsets.
 """
 
 import json
-from typing import Any, Union
+from pathlib import Path
+from typing import Any, Optional, Union
 
+import pydantic.schema
 from pydantic import BaseModel, create_model
+
+HERE = Path(__file__).parent.resolve()
+SCHEMAS_DIRECTORY = HERE.joinpath("schemas")
 
 
 class HashableBaseModel(BaseModel):
@@ -262,6 +267,31 @@ class Schema:
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
+
+    def make_schema(self, uri: Optional[str] = None):
+        """Make a JSON schema dictionary object representing this schema.
+
+        :param uri: The URI where the JSON file that corresponds to this schema lives
+        :returns: A dictionary with the JSON schema inside it that can be written with
+            :func:`json.dump`.
+        """
+        # TODO add description
+        schema = pydantic.schema.schema([self.model], title=self.name)
+        schema["$schema"] = "http://json-schema.org/draft-07/schema#"
+        if uri is not None:
+            schema["$id"] = uri
+        return schema
+
+    def write_schema(
+        self,
+        path,
+        uri: Optional[str] = None,
+    ) -> None:
+        """Write a JSON schema to a file path."""
+        schema = self.make_schema(uri=uri)
+        schema_str = json.dumps(schema, indent=2, ensure_ascii=False, sort_keys=True)
+        path = Path(path).expanduser().resolve()
+        path.write_text(schema_str)
 
     @property
     def obs(self):
