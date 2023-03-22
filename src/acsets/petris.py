@@ -2,7 +2,7 @@
 In this model, we define a schema for petri nets, and then a subclass of acset
 with some convenience methods.
 """
-from acsets import ACSet, Attr, AttrType, Hom, Ob, Schema
+from acsets import SCHEMAS_DIRECTORY, ACSet, Attr, AttrType, Hom, Ob, Schema
 
 Species = Ob("S", title="Species")
 Transition = Ob("T", title="Transition")
@@ -88,3 +88,10 @@ class Petri(ACSet):
                 self.set_subpart(arc, hom_ot, t)
                 self.set_subpart(arc, hom_os, s)
         return ts
+
+
+if __name__ == "__main__":
+    SchPetri.write_schema(
+        SCHEMAS_DIRECTORY.joinpath("petri.json"),
+        uri="https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/petri.json",
+    )

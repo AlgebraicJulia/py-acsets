@@ -3,9 +3,14 @@ In this module, we define schemas and acsets.
 """
 
 import json
+from pathlib import Path
 from typing import Any, Optional, Union
 
+import pydantic.schema
 from pydantic import BaseModel, create_model
+
+HERE = Path(__file__).parent.resolve()
+SCHEMAS_DIRECTORY = HERE.joinpath("schemas")
 
 
 class HashableBaseModel(BaseModel):
@@ -58,8 +63,8 @@ class Hom(HashableBaseModel):
     """
 
     name: str
-    dom: Ob
-    codom: Ob
+    dom: str
+    codom: str
     title: Optional[str] = None
     description: Optional[str] = None
 
@@ -81,9 +86,7 @@ class Hom(HashableBaseModel):
             title: The human-readable label for the morphism
             description: A long-form description of the morphism
         """
-        super(Hom, self).__init__(
-            name=name, dom=dom, codom=codom, title=title, description=description
-        )
+        super(Hom, self).__init__(name=name, dom=dom.name, codom=codom.name, title=title, description=description)
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -156,7 +159,7 @@ class Attr(HashableBaseModel):
     """
 
     name: str
-    dom: Ob
+    dom: str
     codom: AttrType
     title: Optional[str] = None
     description: Optional[str] = None
@@ -179,9 +182,7 @@ class Attr(HashableBaseModel):
             title: The human-readable label for the attribute
             description: A long-form description of the attribute
         """
-        super(Attr, self).__init__(
-            name=name, dom=dom, codom=codom, title=title, description=description
-        )
+        super(Attr, self).__init__(name=name, dom=dom.name, codom=codom, title=title, description=description)
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
@@ -245,7 +246,6 @@ class CatlabSchema(HashableBaseModel):
 
     def __init__(
         self,
-        name: str,
         obs: list[Ob],
         homs: list[Hom],
         attrtypes: list[AttrType],
@@ -291,7 +291,7 @@ class Schema:
             attrs: A list of attributes (`Attr`).
         """
         self.name = name
-        self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
+        self.schema = CatlabSchema(obs, homs, attrtypes, attrs)
         ob_models = {
             ob: create_model(
                 ob.name,
@@ -303,6 +303,31 @@ class Schema:
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
+
+    def make_schema(self, uri: Optional[str] = None):
+        """Make a JSON schema dictionary object representing this schema.
+
+        :param uri: The URI where the JSON file that corresponds to this schema lives
+        :returns: A dictionary with the JSON schema inside it that can be written with
+            :func:`json.dump`.
+        """
+        # TODO add description
+        schema = pydantic.schema.schema([self.model], title=self.name)
+        schema["$schema"] = "http://json-schema.org/draft-07/schema#"
+        if uri is not None:
+            schema["$id"] = uri
+        return schema
+
+    def write_schema(
+        self,
+        path,
+        uri: Optional[str] = None,
+    ) -> None:
+        """Write a JSON schema to a file path."""
+        schema = self.make_schema(uri=uri)
+        schema_str = json.dumps(schema, indent=2, ensure_ascii=False, sort_keys=True)
+        path = Path(path).expanduser().resolve()
+        path.write_text(schema_str)
 
     @property
     def obs(self):
@@ -526,7 +551,7 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(Ob(f.dom))))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.
