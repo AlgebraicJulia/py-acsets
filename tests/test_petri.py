@@ -20,6 +20,7 @@ class TestSerialization(unittest.TestCase):
             schema.schema.attrtypes,
         ]:
             for elements in elements:
+                self.assertIsNotNone(elements.name)
                 self.assertIsNotNone(elements.title)
 
     def test_serialization(self):
