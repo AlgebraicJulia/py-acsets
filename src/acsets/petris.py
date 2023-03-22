@@ -66,7 +66,7 @@ class Petri(ACSet):
             A range of the of the indexes of the transitions that were inserted into the petri net.
         """
         ts = self.add_parts(Transition, len(transitions))
-        for (t, (ins, outs)) in zip(ts, transitions):
+        for t, (ins, outs) in zip(ts, transitions):
             for s in ins:
                 arc = self.add_part(Input)
                 self.set_subpart(arc, hom_it, t)
