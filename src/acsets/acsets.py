@@ -2,11 +2,15 @@
 In this module, we define schemas and acsets.
 """
 
-import builtins
 import json
+from pathlib import Path
 from typing import Any, Optional, Union
 
+import pydantic.schema
 from pydantic import BaseModel, Field, create_model, validator
+
+HERE = Path(__file__).parent.resolve()
+SCHEMAS_DIRECTORY = HERE.joinpath("schemas")
 
 
 class HashableBaseModel(BaseModel):
@@ -45,8 +49,8 @@ class Hom(HashableBaseModel):
     """
 
     name: str = Field(description="The name of the morphism.")
-    dom: Ob = Field(title="domain", description="The object of the domain.")
-    codom: Ob = Field(title="codomain", description="The object of the codomain.")
+    dom: str = Field(title="domain", description="The object of the domain.")
+    codom: str = Field(title="codomain", description="The object of the codomain.")
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -126,7 +130,7 @@ class Attr(HashableBaseModel):
     """
 
     name: str = Field(title="name", description="The name of the attribute.")
-    dom: Ob = Field(title="domain", description="The object in the domain.")
+    dom: str = Field(title="domain", description="The object in the domain.")
     codom: AttrType = Field(title="codomain", description="The attribute type in the codomain")
 
     def valid_value(self, x: Any) -> bool:
@@ -246,6 +250,31 @@ class Schema:
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
+
+    def make_schema(self, uri: Optional[str] = None):
+        """Make a JSON schema dictionary object representing this schema.
+
+        :param uri: The URI where the JSON file that corresponds to this schema lives
+        :returns: A dictionary with the JSON schema inside it that can be written with
+            :func:`json.dump`.
+        """
+        # TODO add description
+        schema = pydantic.schema.schema([self.model], title=self.name)
+        schema["$schema"] = "http://json-schema.org/draft-07/schema#"
+        if uri is not None:
+            schema["$id"] = uri
+        return schema
+
+    def write_schema(
+        self,
+        path,
+        uri: Optional[str] = None,
+    ) -> None:
+        """Write a JSON schema to a file path."""
+        schema = self.make_schema(uri=uri)
+        schema_str = json.dumps(schema, indent=2, ensure_ascii=False, sort_keys=True)
+        path = Path(path).expanduser().resolve()
+        path.write_text(schema_str)
 
     @property
     def obs(self):
@@ -469,7 +498,7 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(Ob(f.dom))))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.

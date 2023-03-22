@@ -2,9 +2,11 @@
 
 """Test serialization."""
 
+import os
+import tempfile
 import unittest
 
-from acsets import AttrType, petris, Attr, Ob
+from acsets import Attr, AttrType, Hom, Ob, petris
 
 
 class TestSerialization(unittest.TestCase):
@@ -50,3 +52,16 @@ class TestSerialization(unittest.TestCase):
         self.assertEqual(pd_sir2, pd_sir)
         self.assertEqual(serialized, reserialized)
         self.assertEqual(reserialized, rereserialized)
+
+    def test_ob(self):
+        """Test instantiating a hom."""
+        ob1, ob2 = Ob(name="ob1"), Ob(name="ob2")
+        hom1 = Hom(name="hom1", dom=ob1, codom=ob2)
+        self.assertIsInstance(hom1.dom, str)
+        self.assertIsInstance(hom1.codom, str)
+
+    def test_write_schema(self):
+        """Test writing the schema does not error."""
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "petri.json")
+            petris.SchPetri.write_schema(path)
