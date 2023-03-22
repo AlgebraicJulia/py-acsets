@@ -79,6 +79,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#acsets.acsets.Schema"><code class="docutils literal notranslate"><span class="pre">Schema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.make_schema"><code class="docutils literal notranslate"><span class="pre">Schema.make_schema()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.write_schema"><code class="docutils literal notranslate"><span class="pre">Schema.write_schema()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.obs"><code class="docutils literal notranslate"><span class="pre">Schema.obs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.homs"><code class="docutils literal notranslate"><span class="pre">Schema.homs</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.attrtypes"><code class="docutils literal notranslate"><span class="pre">Schema.attrtypes</span></code></a></li>
@@ -349,6 +351,32 @@ attrtypes: A list of attribute types (<cite>AttrType</cite>).
 attrs: A list of attributes (<cite>Attr</cite>).</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="acsets.acsets.Schema.make_schema">
+<span class="sig-name descname"><span class="pre">make_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.make_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.make_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Make a JSON schema dictionary object representing this schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.11)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The URI where the JSON file that corresponds to this schema lives</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary with the JSON schema inside it that can be written with
+<a class="reference external" href="https://docs.python.org/3/library/json.html#json.dump" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">json.dump()</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="acsets.acsets.Schema.write_schema">
+<span class="sig-name descname"><span class="pre">write_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.write_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.write_schema" title="Permalink to this definition"></a></dt>
+<dd><p>Write a JSON schema to a file path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.obs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">obs</span></span><a class="headerlink" href="#acsets.acsets.Schema.obs" title="Permalink to this definition"></a></dt>
