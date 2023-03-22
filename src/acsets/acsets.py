@@ -53,9 +53,9 @@ class Hom(HashableBaseModel):
 
     name: str
     dom: str
-    codom: Ob
+    codom: str
 
-    def __init__(self, name: str, dom: Union[Ob, str], codom: Ob) -> None:
+    def __init__(self, name: str, dom: Ob, codom: Ob) -> None:
         """Initialize a new morphism for a schema.
 
         Args:
@@ -63,9 +63,7 @@ class Hom(HashableBaseModel):
             dom: The object of the domain.
             codom: The object of the codomain.
         """
-        if isinstance(dom, Ob):
-            dom = dom.name
-        super(Hom, self).__init__(name=name, dom=dom, codom=codom)
+        super(Hom, self).__init__(name=name, dom=dom.name, codom=codom.name)
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -132,7 +130,7 @@ class Attr(HashableBaseModel):
     """
 
     name: str
-    dom: Ob
+    dom: str
     codom: AttrType
 
     def __init__(self, name: str, dom: Ob, codom: AttrType) -> None:
@@ -143,7 +141,7 @@ class Attr(HashableBaseModel):
             dom: The object in the domain.
             codom: The attribute type in the codomain
         """
-        super(Attr, self).__init__(name=name, dom=dom, codom=codom)
+        super(Attr, self).__init__(name=name, dom=dom.name, codom=codom)
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
@@ -207,7 +205,6 @@ class CatlabSchema(HashableBaseModel):
 
     def __init__(
         self,
-        name: str,
         obs: list[Ob],
         homs: list[Hom],
         attrtypes: list[AttrType],
@@ -253,7 +250,7 @@ class Schema:
             attrs: A list of attributes (`Attr`).
         """
         self.name = name
-        self.schema = CatlabSchema(VERSION_SPEC, obs, homs, attrtypes, attrs)
+        self.schema = CatlabSchema(obs, homs, attrtypes, attrs)
         ob_models = {
             ob: create_model(
                 ob.name,
@@ -488,7 +485,7 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))  # type:ignore
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(Ob(f.dom))))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.
@@ -560,7 +557,7 @@ class ACSet:
         Args:
             fname: The file name to write the JSON to.
         """
-        with open(fname, 'w') as fh:
+        with open(fname, "w") as fh:
             fh.write(self.to_json_str(*args, **kwargs))
 
     def to_json_str(self, *args, **kwargs):
