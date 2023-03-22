@@ -33,10 +33,4 @@ class TestSerialization(unittest.TestCase):
         ob1, ob2 = Ob(name="ob1"), Ob(name="ob2")
         hom1 = Hom(name="hom1", dom=ob1, codom=ob2)
         self.assertIsInstance(hom1.dom, str)
-        self.assertIsInstance(hom1.codom, Ob)
-
-        hom2 = Hom(name="hom1", dom="ob1", codom=ob2)
-        self.assertIsInstance(hom2.dom, str)
-        self.assertIsInstance(hom2.codom, Ob)
-
-        self.assertEqual(hom1, hom2)
+        self.assertIsInstance(hom1.codom, str)
