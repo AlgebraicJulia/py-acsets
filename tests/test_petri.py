@@ -4,11 +4,34 @@
 
 import unittest
 
-from acsets import petris
+from acsets import AttrType, petris, Attr, Ob
 
 
 class TestSerialization(unittest.TestCase):
     """A test case for testing serialization."""
+
+    def test_metadata(self):
+        """Test metadata availability."""
+        schema = petris.SchPetri
+        for elements in [
+            schema.schema.obs,
+            schema.schema.homs,
+            schema.schema.attrs,
+            schema.schema.attrtypes,
+        ]:
+            for elements in elements:
+                self.assertIsNotNone(elements.name)
+
+    def test_look_up(self):
+        """Test looking up class."""
+        attr_type = AttrType(name="test", ty="str")
+        self.assertEqual(str, attr_type.ty_cls)
+
+        attr = Attr(name="test_attr", dom=Ob(name="test_ob"), codom=attr_type)
+        self.assertTrue(attr.valid_value("true!"))
+        self.assertFalse(attr.valid_value(1))
+        self.assertFalse(attr.valid_value(False))
+        self.assertFalse(attr.valid_value(1.0))
 
     def test_serialization(self):
         """Test serialization round trip."""
