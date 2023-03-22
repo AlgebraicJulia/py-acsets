@@ -4,7 +4,7 @@
 
 import unittest
 
-from acsets import petris
+from acsets import Hom, Ob, petris
 
 
 class TestSerialization(unittest.TestCase):
@@ -27,3 +27,16 @@ class TestSerialization(unittest.TestCase):
         self.assertEqual(pd_sir2, pd_sir)
         self.assertEqual(serialized, reserialized)
         self.assertEqual(reserialized, rereserialized)
+
+    def test_ob(self):
+        """Test instantiating a hom."""
+        ob1, ob2 = Ob(name="ob1"), Ob(name="ob2")
+        hom1 = Hom(name="hom1", dom=ob1, codom=ob2)
+        self.assertIsInstance(hom1.dom, str)
+        self.assertIsInstance(hom1.codom, Ob)
+
+        hom2 = Hom(name="hom1", dom="ob1", codom=ob2)
+        self.assertIsInstance(hom2.dom, str)
+        self.assertIsInstance(hom2.codom, Ob)
+
+        self.assertEqual(hom1, hom2)
