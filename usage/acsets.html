@@ -154,14 +154,16 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Ob">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Ob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Ob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob" title="Permalink to this definition"></a></dt>
 <dd><p>This class represents objects in schemas. In an acset, there is a table for
 each object in the schema.</p>
 <p>For instance, in the schema for graphs, there are two objects, <cite>Ob(“V”)</cite> and
 <cite>Ob(“E”)</cite> for the tables of vertices and edges, respectively</p>
 <p>Initialize a new object for a schema</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>name: The name of the object</p>
+<dt>Args:</dt><dd><p>name: The name of the object
+title: The human-readable label for the object
+description: A long-form description of the object</p>
 </dd>
 </dl>
 <dl class="py class">
@@ -174,7 +176,7 @@ each object in the schema.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Hom">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Hom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Hom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codom</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom" title="Permalink to this definition"></a></dt>
 <dd><p>This class represents morphisms in schemas. In an acset, the table corresponding
 to an object <cite>x</cite> has a foreign key column for every morphism in the schema that
 has a domain (<cite>dom</cite>) of <cite>x</cite>, that has ids that reference rows in the table for
@@ -185,7 +187,9 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>name: The name of the morphism.
 dom: The object of the domain.
-codom: The object of the codomain.</p>
+codom: The object of the codomain.
+title: The human-readable label for the morphism
+description: A long-form description of the morphism</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -230,7 +234,7 @@ codom: The object of the codomain.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.AttrType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttrType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttrType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ty</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType" title="Permalink to this definition"></a></dt>
 <dd><p>This class represents attribute types in schemas. An attribute type is the “codomain”
 of attributes. In an acset, each attrtype is associated with a type. But in general,
 acsets are “polymorphic” over the types of their attributes.</p>
@@ -241,7 +245,9 @@ transition, for instance, has a tuple of strings as its name.</p>
 <p>Initialize a new attribute type for a schema.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>name: The name of the attribute type.
-ty: The type assigned to the attribute type.</p>
+ty: The type assigned to the attribute type.
+title: The human-readable label for the attribute type
+description: A long-form description of the attribute type</p>
 </dd>
 </dl>
 <dl class="py class">
@@ -254,7 +260,7 @@ ty: The type assigned to the attribute type.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Attr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codom</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr" title="Permalink to this definition"></a></dt>
 <dd><p>This class represents attributes in schemas. An attribute corresponds to a
 non-foreign-key column in the table for its domain (<cite>dom</cite>).</p>
 <p>For instance, in the schema for Petri nets, we have <cite>Attr(“sname”, Species, Name)</cite>
@@ -263,7 +269,9 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>name: The name of the attribute.
 dom: The object in the domain.
-codom: The attribute type in the codomain</p>
+codom: The attribute type in the codomain
+title: The human-readable label for the attribute
+description: A long-form description of the attribute</p>
 </dd>
 </dl>
 <dl class="py method">

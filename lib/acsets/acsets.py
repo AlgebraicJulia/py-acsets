@@ -30,14 +30,20 @@ class Ob(HashableBaseModel):
     """
 
     name: str
+    title: Optional[str] = None
+    description: Optional[str] = None
 
-    def __init__(self, name: str) -> None:
+    def __init__(
+        self, name: str, *, title: Optional[str] = None, description: Optional[str] = None
+    ) -> None:
         """Initialize a new object for a schema
 
         Args:
             name: The name of the object
+            title: The human-readable label for the object
+            description: A long-form description of the object
         """
-        super(Ob, self).__init__(name=name)
+        super(Ob, self).__init__(name=name, title=title, description=description)
 
     class Config:
         """pydandic config"""
@@ -59,16 +65,30 @@ class Hom(HashableBaseModel):
     name: str
     dom: str
     codom: str
+    title: Optional[str] = None
+    description: Optional[str] = None
 
-    def __init__(self, name: str, dom: Ob, codom: Ob) -> None:
+    def __init__(
+        self,
+        name: str,
+        dom: Ob,
+        codom: Ob,
+        *,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> None:
         """Initialize a new morphism for a schema.
 
         Args:
             name: The name of the morphism.
             dom: The object of the domain.
             codom: The object of the codomain.
+            title: The human-readable label for the morphism
+            description: A long-form description of the morphism
         """
-        super(Hom, self).__init__(name=name, dom=dom.name, codom=codom.name)
+        super(Hom, self).__init__(
+            name=name, dom=dom.name, codom=codom.name, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -109,15 +129,21 @@ class AttrType(HashableBaseModel):
 
     name: str
     ty: type
+    title: Optional[str] = None
+    description: Optional[str] = None
 
-    def __init__(self, name: str, ty: type) -> None:
+    def __init__(
+        self, name: str, ty: type, *, title: Optional[str] = None, description: Optional[str] = None
+    ) -> None:
         """Initialize a new attribute type for a schema.
 
         Args:
             name: The name of the attribute type.
             ty: The type assigned to the attribute type.
+            title: The human-readable label for the attribute type
+            description: A long-form description of the attribute type
         """
-        super(AttrType, self).__init__(name=name, ty=ty)
+        super(AttrType, self).__init__(name=name, ty=ty, title=title, description=description)
 
     class Config:
         """pydandic config"""
@@ -137,16 +163,30 @@ class Attr(HashableBaseModel):
     name: str
     dom: str
     codom: AttrType
+    title: Optional[str] = None
+    description: Optional[str] = None
 
-    def __init__(self, name: str, dom: Ob, codom: AttrType) -> None:
+    def __init__(
+        self,
+        name: str,
+        dom: Ob,
+        codom: AttrType,
+        *,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> None:
         """Initialize a new attribute for a schema.
 
         Args:
             name: The name of the attribute.
             dom: The object in the domain.
             codom: The attribute type in the codomain
+            title: The human-readable label for the attribute
+            description: A long-form description of the attribute
         """
-        super(Attr, self).__init__(name=name, dom=dom.name, codom=codom)
+        super(Attr, self).__init__(
+            name=name, dom=dom.name, codom=codom, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.

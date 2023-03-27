@@ -4,20 +4,32 @@ with some convenience methods.
 """
 from acsets import SCHEMAS_DIRECTORY, ACSet, Attr, AttrType, Hom, Ob, Schema
 
-Species = Ob("S")
-Transition = Ob("T")
-Input = Ob("I")
-Output = Ob("O")
+Species = Ob("S", title="Species")
+Transition = Ob("T", title="Transition")
+Input = Ob("I", title="Input")
+Output = Ob("O", title="Output")
 
-hom_it = Hom("it", Input, Transition)
-hom_is = Hom("is", Input, Species)
-hom_ot = Hom("ot", Output, Transition)
-hom_os = Hom("os", Output, Species)
+hom_it = Hom("it", Input, Transition, title="Input transition morphism")
+hom_is = Hom("is", Input, Species, title="Input species morphism")
+hom_ot = Hom("ot", Output, Transition, title="Output transition morphism")
+hom_os = Hom("os", Output, Species, title="Output species morphism")
 
-Name = AttrType("Name", str)
+Name = AttrType("Name", str, title="Name")
 
-attr_sname = Attr("sname", Species, Name)
-attr_tname = Attr("tname", Transition, Name)
+attr_sname = Attr(
+    "sname",
+    Species,
+    Name,
+    title="Species name",
+    description="An attribute representing the name of a species.",
+)
+attr_tname = Attr(
+    "tname",
+    Transition,
+    Name,
+    title="Transition name",
+    description="An attribute representing the name of a transition.",
+)
 
 SchPetri = Schema(
     "Petri",
@@ -66,7 +78,7 @@ class Petri(ACSet):
             A range of the of the indexes of the transitions that were inserted into the petri net.
         """
         ts = self.add_parts(Transition, len(transitions))
-        for (t, (ins, outs)) in zip(ts, transitions):
+        for t, (ins, outs) in zip(ts, transitions):
             for s in ins:
                 arc = self.add_part(Input)
                 self.set_subpart(arc, hom_it, t)

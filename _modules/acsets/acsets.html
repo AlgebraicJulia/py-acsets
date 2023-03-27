@@ -104,14 +104,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new object for a schema</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the object</span>
+<span class="sd">            title: The human-readable label for the object</span>
+<span class="sd">            description: A long-form description of the object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Ob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Ob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Ob.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
@@ -133,16 +139,30 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">dom</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">codom</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">codom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span>
+        <span class="n">codom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new morphism for a schema.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the morphism.</span>
 <span class="sd">            dom: The object of the domain.</span>
 <span class="sd">            codom: The object of the codomain.</span>
+<span class="sd">            title: The human-readable label for the morphism</span>
+<span class="sd">            description: A long-form description of the morphism</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Hom</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Hom</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="Hom.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a variable is a valid object in the morphism.</span>
@@ -183,15 +203,21 @@
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new attribute type for a schema.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the attribute type.</span>
 <span class="sd">            ty: The type assigned to the attribute type.</span>
+<span class="sd">            title: The human-readable label for the attribute type</span>
+<span class="sd">            description: A long-form description of the attribute type</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">AttrType</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="n">ty</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttrType</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="n">ty</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AttrType.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
@@ -211,16 +237,30 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">dom</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">codom</span><span class="p">:</span> <span class="n">AttrType</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">codom</span><span class="p">:</span> <span class="n">AttrType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dom</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span>
+        <span class="n">codom</span><span class="p">:</span> <span class="n">AttrType</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new attribute for a schema.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            name: The name of the attribute.</span>
 <span class="sd">            dom: The object in the domain.</span>
 <span class="sd">            codom: The attribute type in the codomain</span>
+<span class="sd">            title: The human-readable label for the attribute</span>
+<span class="sd">            description: A long-form description of the attribute</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Attr</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Attr</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">dom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">codom</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">description</span>
+        <span class="p">)</span>
 
 <div class="viewcode-block" id="Attr.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a variable is a valid type to be an attribute.</span>
