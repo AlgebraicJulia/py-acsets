@@ -12,6 +12,19 @@ from acsets import Hom, Ob, petris
 class TestSerialization(unittest.TestCase):
     """A test case for testing serialization."""
 
+    def test_metadata(self):
+        """Test metadata availability."""
+        schema = petris.SchPetri
+        for elements in [
+            schema.schema.obs,
+            schema.schema.homs,
+            schema.schema.attrs,
+            schema.schema.attrtypes,
+        ]:
+            for elements in elements:
+                self.assertIsNotNone(elements.name)
+                self.assertIsNotNone(elements.title)
+
     def test_serialization(self):
         """Test serialization round trip."""
         sir = petris.Petri()
