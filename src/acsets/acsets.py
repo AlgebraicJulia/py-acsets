@@ -30,6 +30,8 @@ class Ob(HashableBaseModel):
     """
 
     name: str = Field(..., description="The name of the object")
+    title: Optional[str] = Field(description="The human-readable label for the object")
+    description: Optional[str] = Field(description="A long-form description of the object")
 
     class Config:
         """pydandic config"""
@@ -51,6 +53,30 @@ class Hom(HashableBaseModel):
     name: str = Field(description="The name of the morphism.")
     dom: str = Field(title="domain", description="The object of the domain.")
     codom: str = Field(title="codomain", description="The object of the codomain.")
+    title: Optional[str] = Field(description="The human-readable label for the morphism")
+    description: Optional[str] = Field(description="A long-form description of the morphism")
+
+    def __init__(
+        self,
+        name: str,
+        dom: Ob,
+        codom: Ob,
+        *,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> None:
+        """Initialize a new morphism for a schema.
+
+        Args:
+            name: The name of the morphism.
+            dom: The object of the domain.
+            codom: The object of the codomain.
+            title: The human-readable label for the morphism
+            description: A long-form description of the morphism
+        """
+        super(Hom, self).__init__(
+            name=name, dom=dom.name, codom=codom.name, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -103,6 +129,8 @@ class AttrType(HashableBaseModel):
     ty: Union[str, type] = Field(
         description="The type assigned to the attribute type. Use a string referring to the Python type"
     )
+    title: Optional[str] = None
+    description: Optional[str] = None
     ty_cls: Optional[type] = Field(exclude=True)
 
     @validator("ty_cls", always=True)
@@ -132,6 +160,30 @@ class Attr(HashableBaseModel):
     name: str = Field(title="name", description="The name of the attribute.")
     dom: str = Field(title="domain", description="The object in the domain.")
     codom: AttrType = Field(title="codomain", description="The attribute type in the codomain")
+    title: Optional[str] = None
+    description: Optional[str] = None
+
+    def __init__(
+        self,
+        name: str,
+        dom: Ob,
+        codom: AttrType,
+        *,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+    ) -> None:
+        """Initialize a new attribute for a schema.
+
+        Args:
+            name: The name of the attribute.
+            dom: The object in the domain.
+            codom: The attribute type in the codomain
+            title: The human-readable label for the attribute
+            description: A long-form description of the attribute
+        """
+        super(Attr, self).__init__(
+            name=name, dom=dom.name, codom=codom, title=title, description=description
+        )
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.

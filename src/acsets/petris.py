@@ -4,20 +4,32 @@ with some convenience methods.
 """
 from acsets import SCHEMAS_DIRECTORY, ACSet, Attr, AttrType, Hom, Ob, Schema
 
-Species = Ob(name="S")
-Transition = Ob(name="T")
-Input = Ob(name="I")
-Output = Ob(name="O")
+Species = Ob(name="S", title="Species")
+Transition = Ob(name="T", title="Transition")
+Input = Ob(name="I", title="Input")
+Output = Ob(name="O", title="Output")
 
-hom_it = Hom(name="it", dom=Input, codom=Transition)
-hom_is = Hom(name="is", dom=Input, codom=Species)
-hom_ot = Hom(name="ot", dom=Output, codom=Transition)
-hom_os = Hom(name="os", dom=Output, codom=Species)
+hom_it = Hom(name="it", dom=Input, codom=Transition, title="Input transition morphism")
+hom_is = Hom(name="is", dom=Input, codom=Species, title="Input species morphism")
+hom_ot = Hom(name="ot", dom=Output, codom=Transition, title="Output transition morphism")
+hom_os = Hom(name="os", dom=Output, codom=Species, title="Output species morphism")
 
-Name = AttrType(name="Name", ty=str)
+Name = AttrType(name="Name", ty=str, title="Name")
 
-attr_sname = Attr(name="sname", dom=Species, codom=Name)
-attr_tname = Attr(name="tname", dom=Transition, codom=Name)
+attr_sname = Attr(
+    name="sname",
+    dom=Species,
+    codom=Name,
+    title="Species name",
+    description="An attribute representing the name of a species.",
+)
+attr_tname = Attr(
+    name="tname",
+    dom=Transition,
+    codom=Name,
+    title="Transition name",
+    description="An attribute representing the name of a transition.",
+)
 
 SchPetri = Schema(
     "Petri",

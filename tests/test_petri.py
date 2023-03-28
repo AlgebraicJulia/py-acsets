@@ -23,6 +23,7 @@ class TestSerialization(unittest.TestCase):
         ]:
             for elements in elements:
                 self.assertIsNotNone(elements.name)
+                self.assertIsNotNone(elements.title)
 
     def test_look_up(self):
         """Test looking up class."""
