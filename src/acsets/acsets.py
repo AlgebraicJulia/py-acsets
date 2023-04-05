@@ -5,7 +5,7 @@ In this module, we define schemas and acsets.
 import json
 import os
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any, Mapping, Optional, Union
 
 import pydantic.schema
 from pydantic import BaseModel, Field, create_model, validator
@@ -417,6 +417,7 @@ class ACSet:
     schema: Schema
     _parts: dict[Ob, int]
     _subparts: dict[Property, dict[int, Any]]
+    _name_to_ob: Mapping[str, Ob]
 
     def __init__(self, name: str, schema: Schema):
         """Initialize a new ACSet.
