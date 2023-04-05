@@ -451,7 +451,7 @@ class ACSet:
 
             url = "https://github.com/AlgebraicJulia/py-acsets/blob/main/tests/petri_schema.json"
             obj = requests.get(url).json()
-            sir = ACSet.from_file(name="petri", path=path)
+            sir = ACSet.from_obj(name="petri", obj=obj)
             s, i, r = sir.add_parts("S", 3)
         """
         catlab_schema = CatlabSchema.parse_obj(obj)
