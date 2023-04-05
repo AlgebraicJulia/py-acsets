@@ -441,6 +441,18 @@ class ACSet:
             A JSON object representing the acset, to be
             loaded through :class:`CatlabSchema`
         :returns: An acset object
+
+        You can get an example ACSets schema definition from the testing suite
+        and load it over the web with the following code:
+
+        .. code-block:: python
+
+            import requests
+
+            url = "https://github.com/AlgebraicJulia/py-acsets/blob/main/tests/petri_schema.json"
+            obj = requests.get(url).json()
+            sir = ACSet.from_file(name="petri", path=path)
+            s, i, r = sir.add_parts("S", 3)
         """
         catlab_schema = CatlabSchema.parse_obj(obj)
         schema = Schema.from_catlab(name=name, catlab_schema=catlab_schema)
