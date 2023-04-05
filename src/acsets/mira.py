@@ -6,56 +6,58 @@ of the Petri net model with additional attributes and metadata.
 from .acsets import Attr, AttrType, Hom, Ob, Schema
 from .petris import Petri
 
-Species = Ob("S", title="Species")
-Transition = Ob("T", title="Transition")
-Input = Ob("I", title="Input")
-Output = Ob("O", title="Output")
+Species = Ob(name="S", title="Species")
+Transition = Ob(name="T", title="Transition")
+Input = Ob(name="I", title="Input")
+Output = Ob(name="O", title="Output")
 
-hom_it = Hom("it", Input, Transition, title="Input transition morphism")
-hom_is = Hom("is", Input, Species, title="Input species morphism")
-hom_ot = Hom("ot", Output, Transition, title="Output transition morphism")
-hom_os = Hom("os", Output, Species, title="Output species morphism")
+hom_it = Hom(name="it", dom=Input, codom=Transition, title="Input transition morphism")
+hom_is = Hom(name="is", dom=Input, codom=Species, title="Input species morphism")
+hom_ot = Hom(name="ot", dom=Output, codom=Transition, title="Output transition morphism")
+hom_os = Hom(name="os", dom=Output, codom=Species, title="Output species morphism")
 
 # Attribute types
-Name = AttrType("Name", str, title="Name")
-Value = AttrType("Value", float)
-JsonStr = AttrType("JsonStr", str, description="A string a serialized JSON object")
-XmlStr = AttrType("XmlStr", str, description="A string representing an XML object as a string")
+Name = AttrType(name="Name", ty=str, title="Name")
+Value = AttrType(name="Value", ty=float)
+JsonStr = AttrType(name="JsonStr", ty=str, description="A string a serialized JSON object")
+XmlStr = AttrType(
+    name="XmlStr", ty=str, description="A string representing an XML object as a string"
+)
 SymPyStr = AttrType(
-    "SymPyStr",
-    str,
+    name="SymPyStr",
+    ty=str,
     description="A string representing an expression in the SymPy "
     "Python package's internal domain specific language (DSL).",
 )
 
 # Species attributes
 attr_sname = Attr(
-    "sname",
-    Species,
-    Name,
+    name="sname",
+    dom=Species,
+    codom=Name,
     title="Species name",
     description="An attribute representing the name of a species.",
 )
-attr_ids = Attr("mira_ids", Species, JsonStr)
-attr_context = Attr("mira_context", Species, JsonStr)
-attr_concept = Attr("mira_concept", Species, JsonStr)
-attr_initial = Attr("mira_initial_value", Species, Value)
+attr_ids = Attr(name="mira_ids", dom=Species, codom=JsonStr)
+attr_context = Attr(name="mira_context", dom=Species, codom=JsonStr)
+attr_concept = Attr(name="mira_concept", dom=Species, codom=JsonStr)
+attr_initial = Attr(name="mira_initial_value", dom=Species, codom=Value)
 
 # Transition attributes
 attr_tname = Attr(
-    "tname",
-    Transition,
-    Name,
+    name="tname",
+    dom=Transition,
+    codom=Name,
     title="Transition name",
     description="An attribute representing the name of a transition.",
 )
-attr_pname = Attr("parameter_name", Transition, Name)
-attr_pval = Attr("parameter_value", Transition, Value)
-attr_template_type = Attr("template_type", Transition, Name)
-attr_rate_law = Attr("mira_rate_law", Transition, SymPyStr)
-attr_rate_mathml = Attr("mira_rate_law_mathml", Transition, XmlStr)
-attr_template = Attr("mira_template", Transition, JsonStr)
-attr_parameters = Attr("mira_parameters", Transition, JsonStr)
+attr_pname = Attr(name="parameter_name", dom=Transition, codom=Name)
+attr_pval = Attr(name="parameter_value", dom=Transition, codom=Value)
+attr_template_type = Attr(name="template_type", dom=Transition, codom=Name)
+attr_rate_law = Attr(name="mira_rate_law", dom=Transition, codom=SymPyStr)
+attr_rate_mathml = Attr(name="mira_rate_law_mathml", dom=Transition, codom=XmlStr)
+attr_template = Attr(name="mira_template", dom=Transition, codom=JsonStr)
+attr_parameters = Attr(name="mira_parameters", dom=Transition, codom=JsonStr)
 
 SchMira = Schema(
     name="MiraNet",
