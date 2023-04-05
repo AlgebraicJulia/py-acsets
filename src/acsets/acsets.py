@@ -428,6 +428,7 @@ class ACSet:
         self.schema = schema
         self._parts = {ob: 0 for ob in schema.obs}
         self._subparts = {f: {} for f in schema.homs + schema.attrs}
+        self._name_to_ob = {ob.name: ob for ob in schema.obs}
 
     @classmethod
     def from_obj(cls, *, name: str, obj) -> "ACSet":
@@ -443,7 +444,7 @@ class ACSet:
             obj = json.load(file)
         return cls.from_obj(name=name, obj=obj)
 
-    def add_parts(self, ob: Ob, n: int) -> range:
+    def add_parts(self, ob: Union[str, Ob], n: int) -> range:
         """Add `n` parts to an object in the ACset.
 
         Args:
@@ -453,12 +454,14 @@ class ACSet:
         Returns:
             A range of the indexes of the new parts added to the object.
         """
+        if isinstance(ob, str):
+            ob = self._name_to_ob[ob]
         assert ob in self.schema.obs
         i = self._parts[ob]
         self._parts[ob] += n
         return range(i, i + n)
 
-    def add_part(self, ob: Ob) -> int:
+    def add_part(self, ob: Union[str, Ob]) -> int:
         """Add a single part to an object in the ACSet
 
         Args:

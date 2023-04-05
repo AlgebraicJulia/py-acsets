@@ -55,7 +55,5 @@ class TestSchema(unittest.TestCase):
         """Test writing, reading, then instantiating."""
         obj = json.loads(SchPetri.schema.json())
         sir = ACSet.from_obj(name="petri", obj=obj)
-        name_to_model = {ob.name: ob for ob in sir.schema.ob_models}
-        # TODO update add_parts to allow lookup based on name, not instance of Ob
-        s, i, r = sir.add_parts(name_to_model["S"], 3)
+        s, i, r = sir.add_parts("S", 3)
         self.assertIsInstance(s, int)
