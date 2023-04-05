@@ -6,7 +6,7 @@ import os
 import tempfile
 import unittest
 
-from acsets import Attr, AttrType, Hom, Ob, petris
+from acsets import ACSet, Attr, AttrType, Hom, Ob, mira, petris
 
 
 class TestSerialization(unittest.TestCase):
@@ -38,21 +38,26 @@ class TestSerialization(unittest.TestCase):
 
     def test_serialization(self):
         """Test serialization round trip."""
-        sir = petris.Petri()
-        s, i, r = sir.add_species(3)
-        inf, rec = sir.add_transitions([([s, i], [i, i]), ([i], [r])])
+        for cls_name, cls, schema in [
+            ("Petri", petris.Petri, petris.SchPetri),
+            ("MiraNet", mira.MiraNet, mira.SchMira),
+        ]:
+            sir = cls()
+            self.assertIsInstance(sir, petris.Petri)
+            s, i, r = sir.add_species(3)
+            inf, rec = sir.add_transitions([([s, i], [i, i]), ([i], [r])])
 
-        pd_sir = sir.export_pydantic()
-        serialized = sir.to_json_str()
-        deserialized = petris.Petri.import_pydantic("Petri", petris.SchPetri, pd_sir)
-        pd_sir2 = deserialized.export_pydantic()
-        reserialized = deserialized.to_json_str()
-        deserialized2 = petris.Petri.read_json("Petri", petris.SchPetri, reserialized)
-        rereserialized = deserialized2.to_json_str()
+            pd_sir = sir.export_pydantic()
+            serialized = sir.to_json_str()
+            deserialized = cls.import_pydantic(cls_name, schema, pd_sir)
+            pd_sir2 = deserialized.export_pydantic()
+            reserialized = deserialized.to_json_str()
+            deserialized2 = cls.read_json(cls_name, schema, reserialized)
+            rereserialized = deserialized2.to_json_str()
 
-        self.assertEqual(pd_sir2, pd_sir)
-        self.assertEqual(serialized, reserialized)
-        self.assertEqual(reserialized, rereserialized)
+            self.assertEqual(pd_sir2, pd_sir)
+            self.assertEqual(serialized, reserialized)
+            self.assertEqual(reserialized, rereserialized)
 
     def test_ob(self):
         """Test instantiating a hom."""

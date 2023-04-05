@@ -1,6 +1,7 @@
 """Tests for schema."""
 
 import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -53,7 +54,9 @@ class TestSchema(unittest.TestCase):
 
     def test_round_trip(self):
         """Test writing, reading, then instantiating."""
-        obj = json.loads(SchPetri.schema.json())
-        sir = ACSet.from_obj(name="petri", obj=obj)
-        s, i, r = sir.add_parts("S", 3)
-        self.assertIsInstance(s, int)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory).resolve().joinpath("petri.json")
+            path.write_text(SchPetri.schema.json())
+            sir = ACSet.from_file(name="petri", path=path)
+            s, i, r = sir.add_parts("S", 3)
+            self.assertIsInstance(s, int)
