@@ -3,6 +3,7 @@ In this module, we define schemas and acsets.
 """
 
 import json
+import os
 from pathlib import Path
 from typing import Any, Optional, Union
 
@@ -432,14 +433,35 @@ class ACSet:
 
     @classmethod
     def from_obj(cls, *, name: str, obj) -> "ACSet":
-        """Make an ACSet from a JSON object representing its schema."""
+        """Make an ACSet from a JSON object representing its schema.
+
+        :param name: The name of the acset
+        :param obj:
+            A JSON object representing the acset, to be
+            loaded through :class:`CatlabSchema`
+        :returns: An acset object
+        """
         catlab_schema = CatlabSchema.parse_obj(obj)
         schema = Schema.from_catlab(name=name, catlab_schema=catlab_schema)
         return cls(name=name, schema=schema)
 
     @classmethod
-    def from_file(cls, *, name: str, path) -> "ACSet":
-        """Make an ACSet from a file with the JSON representing its schema."""
+    def from_file(cls, *, name: str, path: os.PathLike) -> "ACSet":
+        """Make an ACSet from a file with the JSON representing its schema.
+
+        :param name: The name of the acset
+        :param path: A path to the file
+        :returns: An acset object
+
+        For example, if you have a JSON file representing the Petri Net
+        schema, you can load it and start working with:
+
+        .. code-block:: python
+
+            path = ...
+            sir = ACSet.from_file(name="petri", path=path)
+            s, i, r = sir.add_parts("S", 3)
+        """
         with open(path) as file:
             obj = json.load(file)
         return cls.from_obj(name=name, obj=obj)
