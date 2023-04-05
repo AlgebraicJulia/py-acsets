@@ -51,32 +51,20 @@ class Hom(HashableBaseModel):
     """
 
     name: str = Field(description="The name of the morphism.")
-    dom: str = Field(title="domain", description="The object of the domain.")
-    codom: str = Field(title="codomain", description="The object of the codomain.")
+    dom: Union[str, Ob] = Field(title="domain", description="The object of the domain.")
+    codom: Union[str, Ob] = Field(title="codomain", description="The object of the codomain.")
     title: Optional[str] = Field(description="The human-readable label for the morphism")
     description: Optional[str] = Field(description="A long-form description of the morphism")
 
-    def __init__(
-        self,
-        name: str,
-        dom: Ob,
-        codom: Ob,
-        *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-    ) -> None:
-        """Initialize a new morphism for a schema.
+    @validator("dom", always=True)
+    def populate_dom(cls, v):
+        """Populate the parsed value of the type."""
+        return v.name if isinstance(v, Ob) else v
 
-        Args:
-            name: The name of the morphism.
-            dom: The object of the domain.
-            codom: The object of the codomain.
-            title: The human-readable label for the morphism
-            description: A long-form description of the morphism
-        """
-        super(Hom, self).__init__(
-            name=name, dom=dom.name, codom=codom.name, title=title, description=description
-        )
+    @validator("codom", always=True)
+    def populate_codom(cls, v):
+        """Populate the parsed value of the type."""
+        return v.name if isinstance(v, Ob) else v
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid object in the morphism.
@@ -158,32 +146,15 @@ class Attr(HashableBaseModel):
     """
 
     name: str = Field(title="name", description="The name of the attribute.")
-    dom: str = Field(title="domain", description="The object in the domain.")
+    dom: Union[str, Ob] = Field(title="domain", description="The object in the domain.")
     codom: AttrType = Field(title="codomain", description="The attribute type in the codomain")
     title: Optional[str] = None
     description: Optional[str] = None
 
-    def __init__(
-        self,
-        name: str,
-        dom: Ob,
-        codom: AttrType,
-        *,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-    ) -> None:
-        """Initialize a new attribute for a schema.
-
-        Args:
-            name: The name of the attribute.
-            dom: The object in the domain.
-            codom: The attribute type in the codomain
-            title: The human-readable label for the attribute
-            description: A long-form description of the attribute
-        """
-        super(Attr, self).__init__(
-            name=name, dom=dom.name, codom=codom, title=title, description=description
-        )
+    @validator("dom", always=True)
+    def populate_dom(cls, v):
+        """Populate the parsed value of the type."""
+        return v.name if isinstance(v, Ob) else v
 
     def valid_value(self, x: Any) -> bool:
         """Check if a variable is a valid type to be an attribute.
@@ -301,6 +272,17 @@ class Schema:
         self.ob_models = ob_models
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
+        )
+
+    @classmethod
+    def from_catlab(cls, name: str, catlab_schema: CatlabSchema) -> "Schema":
+        """Get a schema from a CatLab schema."""
+        return cls(
+            name=name,
+            obs=catlab_schema.obs,
+            homs=catlab_schema.homs,
+            attrs=catlab_schema.attrs,
+            attrtypes=catlab_schema.attrtypes,
         )
 
     def make_schema(self, uri: Optional[str] = None):
@@ -446,6 +428,20 @@ class ACSet:
         self.schema = schema
         self._parts = {ob: 0 for ob in schema.obs}
         self._subparts = {f: {} for f in schema.homs + schema.attrs}
+
+    @classmethod
+    def from_obj(cls, *, name: str, obj) -> "ACSet":
+        """Make an ACSet from a JSON object representing its schema."""
+        catlab_schema = CatlabSchema.parse_obj(obj)
+        schema = Schema.from_catlab(name=name, catlab_schema=catlab_schema)
+        return cls(name=name, schema=schema)
+
+    @classmethod
+    def from_file(cls, *, name: str, path) -> "ACSet":
+        """Make an ACSet from a file with the JSON representing its schema."""
+        with open(path) as file:
+            obj = json.load(file)
+        return cls.from_obj(name=name, obj=obj)
 
     def add_parts(self, ob: Ob, n: int) -> range:
         """Add `n` parts to an object in the ACset.

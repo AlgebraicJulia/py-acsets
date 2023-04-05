@@ -7,9 +7,9 @@ from .acsets import Attr, AttrType, Hom, Ob, Schema
 from .petris import Petri
 
 Species = Ob(name="S", title="Species")
-Transition = Ob("T", title="Transition")
-Input = Ob("I", title="Input")
-Output = Ob("O", title="Output")
+Transition = Ob(name="T", title="Transition")
+Input = Ob(name="I", title="Input")
+Output = Ob(name="O", title="Output")
 
 hom_it = Hom(name="it", dom=Input, codom=Transition, title="Input transition morphism")
 hom_is = Hom(name="is", dom=Input, codom=Species, title="Input species morphism")
@@ -20,7 +20,9 @@ hom_os = Hom(name="os", dom=Output, codom=Species, title="Output species morphis
 Name = AttrType(name="Name", ty=str, title="Name")
 Value = AttrType(name="Value", ty=float)
 JsonStr = AttrType(name="JsonStr", ty=str, description="A string a serialized JSON object")
-XmlStr = AttrType("XmlStr", ty=str, description="A string representing an XML object as a string")
+XmlStr = AttrType(
+    name="XmlStr", ty=str, description="A string representing an XML object as a string"
+)
 SymPyStr = AttrType(
     name="SymPyStr",
     ty=str,

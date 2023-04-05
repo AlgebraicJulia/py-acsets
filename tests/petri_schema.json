@@ -2,81 +2,87 @@
   "attrs": [
     {
       "codom": {
+        "description": null,
         "name": "Name",
+        "title": "Name",
         "ty": "str"
       },
-      "dom": {
-        "name": "S"
-      },
-      "name": "sname"
+      "description": "An attribute representing the name of a species.",
+      "dom": "S",
+      "name": "sname",
+      "title": "Species name"
     },
     {
       "codom": {
+        "description": null,
         "name": "Name",
+        "title": "Name",
         "ty": "str"
       },
-      "dom": {
-        "name": "T"
-      },
-      "name": "tname"
+      "description": "An attribute representing the name of a transition.",
+      "dom": "T",
+      "name": "tname",
+      "title": "Transition name"
     }
   ],
   "attrtypes": [
     {
+      "description": null,
       "name": "Name",
+      "title": "Name",
       "ty": "str"
     }
   ],
   "homs": [
     {
-      "codom": {
-        "name": "T"
-      },
-      "dom": {
-        "name": "I"
-      },
-      "name": "it"
+      "codom": "T",
+      "description": null,
+      "dom": "I",
+      "name": "it",
+      "title": "Input transition morphism"
     },
     {
-      "codom": {
-        "name": "S"
-      },
-      "dom": {
-        "name": "I"
-      },
-      "name": "is"
+      "codom": "S",
+      "description": null,
+      "dom": "I",
+      "name": "is",
+      "title": "Input species morphism"
     },
     {
-      "codom": {
-        "name": "T"
-      },
-      "dom": {
-        "name": "O"
-      },
-      "name": "ot"
+      "codom": "T",
+      "description": null,
+      "dom": "O",
+      "name": "ot",
+      "title": "Output transition morphism"
     },
     {
-      "codom": {
-        "name": "S"
-      },
-      "dom": {
-        "name": "O"
-      },
-      "name": "os"
+      "codom": "S",
+      "description": null,
+      "dom": "O",
+      "name": "os",
+      "title": "Output species morphism"
     }
   ],
   "obs": [
     {
-      "name": "S"
+      "description": null,
+      "name": "S",
+      "title": "Species"
     },
     {
-      "name": "T"
+      "description": null,
+      "name": "T",
+      "title": "Transition"
     },
     {
-      "name": "I"
+      "description": null,
+      "name": "I",
+      "title": "Input"
     },
     {
-      "name": "O"
+      "description": null,
+      "name": "O",
+      "title": "Output"
     }
   ],
   "version": {
