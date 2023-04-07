@@ -16,10 +16,10 @@ class TestSerialization(unittest.TestCase):
         """Test metadata availability."""
         schema = petris.SchPetri
         for elements in [
-            schema.schema.obs,
-            schema.schema.homs,
-            schema.schema.attrs,
-            schema.schema.attrtypes,
+            schema.schema.Ob,
+            schema.schema.Hom,
+            schema.schema.Attr,
+            schema.schema.AttrType,
         ]:
             for elements in elements:
                 self.assertIsNotNone(elements.name)

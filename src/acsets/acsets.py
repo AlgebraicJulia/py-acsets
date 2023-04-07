@@ -216,10 +216,10 @@ class CatlabSchema(HashableBaseModel):
     the user should use the Schema class, which is below.
     """
 
-    obs: list[Ob]
-    homs: list[Hom]
-    attrtypes: list[AttrType]
-    attrs: list[Attr]
+    Ob: list[Ob]
+    Hom: list[Hom]
+    AttrType: list[AttrType]
+    Attr: list[Attr]
     version: VersionSpec = Field(default=VERSION_SPEC)
 
     class Config:
@@ -261,7 +261,7 @@ class Schema:
         """
         self.name = name
         self.schema = CatlabSchema(
-            version=VERSION_SPEC, obs=obs, homs=homs, attrtypes=attrtypes, attrs=attrs
+            version=VERSION_SPEC, Ob=obs, Hom=homs, AttrType=attrtypes, Attr=attrs
         )
         ob_models = {
             ob: create_model(
@@ -280,10 +280,10 @@ class Schema:
         """Get a schema from a CatLab schema."""
         return cls(
             name=name,
-            obs=catlab_schema.obs,
-            homs=catlab_schema.homs,
-            attrs=catlab_schema.attrs,
-            attrtypes=catlab_schema.attrtypes,
+            obs=catlab_schema.Ob,
+            homs=catlab_schema.Hom,
+            attrs=catlab_schema.Attr,
+            attrtypes=catlab_schema.AttrType,
         )
 
     def make_schema(self, uri: Optional[str] = None):
@@ -318,7 +318,7 @@ class Schema:
         Returns:
             A list of of `Ob`\s
         """
-        return self.schema.obs
+        return self.schema.Ob
 
     @property
     def homs(self):
@@ -327,7 +327,7 @@ class Schema:
         Returns:
             A list of of `Hom`\s
         """
-        return self.schema.homs
+        return self.schema.Hom
 
     @property
     def attrtypes(self):
@@ -336,7 +336,7 @@ class Schema:
         Returns:
             A list of of `AttrType`\s
         """
-        return self.schema.attrtypes
+        return self.schema.AttrType
 
     @property
     def attrs(self):
@@ -345,7 +345,7 @@ class Schema:
         Returns:
             A list of of `Attr`\s
         """
-        return self.schema.attrs
+        return self.schema.Attr
 
     def props_outof(self, ob: Ob) -> list[Property]:
         """Get all of the properties with the domain of `ob` in the schema.
