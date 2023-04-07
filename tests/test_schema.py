@@ -5,8 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from acsets import ACSet, Attr, AttrType, CatlabSchema, Hom, Ob, Schema
-from acsets.petris import SchPetri
+from acsets import ACSet, Attr, AttrType, CatlabSchema, Hom, Ob, petris
 
 HERE = Path(__file__).parent.resolve()
 PETRI_SCHEMA_PATH = HERE.joinpath("petri_schema.json")
@@ -42,21 +41,21 @@ class TestSchema(unittest.TestCase):
         """Test loading a schema from a JSON file."""
         schema = CatlabSchema.parse_file(PETRI_SCHEMA_PATH)
         self.assertEqual(
-            SchPetri.schema.json(),
+            petris.SchPropertyLabelledReactionNet.schema.json(),
             schema.json(),
         )
 
     def test_writing(self):
         """Test writing a schema works as expected."""
         expected = json.loads(PETRI_SCHEMA_PATH.read_text())
-        actual = json.loads(SchPetri.schema.json())
+        actual = json.loads(petris.SchPropertyLabelledReactionNet.schema.json())
         self.assertEqual(expected, actual)
 
     def test_round_trip(self):
         """Test writing, reading, then instantiating."""
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory).resolve().joinpath("petri.json")
-            path.write_text(SchPetri.schema.json())
+            path.write_text(petris.SchPropertyLabelledReactionNet.schema.json())
             sir = ACSet.from_file(name="petri", path=path)
             s, i, r = sir.add_parts("S", 3)
             self.assertIsInstance(s, int)
