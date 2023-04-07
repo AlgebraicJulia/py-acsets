@@ -86,6 +86,12 @@ class Hom(HashableBaseModel):
         """
         return int
 
+    def dom_name(self) -> str:
+        return self.dom.name if isinstance(self.dom, Ob) else self.dom
+
+    def codom_name(self) -> str:
+        return self.codom.name if isinstance(self.codom, Ob) else self.codom
+
     class Config:
         """pydandic config"""
 
@@ -356,7 +362,7 @@ class Schema:
         Returns:
             A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.
         """
-        return list(filter(lambda f: f.dom == ob.name, self.homs + self.attrs))
+        return list(filter(lambda f: f.dom_name() == ob.name, self.homs + self.attrs))
 
     def homs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the morphisms that the given object `ob` maps to in the schema.
@@ -367,7 +373,7 @@ class Schema:
         Returns:
             A list of `Hom` objects where `ob` is in the domain of the morphism.
         """
-        return list(filter(lambda f: f.dom == ob.name, self.homs))
+        return list(filter(lambda f: f.dom_name() == ob.name, self.homs))
 
     def attrs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the attributes that the given object `ob` maps to in the schema.
@@ -378,7 +384,7 @@ class Schema:
         Returns:
             A list of `Attr` objects where `ob` is in the domain of the attribute.
         """
-        return list(filter(lambda f: f.dom == ob.name, self.attrs))
+        return list(filter(lambda f: f.dom_name() == ob.name, self.attrs))
 
     def from_string(self, s: str):
         """Get the appropriate object, morphism, attribute type, or attribute from the schema by name.
