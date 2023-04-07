@@ -1,5 +1,5 @@
 {
-  "attrs": [
+  "Attr": [
     {
       "codom": {
         "description": null,
@@ -25,7 +25,7 @@
       "title": "Transition name"
     }
   ],
-  "attrtypes": [
+  "AttrType": [
     {
       "description": null,
       "name": "Name",
@@ -33,7 +33,7 @@
       "ty": "str"
     }
   ],
-  "homs": [
+  "Hom": [
     {
       "codom": "T",
       "description": null,
@@ -63,7 +63,7 @@
       "title": "Output species morphism"
     }
   ],
-  "obs": [
+  "Ob": [
     {
       "description": null,
       "name": "S",
