@@ -356,7 +356,7 @@ class Schema:
         Returns:
             A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.
         """
-        return list(filter(lambda f: f.dom == ob, self.homs + self.attrs))
+        return list(filter(lambda f: f.dom == ob.name, self.homs + self.attrs))
 
     def homs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the morphisms that the given object `ob` maps to in the schema.
@@ -367,7 +367,7 @@ class Schema:
         Returns:
             A list of `Hom` objects where `ob` is in the domain of the morphism.
         """
-        return list(filter(lambda f: f.dom == ob, self.homs))
+        return list(filter(lambda f: f.dom == ob.name, self.homs))
 
     def attrs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the attributes that the given object `ob` maps to in the schema.
@@ -378,7 +378,7 @@ class Schema:
         Returns:
             A list of `Attr` objects where `ob` is in the domain of the attribute.
         """
-        return list(filter(lambda f: f.dom == ob, self.attrs))
+        return list(filter(lambda f: f.dom == ob.name, self.attrs))
 
     def from_string(self, s: str):
         """Get the appropriate object, morphism, attribute type, or attribute from the schema by name.
