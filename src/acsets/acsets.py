@@ -87,9 +87,11 @@ class Hom(HashableBaseModel):
         return int
 
     def dom_name(self) -> str:
+        """The name of the domain"""
         return self.dom.name if isinstance(self.dom, Ob) else self.dom
 
     def codom_name(self) -> str:
+        """The name of the codomain"""
         return self.codom.name if isinstance(self.codom, Ob) else self.codom
 
     class Config:
@@ -183,6 +185,14 @@ class Attr(HashableBaseModel):
         if self.codom.ty_cls is None:
             raise RuntimeError
         return self.codom.ty_cls
+
+    def dom_name(self) -> str:
+        """The name of the domain"""
+        return self.dom.name if isinstance(self.dom, Ob) else self.dom
+
+    def codom_name(self) -> str:
+        """The name of the codomain"""
+        return self.codom.name if isinstance(self.codom, Ob) else self.codom
 
     class Config:
         """pydandic config"""
