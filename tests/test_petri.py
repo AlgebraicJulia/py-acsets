@@ -14,7 +14,7 @@ class TestSerialization(unittest.TestCase):
 
     def test_metadata(self):
         """Test metadata availability."""
-        schema = petris.SchPetri
+        schema = petris.SchPropertyLabelledReactionNet
         for elements in [
             schema.schema.Ob,
             schema.schema.Hom,
@@ -28,7 +28,7 @@ class TestSerialization(unittest.TestCase):
     def test_serialization(self):
         """Test serialization round trip."""
         for cls_name, cls, schema in [
-            ("Petri", petris.Petri, petris.SchPetri),
+            ("Petri", petris.Petri, petris.SchPropertyLabelledReactionNet),
             ("MiraNet", mira.MiraNet, mira.SchMira),
         ]:
             sir = cls()
@@ -59,4 +59,4 @@ class TestSerialization(unittest.TestCase):
         """Test writing the schema does not error."""
         with tempfile.TemporaryDirectory() as directory:
             path = os.path.join(directory, "petri.json")
-            petris.SchPetri.write_schema(path)
+            petris.SchPropertyLabelledReactionNet.write_schema(path)

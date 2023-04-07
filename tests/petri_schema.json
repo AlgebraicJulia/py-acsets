@@ -8,11 +8,39 @@
       "title": "Species name"
     },
     {
+      "codom": "Concentration",
+      "description": "An attribute representing the concentration of a species.",
+      "dom": "S",
+      "name": "concentration",
+      "title": "Species concentration"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a species.",
+      "dom": "S",
+      "name": "sprop",
+      "title": "Species properties"
+    },
+    {
       "codom": "Name",
       "description": "An attribute representing the name of a transition.",
       "dom": "T",
       "name": "tname",
       "title": "Transition name"
+    },
+    {
+      "codom": "Rate",
+      "description": "An attribute representing the rate of a transition.",
+      "dom": "T",
+      "name": "rate",
+      "title": "Transition rate"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a transition.",
+      "dom": "T",
+      "name": "tprop",
+      "title": "Transition properties"
     }
   ],
   "AttrType": [
@@ -21,6 +49,24 @@
       "name": "Name",
       "title": "Name",
       "ty": "str"
+    },
+    {
+      "description": null,
+      "name": "Concentration",
+      "title": "Concentration",
+      "ty": "int"
+    },
+    {
+      "description": null,
+      "name": "Rate",
+      "title": "Rate",
+      "ty": "float"
+    },
+    {
+      "description": null,
+      "name": "Prop",
+      "title": "Property",
+      "ty": "dict"
     }
   ],
   "Hom": [
