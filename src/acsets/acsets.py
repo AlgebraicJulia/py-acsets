@@ -34,7 +34,7 @@ class Ob(HashableBaseModel):
     description: Optional[str] = Field(description="A long-form description of the object")
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
 
@@ -51,39 +51,40 @@ class Hom(HashableBaseModel):
     """
 
     name: str = Field(description="The name of the morphism.")
-    dom: Union[str, Ob] = Field(title="domain", description="The object of the domain.")
-    codom: Union[str, Ob] = Field(title="codomain", description="The object of the codomain.")
+    dom: str = Field(title="domain", description="The object of the domain.")
+    codom: str = Field(title="codomain", description="The object of the codomain.")
     title: Optional[str] = Field(description="The human-readable label for the morphism")
     description: Optional[str] = Field(description="A long-form description of the morphism")
 
-    @validator("dom", always=True)
-    def populate_dom(cls, v):
-        """Populate the parsed value of the type."""
-        return v.name if isinstance(v, Ob) else v
-
-    @validator("codom", always=True)
-    def populate_codom(cls, v):
-        """Populate the parsed value of the type."""
-        return v.name if isinstance(v, Ob) else v
-
-    def valid_value(self, x: Any) -> bool:
-        """Check if a variable is a valid object in the morphism.
+    @validator("dom", pre=True)
+    def dom_string(cls, ob: Union[str, Ob]):
+        """Validate domain inputs to string
 
         Args:
-            x: The variable of any type that you want to check.
+            ob: either a string of the object name or the object
 
         Returns:
-            `True` if `x` is a valid object in the morphism and `False` otherwise.
+            the string representation of the object
         """
-        return type(x) == int
+        if isinstance(ob, Ob):
+            return ob.name
+        else:
+            return ob
 
-    def valtype(self) -> type:
-        """Get the valid type of the schema's objects.
+    @validator("codom", pre=True)
+    def codom_string(cls, ob: Union[str, Ob]):
+        """Validate codomain inputs to string
+
+        Args:
+            ob: either a string of the object name or the object
 
         Returns:
-            The type that is valid for objects in the schema.
+            the string representation of the object
         """
-        return int
+        if isinstance(ob, Ob):
+            return ob.name
+        else:
+            return ob
 
     class Config:
         """pydandic config"""
@@ -146,36 +147,40 @@ class Attr(HashableBaseModel):
     """
 
     name: str = Field(title="name", description="The name of the attribute.")
-    dom: Union[str, Ob] = Field(title="domain", description="The object in the domain.")
-    codom: AttrType = Field(title="codomain", description="The attribute type in the codomain")
+    dom: str = Field(title="domain", description="The object in the domain.")
+    codom: str = Field(title="codomain", description="The attribute type in the codomain")
     title: Optional[str] = None
     description: Optional[str] = None
 
-    @validator("dom", always=True)
-    def populate_dom(cls, v):
-        """Populate the parsed value of the type."""
-        return v.name if isinstance(v, Ob) else v
-
-    def valid_value(self, x: Any) -> bool:
-        """Check if a variable is a valid type to be an attribute.
+    @validator("dom", pre=True)
+    def dom_string(cls, ob: Union[str, Ob]):
+        """Validate domain inputs to string
 
         Args:
-            x: The variable of any type that you want to check.
+            ob: either a string of the object name or the object
 
         Returns:
-            `True` if `x` is a valid attribute and `False` otherwise.
+            the string representation of the object
         """
-        return isinstance(x, self.valtype())
+        if isinstance(ob, Ob):
+            return ob.name
+        else:
+            return ob
 
-    def valtype(self) -> type:
-        """Get the valid attribute type
+    @validator("codom", pre=True)
+    def codom_string(cls, at: Union[str, AttrType]):
+        """Validate codomain inputs to string
+
+        Args:
+            ob: either a string of the AttrType name or the AttrType object
 
         Returns:
-            The type that the attribute maps to.
+            the string representation of the AttrType
         """
-        if self.codom.ty_cls is None:
-            raise RuntimeError
-        return self.codom.ty_cls
+        if isinstance(at, AttrType):
+            return at.name
+        else:
+            return at
 
     class Config:
         """pydandic config"""
@@ -265,7 +270,10 @@ class Schema:
         ob_models = {
             ob: create_model(
                 ob.name,
-                **{prop.name: (Union[prop.valtype(), None], None) for prop in self.props_outof(ob)},
+                **{
+                    prop.name: (Union[self.valtype(prop), None], None)
+                    for prop in self.props_outof(ob)
+                },
             )
             for ob in obs
         }
@@ -273,6 +281,35 @@ class Schema:
         self.model = create_model(
             self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
         )
+
+    def valtype(self, prop: Property):
+        """Resolve the python type of a given property
+
+        Args:
+            prop: Either a Hom  object or a AttrTyp object
+
+        Returns:
+            The Property value type
+        """
+        if isinstance(prop, Hom):
+            return int
+        else:
+            at = next(at for at in self.schema.AttrType if at.name == prop.codom)
+            if at.ty_cls == None:
+                raise RuntimeError("Unable to verify type of AttrType: {}".format(at.name))
+            return at.ty_cls
+
+    def valid_value(self, prop: Property, val):
+        """Verify if a given value is valid for a given property
+
+        Args:
+            val (any): the value to check if valid
+            prop: the Property object
+
+        Returns:
+            true if the value is valid for the given property, false otherwise
+        """
+        return isinstance(val, self.valtype(prop))
 
     @classmethod
     def from_catlab(cls, name: str, catlab_schema: CatlabSchema) -> "Schema":
@@ -355,7 +392,7 @@ class Schema:
         Returns:
             A list of `Hom` and `Attr` objects where `ob` is in the domain of the properties.
         """
-        return list(filter(lambda f: f.dom == ob, self.homs + self.attrs))
+        return list(filter(lambda f: f.dom == ob.name, self.homs + self.attrs))
 
     def homs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the morphisms that the given object `ob` maps to in the schema.
@@ -366,7 +403,7 @@ class Schema:
         Returns:
             A list of `Hom` objects where `ob` is in the domain of the morphism.
         """
-        return list(filter(lambda f: f.dom == ob, self.homs))
+        return list(filter(lambda f: f.dom == ob.name, self.homs))
 
     def attrs_outof(self, ob: Ob) -> list[Property]:
         """Get all of the attributes that the given object `ob` maps to in the schema.
@@ -377,7 +414,7 @@ class Schema:
         Returns:
             A list of `Attr` objects where `ob` is in the domain of the attribute.
         """
-        return list(filter(lambda f: f.dom == ob, self.attrs))
+        return list(filter(lambda f: f.dom == ob.name, self.attrs))
 
     def from_string(self, s: str):
         """Get the appropriate object, morphism, attribute type, or attribute from the schema by name.
@@ -518,7 +555,7 @@ class ACSet:
             if self.has_subpart(i, f):
                 del self._subparts[f][i]
         else:
-            assert f.valid_value(x)
+            assert self.schema.valid_value(f, x)
             self._subparts[f][i] = x
 
     def has_subpart(self, i: int, f: Property):
@@ -582,8 +619,13 @@ class ACSet:
         Returns:
             A list indexes.
         """
-        assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(Ob(f.dom))))
+        assert self.schema.valid_value(f, x)
+        return list(
+            filter(
+                lambda i: self.subpart(i, f) == x,
+                self.parts(Ob(name=f.dom, title=None, description=None)),
+            )
+        )
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.
@@ -602,7 +644,7 @@ class ACSet:
         }
 
     def export_pydantic(self):
-        """Serialize the ACset to a pydantic model.
+        """Serialize the ACSet to a pydantic model.
 
         Returns:
             The pydantic model of the serialized ACSet.

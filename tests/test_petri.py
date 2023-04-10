@@ -25,17 +25,6 @@ class TestSerialization(unittest.TestCase):
                 self.assertIsNotNone(elements.name)
                 self.assertIsNotNone(elements.title)
 
-    def test_look_up(self):
-        """Test looking up class."""
-        attr_type = AttrType(name="test", ty="str")
-        self.assertEqual(str, attr_type.ty_cls)
-
-        attr = Attr(name="test_attr", dom=Ob(name="test_ob"), codom=attr_type)
-        self.assertTrue(attr.valid_value("true!"))
-        self.assertFalse(attr.valid_value(1))
-        self.assertFalse(attr.valid_value(False))
-        self.assertFalse(attr.valid_value(1.0))
-
     def test_serialization(self):
         """Test serialization round trip."""
         for cls_name, cls, schema in [

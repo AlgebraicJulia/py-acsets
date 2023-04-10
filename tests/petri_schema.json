@@ -1,24 +1,14 @@
 {
   "Attr": [
     {
-      "codom": {
-        "description": null,
-        "name": "Name",
-        "title": "Name",
-        "ty": "str"
-      },
+      "codom": "Name",
       "description": "An attribute representing the name of a species.",
       "dom": "S",
       "name": "sname",
       "title": "Species name"
     },
     {
-      "codom": {
-        "description": null,
-        "name": "Name",
-        "title": "Name",
-        "ty": "str"
-      },
+      "codom": "Name",
       "description": "An attribute representing the name of a transition.",
       "dom": "T",
       "name": "tname",
