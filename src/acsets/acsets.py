@@ -192,7 +192,7 @@ class Attr(HashableBaseModel):
 
     def codom_name(self) -> str:
         """The name of the codomain"""
-        return self.codom.name if isinstance(self.codom, Ob) else self.codom
+        return self.codom.name if isinstance(self.codom, AttrType) else self.codom
 
     class Config:
         """pydandic config"""
@@ -566,7 +566,7 @@ class ACSet:
         else:
             return self._subparts[f][i]
 
-    def nparts(self, ob: Ob) -> int:
+    def nparts(self, ob: Union[str, Ob]) -> int:
         """Get the number of rows in a given table of the ACSet.
 
         Args:
@@ -575,10 +575,12 @@ class ACSet:
         Returns:
             The number of rows in `ob`.
         """
+        if isinstance(ob, str):
+            ob = self._name_to_ob[ob]
         assert ob in self.schema.obs
         return self._parts[ob]
 
-    def parts(self, ob: Ob) -> range:
+    def parts(self, ob: Union[str, Ob]) -> range:
         """Get all of the row indexes in a given table of the ACSet.
 
         Args:
@@ -600,7 +602,7 @@ class ACSet:
             A list indexes.
         """
         assert f.valid_value(x)
-        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(Ob(f.dom))))
+        return list(filter(lambda i: self.subpart(i, f) == x, self.parts(f.dom)))
 
     def prop_dict(self, ob: Ob, i: int) -> dict[str, Any]:
         """Get a dictionary of all subparts for a given row in a table.

@@ -59,4 +59,5 @@ class TestSchema(unittest.TestCase):
             path.write_text(SchPetri.schema.json())
             sir = ACSet.from_file(name="petri", path=path)
             s, i, r = sir.add_parts("S", 3)
+            self.assertEqual(sir.nparts("S"), 3)
             self.assertIsInstance(s, int)
