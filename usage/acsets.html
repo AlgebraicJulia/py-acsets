@@ -55,10 +55,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#acsets.acsets.Hom"><code class="docutils literal notranslate"><span class="pre">Hom</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.populate_dom"><code class="docutils literal notranslate"><span class="pre">Hom.populate_dom()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.populate_codom"><code class="docutils literal notranslate"><span class="pre">Hom.populate_codom()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.valid_value"><code class="docutils literal notranslate"><span class="pre">Hom.valid_value()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.valtype"><code class="docutils literal notranslate"><span class="pre">Hom.valtype()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.dom_string"><code class="docutils literal notranslate"><span class="pre">Hom.dom_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.codom_string"><code class="docutils literal notranslate"><span class="pre">Hom.codom_string()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Hom.Config"><code class="docutils literal notranslate"><span class="pre">Hom.Config</span></code></a></li>
 </ul>
 </li>
@@ -68,9 +66,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#acsets.acsets.Attr"><code class="docutils literal notranslate"><span class="pre">Attr</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.populate_dom"><code class="docutils literal notranslate"><span class="pre">Attr.populate_dom()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.valid_value"><code class="docutils literal notranslate"><span class="pre">Attr.valid_value()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.valtype"><code class="docutils literal notranslate"><span class="pre">Attr.valtype()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.dom_string"><code class="docutils literal notranslate"><span class="pre">Attr.dom_string()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.codom_string"><code class="docutils literal notranslate"><span class="pre">Attr.codom_string()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Attr.Config"><code class="docutils literal notranslate"><span class="pre">Attr.Config</span></code></a></li>
 </ul>
 </li>
@@ -83,6 +80,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#acsets.acsets.Schema"><code class="docutils literal notranslate"><span class="pre">Schema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.valtype"><code class="docutils literal notranslate"><span class="pre">Schema.valtype()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.valid_value"><code class="docutils literal notranslate"><span class="pre">Schema.valid_value()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.from_catlab"><code class="docutils literal notranslate"><span class="pre">Schema.from_catlab()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.make_schema"><code class="docutils literal notranslate"><span class="pre">Schema.make_schema()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#acsets.acsets.Schema.write_schema"><code class="docutils literal notranslate"><span class="pre">Schema.write_schema()</span></code></a></li>
@@ -171,7 +170,7 @@ each object in the schema.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Ob.Config">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob.Config" title="Permalink to this definition"></a></dt>
-<dd><p>pydandic config</p>
+<dd><p>pydantic config</p>
 </dd></dl>
 
 </dd></dl>
@@ -188,45 +187,25 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 <p>Create a new model by parsing and validating input data from keyword arguments.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Hom.populate_dom">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_dom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.populate_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.populate_dom" title="Permalink to this definition"></a></dt>
-<dd><p>Populate the parsed value of the type.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Hom.populate_codom">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_codom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.populate_codom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.populate_codom" title="Permalink to this definition"></a></dt>
-<dd><p>Populate the parsed value of the type.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Hom.valid_value">
-<span class="sig-name descname"><span class="pre">valid_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.valid_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.valid_value" title="Permalink to this definition"></a></dt>
-<dd><p>Check if a variable is a valid object in the morphism.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="acsets.acsets.Hom.dom_string">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.dom_string" title="Permalink to this definition"></a></dt>
+<dd><p>Validate domain inputs to string</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>x: The variable of any type that you want to check.</p>
+<dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
 </dd>
-<dt>Returns:</dt><dd><p><cite>True</cite> if <cite>x</cite> is a valid object in the morphism and <cite>False</cite> otherwise.</p>
+<dt>Returns:</dt><dd><p>the string representation of the object</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Hom.valtype">
-<span class="sig-name descname"><span class="pre">valtype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.valtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.valtype" title="Permalink to this definition"></a></dt>
-<dd><p>Get the valid type of the schema’s objects.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="acsets.acsets.Hom.codom_string">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.codom_string" title="Permalink to this definition"></a></dt>
+<dd><p>Validate codomain inputs to string</p>
 <dl class="simple">
-<dt>Returns:</dt><dd><p>The type that is valid for objects in the schema.</p>
+<dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
+</dd>
+<dt>Returns:</dt><dd><p>the string representation of the object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -275,39 +254,25 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 <p>Create a new model by parsing and validating input data from keyword arguments.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Attr.populate_dom">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">populate_dom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.populate_dom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.populate_dom" title="Permalink to this definition"></a></dt>
-<dd><p>Populate the parsed value of the type.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Attr.valid_value">
-<span class="sig-name descname"><span class="pre">valid_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.valid_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.valid_value" title="Permalink to this definition"></a></dt>
-<dd><p>Check if a variable is a valid type to be an attribute.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="acsets.acsets.Attr.dom_string">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.dom_string" title="Permalink to this definition"></a></dt>
+<dd><p>Validate domain inputs to string</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>x: The variable of any type that you want to check.</p>
+<dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
 </dd>
-<dt>Returns:</dt><dd><p><cite>True</cite> if <cite>x</cite> is a valid attribute and <cite>False</cite> otherwise.</p>
+<dt>Returns:</dt><dd><p>the string representation of the object</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="acsets.acsets.Attr.valtype">
-<span class="sig-name descname"><span class="pre">valtype</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.valtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.valtype" title="Permalink to this definition"></a></dt>
-<dd><p>Get the valid attribute type</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="acsets.acsets.Attr.codom_string">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.codom_string" title="Permalink to this definition"></a></dt>
+<dd><p>Validate codomain inputs to string</p>
 <dl class="simple">
-<dt>Returns:</dt><dd><p>The type that the attribute maps to.</p>
+<dt>Args:</dt><dd><p>ob: either a string of the AttrType name or the AttrType object</p>
+</dd>
+<dt>Returns:</dt><dd><p>the string representation of the AttrType</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,6 +331,31 @@ attrtypes: A list of attribute types (<cite>AttrType</cite>).
 attrs: A list of attributes (<cite>Attr</cite>).</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="acsets.acsets.Schema.valtype">
+<span class="sig-name descname"><span class="pre">valtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valtype" title="Permalink to this definition"></a></dt>
+<dd><p>Resolve the python type of a given property</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>prop: Either a Hom  object or a AttrTyp object</p>
+</dd>
+<dt>Returns:</dt><dd><p>The Property value type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="acsets.acsets.Schema.valid_value">
+<span class="sig-name descname"><span class="pre">valid_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valid_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valid_value" title="Permalink to this definition"></a></dt>
+<dd><p>Verify if a given value is valid for a given property</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>val (any): the value to check if valid
+prop: the Property object</p>
+</dd>
+<dt>Returns:</dt><dd><p>true if the value is valid for the given property, false otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.from_catlab">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_catlab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catlab_schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.from_catlab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.from_catlab" title="Permalink to this definition"></a></dt>
@@ -726,7 +716,7 @@ i: The row in <cite>ob</cite>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.export_pydantic">
 <span class="sig-name descname"><span class="pre">export_pydantic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.export_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.export_pydantic" title="Permalink to this definition"></a></dt>
-<dd><p>Serialize the ACset to a pydantic model.</p>
+<dd><p>Serialize the ACSet to a pydantic model.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The pydantic model of the serialized ACSet.</p>
 </dd>
