@@ -7,7 +7,6 @@ import os
 from pathlib import Path
 from typing import Any, Mapping, Optional, Union
 
-import pydantic.schema
 from pydantic import BaseModel, Field, create_model, validator
 
 HERE = Path(__file__).parent.resolve()
@@ -310,7 +309,7 @@ class Schema:
             :func:`json.dump`.
         """
         # TODO add description
-        schema = pydantic.schema.schema([self.model], title=self.name)
+        schema = self.model.schema()
         schema["$schema"] = "http://json-schema.org/draft-07/schema#"
         if uri is not None:
             schema["$id"] = uri

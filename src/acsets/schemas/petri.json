@@ -30,46 +30,6 @@
       "title": "O",
       "type": "object"
     },
-    "Petri": {
-      "properties": {
-        "I": {
-          "items": {
-            "$ref": "#/definitions/I"
-          },
-          "title": "I",
-          "type": "array"
-        },
-        "O": {
-          "items": {
-            "$ref": "#/definitions/O"
-          },
-          "title": "O",
-          "type": "array"
-        },
-        "S": {
-          "items": {
-            "$ref": "#/definitions/S"
-          },
-          "title": "S",
-          "type": "array"
-        },
-        "T": {
-          "items": {
-            "$ref": "#/definitions/T"
-          },
-          "title": "T",
-          "type": "array"
-        }
-      },
-      "required": [
-        "S",
-        "T",
-        "I",
-        "O"
-      ],
-      "title": "Petri",
-      "type": "object"
-    },
     "S": {
       "properties": {
         "sname": {
@@ -91,5 +51,42 @@
       "type": "object"
     }
   },
-  "title": "Petri"
+  "properties": {
+    "I": {
+      "items": {
+        "$ref": "#/definitions/I"
+      },
+      "title": "I",
+      "type": "array"
+    },
+    "O": {
+      "items": {
+        "$ref": "#/definitions/O"
+      },
+      "title": "O",
+      "type": "array"
+    },
+    "S": {
+      "items": {
+        "$ref": "#/definitions/S"
+      },
+      "title": "S",
+      "type": "array"
+    },
+    "T": {
+      "items": {
+        "$ref": "#/definitions/T"
+      },
+      "title": "T",
+      "type": "array"
+    }
+  },
+  "required": [
+    "S",
+    "T",
+    "I",
+    "O"
+  ],
+  "title": "Petri",
+  "type": "object"
 }
