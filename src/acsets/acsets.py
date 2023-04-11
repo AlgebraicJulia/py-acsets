@@ -68,10 +68,7 @@ class Hom(HashableBaseModel):
         Returns:
             the string representation of the object
         """
-        if isinstance(ob, Ob):
-            return ob.name
-        else:
-            return ob
+        return ob.name if isinstance(ob, Ob) else ob
 
     @validator("codom", pre=True)
     def codom_string(cls, ob: Union[str, Ob]):
@@ -83,10 +80,7 @@ class Hom(HashableBaseModel):
         Returns:
             the string representation of the object
         """
-        if isinstance(ob, Ob):
-            return ob.name
-        else:
-            return ob
+        return ob.name if isinstance(ob, Ob) else ob
 
     class Config:
         """pydandic config"""
@@ -117,17 +111,15 @@ class AttrType(HashableBaseModel):
     """
 
     name: str = Field(description="The name of the attribute type.")
-    ty: Union[str, type] = Field(
+    ty: type = Field(
         description="The type assigned to the attribute type. Use a string referring to the Python type"
     )
     title: Optional[str] = None
     description: Optional[str] = None
-    ty_cls: Optional[type] = Field(exclude=True)
 
-    @validator("ty_cls", always=True)
-    def populate_ty_cls(cls, v, values):
+    @validator("ty", pre=True)
+    def evaluate_type(cls, ty: Union[str, type]):
         """Populate the parsed value of the type."""
-        ty = values["ty"]
         return _look_up_type(ty) if isinstance(ty, str) else ty
 
     class Config:
@@ -164,10 +156,7 @@ class Attr(HashableBaseModel):
         Returns:
             the string representation of the object
         """
-        if isinstance(ob, Ob):
-            return ob.name
-        else:
-            return ob
+        return ob.name if isinstance(ob, Ob) else ob
 
     @validator("codom", pre=True)
     def codom_string(cls, at: Union[str, AttrType]):
@@ -179,10 +168,7 @@ class Attr(HashableBaseModel):
         Returns:
             the string representation of the AttrType
         """
-        if isinstance(at, AttrType):
-            return at.name
-        else:
-            return at
+        return at.name if isinstance(at, AttrType) else at
 
     class Config:
         """pydandic config"""
@@ -293,13 +279,7 @@ class Schema:
         Returns:
             The Property value type
         """
-        if isinstance(prop, Hom):
-            return int
-        else:
-            at = next(at for at in self.schema.AttrType if at.name == prop.codom)
-            if at.ty_cls == None:
-                raise RuntimeError("Unable to verify type of AttrType: {}".format(at.name))
-            return at.ty_cls
+        return int if isinstance(prop, Hom) else next(at for at in self.schema.AttrType if at.name == prop.codom).ty
 
     def valid_value(self, prop: Property, val):
         """Verify if a given value is valid for a given property
