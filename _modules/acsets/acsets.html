@@ -85,6 +85,8 @@
 
 <span class="n">HERE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="n">SCHEMAS_DIRECTORY</span> <span class="o">=</span> <span class="n">HERE</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;schemas&quot;</span><span class="p">)</span>
+<span class="n">CATLAB_SCHEMAS_DIRECTORY</span> <span class="o">=</span> <span class="n">SCHEMAS_DIRECTORY</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;catlab&quot;</span><span class="p">)</span>
+<span class="n">JSON_SCHEMAS_DIRECTORY</span> <span class="o">=</span> <span class="n">SCHEMAS_DIRECTORY</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;jsonschema&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="HashableBaseModel"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.HashableBaseModel">[docs]</a><span class="k">class</span> <span class="nc">HashableBaseModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>

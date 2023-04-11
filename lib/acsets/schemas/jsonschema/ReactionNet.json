@@ -1,5 +1,5 @@
 {
-  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/petri.json",
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/jsonschema/ReactionNet.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "I": {
@@ -32,9 +32,9 @@
     },
     "S": {
       "properties": {
-        "sname": {
-          "title": "Sname",
-          "type": "string"
+        "concentration": {
+          "title": "Concentration",
+          "type": "integer"
         }
       },
       "title": "S",
@@ -42,9 +42,9 @@
     },
     "T": {
       "properties": {
-        "tname": {
-          "title": "Tname",
-          "type": "string"
+        "rate": {
+          "title": "Rate",
+          "type": "number"
         }
       },
       "title": "T",
@@ -87,6 +87,6 @@
     "I",
     "O"
   ],
-  "title": "Petri",
+  "title": "ReactionNet",
   "type": "object"
 }
