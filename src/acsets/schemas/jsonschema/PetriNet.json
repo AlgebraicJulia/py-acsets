@@ -1,5 +1,5 @@
 {
-  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/PropertyPetriNet.json",
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/jsonschema/PetriNet.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "I": {
@@ -31,22 +31,12 @@
       "type": "object"
     },
     "S": {
-      "properties": {
-        "sprop": {
-          "title": "Sprop",
-          "type": "object"
-        }
-      },
+      "properties": {},
       "title": "S",
       "type": "object"
     },
     "T": {
-      "properties": {
-        "tprop": {
-          "title": "Tprop",
-          "type": "object"
-        }
-      },
+      "properties": {},
       "title": "T",
       "type": "object"
     }
@@ -87,6 +77,6 @@
     "I",
     "O"
   ],
-  "title": "PropertyPetriNet",
+  "title": "PetriNet",
   "type": "object"
 }

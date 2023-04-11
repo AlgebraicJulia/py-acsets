@@ -1,5 +1,5 @@
 {
-  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/ReactionNet.json",
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/jsonschema/PropertyLabelledReactionNet.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "I": {
@@ -35,6 +35,14 @@
         "concentration": {
           "title": "Concentration",
           "type": "integer"
+        },
+        "sname": {
+          "title": "Sname",
+          "type": "string"
+        },
+        "sprop": {
+          "title": "Sprop",
+          "type": "object"
         }
       },
       "title": "S",
@@ -45,6 +53,14 @@
         "rate": {
           "title": "Rate",
           "type": "number"
+        },
+        "tname": {
+          "title": "Tname",
+          "type": "string"
+        },
+        "tprop": {
+          "title": "Tprop",
+          "type": "object"
         }
       },
       "title": "T",
@@ -87,6 +103,6 @@
     "I",
     "O"
   ],
-  "title": "ReactionNet",
+  "title": "PropertyLabelledReactionNet",
   "type": "object"
 }

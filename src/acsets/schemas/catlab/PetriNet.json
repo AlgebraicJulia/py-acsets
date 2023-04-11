@@ -1,0 +1,60 @@
+{
+  "Attr": [],
+  "AttrType": [],
+  "Hom": [
+    {
+      "codom": "T",
+      "description": null,
+      "dom": "I",
+      "name": "it",
+      "title": "Input transition morphism"
+    },
+    {
+      "codom": "S",
+      "description": null,
+      "dom": "I",
+      "name": "is",
+      "title": "Input species morphism"
+    },
+    {
+      "codom": "T",
+      "description": null,
+      "dom": "O",
+      "name": "ot",
+      "title": "Output transition morphism"
+    },
+    {
+      "codom": "S",
+      "description": null,
+      "dom": "O",
+      "name": "os",
+      "title": "Output species morphism"
+    }
+  ],
+  "Ob": [
+    {
+      "description": null,
+      "name": "S",
+      "title": "Species"
+    },
+    {
+      "description": null,
+      "name": "T",
+      "title": "Transition"
+    },
+    {
+      "description": null,
+      "name": "I",
+      "title": "Input"
+    },
+    {
+      "description": null,
+      "name": "O",
+      "title": "Output"
+    }
+  ],
+  "version": {
+    "ACSetSchema": "0.0.1",
+    "Catlab": "0.14.12"
+  }
+}

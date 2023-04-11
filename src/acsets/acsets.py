@@ -11,6 +11,8 @@ from pydantic import BaseModel, Field, create_model, validator
 
 HERE = Path(__file__).parent.resolve()
 SCHEMAS_DIRECTORY = HERE.joinpath("schemas")
+CATLAB_SCHEMAS_DIRECTORY = SCHEMAS_DIRECTORY.joinpath("catlab")
+JSON_SCHEMAS_DIRECTORY = SCHEMAS_DIRECTORY.joinpath("jsonschema")
 
 
 class HashableBaseModel(BaseModel):
