@@ -34,7 +34,7 @@
       "properties": {
         "concentration": {
           "title": "Concentration",
-          "type": "integer"
+          "type": "number"
         }
       },
       "title": "S",

@@ -30,7 +30,7 @@ petri_obs = [Species, Transition, Input, Output]
 petri_homs = [hom_it, hom_is, hom_ot, hom_os]
 
 Name = AttrType(name="Name", ty=str, title="Name")
-Concentration = AttrType(name="Concentration", ty=int, title="Concentration")
+Concentration = AttrType(name="Concentration", ty=float, title="Concentration")
 Rate = AttrType(name="Rate", ty=float, title="Rate")
 Prop = AttrType(name="Prop", ty=dict, title="Property")
 

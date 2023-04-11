@@ -40,7 +40,7 @@
       "description": null,
       "name": "Concentration",
       "title": "Concentration",
-      "ty": "int"
+      "ty": "float"
     },
     {
       "description": null,
