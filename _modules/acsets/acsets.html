@@ -142,10 +142,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            the string representation of the object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ob</span></div>
+        <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
 <div class="viewcode-block" id="Hom.codom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.codom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">codom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">]):</span>
@@ -157,10 +154,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            the string representation of the object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ob</span></div>
+        <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
 <div class="viewcode-block" id="Hom.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
@@ -191,17 +185,15 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;The name of the attribute type.&quot;</span><span class="p">)</span>
-    <span class="n">ty</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+    <span class="n">ty</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The type assigned to the attribute type. Use a string referring to the Python type&quot;</span>
     <span class="p">)</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">ty_cls</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AttrType.populate_ty_cls"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.populate_ty_cls">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;ty_cls&quot;</span><span class="p">,</span> <span class="n">always</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">populate_ty_cls</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<div class="viewcode-block" id="AttrType.evaluate_type"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.evaluate_type">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;ty&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">evaluate_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ty</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Populate the parsed value of the type.&quot;&quot;&quot;</span>
-        <span class="n">ty</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;ty&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">_look_up_type</span><span class="p">(</span><span class="n">ty</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ty</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">ty</span></div>
 
 <div class="viewcode-block" id="AttrType.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
@@ -238,10 +230,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            the string representation of the object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ob</span></div>
+        <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
 <div class="viewcode-block" id="Attr.codom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.codom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">codom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">]):</span>
@@ -253,10 +242,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            the string representation of the AttrType</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">at</span></div>
+        <span class="k">return</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">)</span> <span class="k">else</span> <span class="n">at</span></div>
 
 <div class="viewcode-block" id="Attr.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
@@ -367,13 +353,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            The Property value type</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">Hom</span><span class="p">):</span>
-            <span class="k">return</span> <span class="nb">int</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">at</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">at</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">AttrType</span> <span class="k">if</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">prop</span><span class="o">.</span><span class="n">codom</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">at</span><span class="o">.</span><span class="n">ty_cls</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Unable to verify type of AttrType: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">at</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">at</span><span class="o">.</span><span class="n">ty_cls</span></div>
+        <span class="k">return</span> <span class="nb">int</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">Hom</span><span class="p">)</span> <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">at</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">AttrType</span> <span class="k">if</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">prop</span><span class="o">.</span><span class="n">codom</span><span class="p">)</span><span class="o">.</span><span class="n">ty</span></div>
 
 <div class="viewcode-block" id="Schema.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify if a given value is valid for a given property</span>
