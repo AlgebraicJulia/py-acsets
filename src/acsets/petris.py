@@ -2,7 +2,19 @@
 In this model, we define a schema for petri nets, and then a subclass of acset
 with some convenience methods.
 """
-from acsets import SCHEMAS_DIRECTORY, ACSet, Attr, AttrType, Hom, Ob, Schema
+from pathlib import Path
+
+from acsets import (
+    CATLAB_SCHEMAS_DIRECTORY,
+    HERE,
+    JSON_SCHEMAS_DIRECTORY,
+    ACSet,
+    Attr,
+    AttrType,
+    Hom,
+    Ob,
+    Schema,
+)
 
 Species = Ob(name="S", title="Species")
 Transition = Ob(name="T", title="Transition")
@@ -183,10 +195,14 @@ if __name__ == "__main__":
         SchPropertyReactionNet,
         SchPropertyLabelledReactionNet,
     ]:
-        schema_file = "{}.json".format(schema.name)
+        schema_filename = "{}.json".format(schema.name)
+        CATLAB_SCHEMAS_DIRECTORY.joinpath(schema_filename).write_text(
+            schema.schema.json(indent=2, ensure_ascii=False, sort_keys=True)
+        )
+        jsonschema_path = JSON_SCHEMAS_DIRECTORY.joinpath(schema_filename)
         schema.write_schema(
-            SCHEMAS_DIRECTORY.joinpath(schema_file),
-            uri="https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/schemas/{}".format(
-                schema_file
+            JSON_SCHEMAS_DIRECTORY.joinpath(jsonschema_path),
+            uri="https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/{}".format(
+                Path(jsonschema_path).relative_to(HERE)
             ),
         )

@@ -1,0 +1,128 @@
+{
+  "Attr": [
+    {
+      "codom": "Name",
+      "description": "An attribute representing the name of a species.",
+      "dom": "S",
+      "name": "sname",
+      "title": "Species name"
+    },
+    {
+      "codom": "Concentration",
+      "description": "An attribute representing the concentration of a species.",
+      "dom": "S",
+      "name": "concentration",
+      "title": "Species concentration"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a species.",
+      "dom": "S",
+      "name": "sprop",
+      "title": "Species properties"
+    },
+    {
+      "codom": "Name",
+      "description": "An attribute representing the name of a transition.",
+      "dom": "T",
+      "name": "tname",
+      "title": "Transition name"
+    },
+    {
+      "codom": "Rate",
+      "description": "An attribute representing the rate of a transition.",
+      "dom": "T",
+      "name": "rate",
+      "title": "Transition rate"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a transition.",
+      "dom": "T",
+      "name": "tprop",
+      "title": "Transition properties"
+    }
+  ],
+  "AttrType": [
+    {
+      "description": null,
+      "name": "Name",
+      "title": "Name",
+      "ty": "str"
+    },
+    {
+      "description": null,
+      "name": "Concentration",
+      "title": "Concentration",
+      "ty": "int"
+    },
+    {
+      "description": null,
+      "name": "Rate",
+      "title": "Rate",
+      "ty": "float"
+    },
+    {
+      "description": null,
+      "name": "Prop",
+      "title": "Property",
+      "ty": "dict"
+    }
+  ],
+  "Hom": [
+    {
+      "codom": "T",
+      "description": null,
+      "dom": "I",
+      "name": "it",
+      "title": "Input transition morphism"
+    },
+    {
+      "codom": "S",
+      "description": null,
+      "dom": "I",
+      "name": "is",
+      "title": "Input species morphism"
+    },
+    {
+      "codom": "T",
+      "description": null,
+      "dom": "O",
+      "name": "ot",
+      "title": "Output transition morphism"
+    },
+    {
+      "codom": "S",
+      "description": null,
+      "dom": "O",
+      "name": "os",
+      "title": "Output species morphism"
+    }
+  ],
+  "Ob": [
+    {
+      "description": null,
+      "name": "S",
+      "title": "Species"
+    },
+    {
+      "description": null,
+      "name": "T",
+      "title": "Transition"
+    },
+    {
+      "description": null,
+      "name": "I",
+      "title": "Input"
+    },
+    {
+      "description": null,
+      "name": "O",
+      "title": "Output"
+    }
+  ],
+  "version": {
+    "ACSetSchema": "0.0.1",
+    "Catlab": "0.14.12"
+  }
+}
