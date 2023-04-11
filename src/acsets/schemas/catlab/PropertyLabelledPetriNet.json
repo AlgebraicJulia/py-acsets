@@ -8,18 +8,18 @@
       "title": "Species name"
     },
     {
-      "codom": "Prop",
-      "description": "An attribute representing the properties of a species.",
-      "dom": "S",
-      "name": "sprop",
-      "title": "Species properties"
-    },
-    {
       "codom": "Name",
       "description": "An attribute representing the name of a transition.",
       "dom": "T",
       "name": "tname",
       "title": "Transition name"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a species.",
+      "dom": "S",
+      "name": "sprop",
+      "title": "Species properties"
     },
     {
       "codom": "Prop",

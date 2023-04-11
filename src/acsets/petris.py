@@ -26,6 +26,9 @@ hom_is = Hom(name="is", dom=Input, codom=Species, title="Input species morphism"
 hom_ot = Hom(name="ot", dom=Output, codom=Transition, title="Output transition morphism")
 hom_os = Hom(name="os", dom=Output, codom=Species, title="Output species morphism")
 
+petri_obs = [Species, Transition, Input, Output]
+petri_homs = [hom_it, hom_is, hom_ot, hom_os]
+
 Name = AttrType(name="Name", ty=str, title="Name")
 Concentration = AttrType(name="Concentration", ty=int, title="Concentration")
 Rate = AttrType(name="Rate", ty=float, title="Rate")
@@ -74,61 +77,46 @@ attr_tprop = Attr(
     description="An attribute representing the properties of a transition.",
 )
 
+labelled_ats = [Name]
+labelled_attrs = [attr_sname, attr_tname]
+
+rxn_ats = [Concentration, Rate]
+rxn_attrs = [attr_concentration, attr_rate]
+
+prop_ats = [Prop]
+prop_attrs = [attr_sprop, attr_tprop]
+
 SchPetriNet = Schema(
     "PetriNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
+    petri_obs,
+    petri_homs,
     [],
     [],
 )
 SchLabelledPetriNet = Schema(
-    "LabelledPetriNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Name],
-    [attr_sname, attr_tname],
+    "LabelledPetriNet", petri_obs, petri_homs, labelled_ats, labelled_attrs
 )
-SchReactionNet = Schema(
-    "ReactionNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Concentration, Rate],
-    [attr_concentration, attr_rate],
-)
+SchReactionNet = Schema("ReactionNet", petri_obs, petri_homs, rxn_ats, rxn_attrs)
 SchLabelledReactionNet = Schema(
-    "LabelledReactionNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Name, Concentration, Rate],
-    [attr_sname, attr_concentration, attr_tname, attr_rate],
+    "LabelledReactionNet", petri_obs, petri_homs, labelled_ats + rxn_ats, labelled_attrs + rxn_attrs
 )
-SchPropertyPetriNet = Schema(
-    "PropertyPetriNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Prop],
-    [attr_sprop, attr_tprop],
-)
+SchPropertyPetriNet = Schema("PropertyPetriNet", petri_obs, petri_homs, prop_ats, prop_attrs)
 SchPropertyLabelledPetriNet = Schema(
     "PropertyLabelledPetriNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Name, Prop],
-    [attr_sname, attr_sprop, attr_tname, attr_tprop],
+    petri_obs,
+    petri_homs,
+    labelled_ats + prop_ats,
+    labelled_attrs + prop_attrs,
 )
 SchPropertyReactionNet = Schema(
-    "PropertyReactionNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Concentration, Rate, Prop],
-    [attr_concentration, attr_sprop, attr_rate, attr_tprop],
+    "PropertyReactionNet", petri_obs, petri_homs, rxn_ats + prop_ats, rxn_attrs + prop_attrs
 )
 SchPropertyLabelledReactionNet = Schema(
     "PropertyLabelledReactionNet",
-    [Species, Transition, Input, Output],
-    [hom_it, hom_is, hom_ot, hom_os],
-    [Name, Concentration, Rate, Prop],
-    [attr_sname, attr_concentration, attr_sprop, attr_tname, attr_rate, attr_tprop],
+    petri_obs,
+    petri_homs,
+    labelled_ats + rxn_ats + prop_ats,
+    labelled_attrs + rxn_attrs + prop_attrs,
 )
 
 
