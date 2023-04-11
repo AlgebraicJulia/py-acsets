@@ -100,6 +100,9 @@
 <span class="n">hom_ot</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ot&quot;</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">Output</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">Transition</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Output transition morphism&quot;</span><span class="p">)</span>
 <span class="n">hom_os</span> <span class="o">=</span> <span class="n">Hom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;os&quot;</span><span class="p">,</span> <span class="n">dom</span><span class="o">=</span><span class="n">Output</span><span class="p">,</span> <span class="n">codom</span><span class="o">=</span><span class="n">Species</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Output species morphism&quot;</span><span class="p">)</span>
 
+<span class="n">petri_obs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">]</span>
+<span class="n">petri_homs</span> <span class="o">=</span> <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">]</span>
+
 <span class="n">Name</span> <span class="o">=</span> <span class="n">AttrType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">)</span>
 <span class="n">Concentration</span> <span class="o">=</span> <span class="n">AttrType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">)</span>
 <span class="n">Rate</span> <span class="o">=</span> <span class="n">AttrType</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Rate&quot;</span><span class="p">,</span> <span class="n">ty</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rate&quot;</span><span class="p">)</span>
@@ -148,61 +151,46 @@
     <span class="n">description</span><span class="o">=</span><span class="s2">&quot;An attribute representing the properties of a transition.&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="n">labelled_ats</span> <span class="o">=</span> <span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="n">labelled_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">]</span>
+
+<span class="n">rxn_ats</span> <span class="o">=</span> <span class="p">[</span><span class="n">Concentration</span><span class="p">,</span> <span class="n">Rate</span><span class="p">]</span>
+<span class="n">rxn_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr_concentration</span><span class="p">,</span> <span class="n">attr_rate</span><span class="p">]</span>
+
+<span class="n">prop_ats</span> <span class="o">=</span> <span class="p">[</span><span class="n">Prop</span><span class="p">]</span>
+<span class="n">prop_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr_sprop</span><span class="p">,</span> <span class="n">attr_tprop</span><span class="p">]</span>
+
 <span class="n">SchPetriNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
     <span class="s2">&quot;PetriNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
+    <span class="n">petri_obs</span><span class="p">,</span>
+    <span class="n">petri_homs</span><span class="p">,</span>
     <span class="p">[],</span>
     <span class="p">[],</span>
 <span class="p">)</span>
 <span class="n">SchLabelledPetriNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
-    <span class="s2">&quot;LabelledPetriNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Name</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">],</span>
+    <span class="s2">&quot;LabelledPetriNet&quot;</span><span class="p">,</span> <span class="n">petri_obs</span><span class="p">,</span> <span class="n">petri_homs</span><span class="p">,</span> <span class="n">labelled_ats</span><span class="p">,</span> <span class="n">labelled_attrs</span>
 <span class="p">)</span>
-<span class="n">SchReactionNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
-    <span class="s2">&quot;ReactionNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Concentration</span><span class="p">,</span> <span class="n">Rate</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_concentration</span><span class="p">,</span> <span class="n">attr_rate</span><span class="p">],</span>
-<span class="p">)</span>
+<span class="n">SchReactionNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="s2">&quot;ReactionNet&quot;</span><span class="p">,</span> <span class="n">petri_obs</span><span class="p">,</span> <span class="n">petri_homs</span><span class="p">,</span> <span class="n">rxn_ats</span><span class="p">,</span> <span class="n">rxn_attrs</span><span class="p">)</span>
 <span class="n">SchLabelledReactionNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
-    <span class="s2">&quot;LabelledReactionNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Name</span><span class="p">,</span> <span class="n">Concentration</span><span class="p">,</span> <span class="n">Rate</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_concentration</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">,</span> <span class="n">attr_rate</span><span class="p">],</span>
+    <span class="s2">&quot;LabelledReactionNet&quot;</span><span class="p">,</span> <span class="n">petri_obs</span><span class="p">,</span> <span class="n">petri_homs</span><span class="p">,</span> <span class="n">labelled_ats</span> <span class="o">+</span> <span class="n">rxn_ats</span><span class="p">,</span> <span class="n">labelled_attrs</span> <span class="o">+</span> <span class="n">rxn_attrs</span>
 <span class="p">)</span>
-<span class="n">SchPropertyPetriNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
-    <span class="s2">&quot;PropertyPetriNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Prop</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_sprop</span><span class="p">,</span> <span class="n">attr_tprop</span><span class="p">],</span>
-<span class="p">)</span>
+<span class="n">SchPropertyPetriNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span><span class="s2">&quot;PropertyPetriNet&quot;</span><span class="p">,</span> <span class="n">petri_obs</span><span class="p">,</span> <span class="n">petri_homs</span><span class="p">,</span> <span class="n">prop_ats</span><span class="p">,</span> <span class="n">prop_attrs</span><span class="p">)</span>
 <span class="n">SchPropertyLabelledPetriNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
     <span class="s2">&quot;PropertyLabelledPetriNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Name</span><span class="p">,</span> <span class="n">Prop</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_sprop</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">,</span> <span class="n">attr_tprop</span><span class="p">],</span>
+    <span class="n">petri_obs</span><span class="p">,</span>
+    <span class="n">petri_homs</span><span class="p">,</span>
+    <span class="n">labelled_ats</span> <span class="o">+</span> <span class="n">prop_ats</span><span class="p">,</span>
+    <span class="n">labelled_attrs</span> <span class="o">+</span> <span class="n">prop_attrs</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">SchPropertyReactionNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
-    <span class="s2">&quot;PropertyReactionNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Concentration</span><span class="p">,</span> <span class="n">Rate</span><span class="p">,</span> <span class="n">Prop</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_concentration</span><span class="p">,</span> <span class="n">attr_sprop</span><span class="p">,</span> <span class="n">attr_rate</span><span class="p">,</span> <span class="n">attr_tprop</span><span class="p">],</span>
+    <span class="s2">&quot;PropertyReactionNet&quot;</span><span class="p">,</span> <span class="n">petri_obs</span><span class="p">,</span> <span class="n">petri_homs</span><span class="p">,</span> <span class="n">rxn_ats</span> <span class="o">+</span> <span class="n">prop_ats</span><span class="p">,</span> <span class="n">rxn_attrs</span> <span class="o">+</span> <span class="n">prop_attrs</span>
 <span class="p">)</span>
 <span class="n">SchPropertyLabelledReactionNet</span> <span class="o">=</span> <span class="n">Schema</span><span class="p">(</span>
     <span class="s2">&quot;PropertyLabelledReactionNet&quot;</span><span class="p">,</span>
-    <span class="p">[</span><span class="n">Species</span><span class="p">,</span> <span class="n">Transition</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">hom_it</span><span class="p">,</span> <span class="n">hom_is</span><span class="p">,</span> <span class="n">hom_ot</span><span class="p">,</span> <span class="n">hom_os</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">Name</span><span class="p">,</span> <span class="n">Concentration</span><span class="p">,</span> <span class="n">Rate</span><span class="p">,</span> <span class="n">Prop</span><span class="p">],</span>
-    <span class="p">[</span><span class="n">attr_sname</span><span class="p">,</span> <span class="n">attr_concentration</span><span class="p">,</span> <span class="n">attr_sprop</span><span class="p">,</span> <span class="n">attr_tname</span><span class="p">,</span> <span class="n">attr_rate</span><span class="p">,</span> <span class="n">attr_tprop</span><span class="p">],</span>
+    <span class="n">petri_obs</span><span class="p">,</span>
+    <span class="n">petri_homs</span><span class="p">,</span>
+    <span class="n">labelled_ats</span> <span class="o">+</span> <span class="n">rxn_ats</span> <span class="o">+</span> <span class="n">prop_ats</span><span class="p">,</span>
+    <span class="n">labelled_attrs</span> <span class="o">+</span> <span class="n">rxn_attrs</span> <span class="o">+</span> <span class="n">prop_attrs</span><span class="p">,</span>
 <span class="p">)</span>
 
 

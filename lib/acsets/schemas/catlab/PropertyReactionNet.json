@@ -8,18 +8,18 @@
       "title": "Species concentration"
     },
     {
-      "codom": "Prop",
-      "description": "An attribute representing the properties of a species.",
-      "dom": "S",
-      "name": "sprop",
-      "title": "Species properties"
-    },
-    {
       "codom": "Rate",
       "description": "An attribute representing the rate of a transition.",
       "dom": "T",
       "name": "rate",
       "title": "Transition rate"
+    },
+    {
+      "codom": "Prop",
+      "description": "An attribute representing the properties of a species.",
+      "dom": "S",
+      "name": "sprop",
+      "title": "Species properties"
     },
     {
       "codom": "Prop",

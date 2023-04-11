@@ -8,18 +8,18 @@
       "title": "Species name"
     },
     {
-      "codom": "Concentration",
-      "description": "An attribute representing the concentration of a species.",
-      "dom": "S",
-      "name": "concentration",
-      "title": "Species concentration"
-    },
-    {
       "codom": "Name",
       "description": "An attribute representing the name of a transition.",
       "dom": "T",
       "name": "tname",
       "title": "Transition name"
+    },
+    {
+      "codom": "Concentration",
+      "description": "An attribute representing the concentration of a species.",
+      "dom": "S",
+      "name": "concentration",
+      "title": "Species concentration"
     },
     {
       "codom": "Rate",
