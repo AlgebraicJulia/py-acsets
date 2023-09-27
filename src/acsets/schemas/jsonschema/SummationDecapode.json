@@ -1,5 +1,5 @@
 {
-  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/jsonschema/SummationDecapode.json",
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/SummationDecapode.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "Op1": {

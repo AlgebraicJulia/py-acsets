@@ -30,7 +30,7 @@ def main():
         schema = Schema.from_catlab(catlab_path.name, catlab_schema)
         schema.write_schema(
             jsonschema_path,
-            uri="https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/{}".format(
+            uri="https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/{}".format(
                 Path(jsonschema_path).relative_to(HERE)
             ),
         )
