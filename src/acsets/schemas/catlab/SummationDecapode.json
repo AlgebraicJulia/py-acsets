@@ -1,155 +1,154 @@
 {
-    "version": {
-        "ACSets": "0.0.0",
-        "ACSetSchema": "0.0.1"
+  "version": {
+    "ACSets": "0.0.0",
+    "Catlab": "0.0.0",
+    "ACSetSchema": "0.0.1"
+  },
+  "Ob": [
+    {
+      "name": "Var",
+      "description": null,
+      "title": "Variable"
     },
-    "Ob": [
-        {
-            "name": "Var",
-            "description":null,
-            "title": "Variable"
-        },
-        {
-            "name": "TVar"
-            "description":null,
-            "title": "Tangent Variable"
-        },
-        {
-            "name": "Op1"
-            "description":null,
-            "title": "Unary Operation"
-        },
-        {
-            "name": "Op2"
-            "description":null,
-            "title": "Bianry Operation"
-        },
-        {
-            "name": "Σ"
-            "description":null,
-            "title": "Summation"
-        },
-        {
-            "name": "Summand"
-            "description":null,
-            "title": "Summand"
-        }
-    ],
-    "Hom": [
-        {
-            "name": "src",
-            "codom": "Var",
-            "dom": "Op1",
-            "description":null,
-            "title": "Source"
-
-        },
-        {
-            "name": "tgt",
-            "codom": "Var",
-            "dom": "Op1",
-            "description":null,
-            "title": "Target"
-
-        },
-        {
-            "name": "proj1",
-            "codom": "Var",
-            "dom": "Op2",
-            "description":null,
-            "title": "First Argument"
-        },
-        {
-            "name": "proj2",
-            "codom": "Var",
-            "dom": "Op2",
-            "description":null,
-            "title": "Second Argument"
-        },
-        {
-            "name": "res",
-            "codom": "Var",
-            "dom": "Op2",
-            "description":null,
-            "title": "Result"
-        },
-        {
-            "name": "incl",
-            "codom": "Var",
-            "dom": "TVar",
-            "description":null,
-            "title": "Inclusion of Tangent Variables"
-        },
-        {
-            "name": "summand",
-            "codom": "Var",
-            "dom": "Summand",
-            "description":null,
-            "title": "summand"
-        },
-        {
-            "name": "summation",
-            "codom": "Σ",
-            "dom": "Summand",
-            "description":null,
-            "title": "summation"
-        },
-        {
-            "name": "sum",
-            "codom": "Var",
-            "dom": "Σ"
-            "description":null,
-            "title": "result of summation"
-        }
-    ],
-    "AttrType": [
-        {
-            "name": "Type",
-            "description":"The DEC type of a variable, not a python type",
-            "title": "Variable Type",
-            "ty":"str"
-        },
-        {
-            "name": "Operator",
-            "description":"The DEC operator name",
-            "title": "Operator",
-            "ty":"str"
-        },
-        {
-            "name": "Name",
-            "description":null,
-            "title": "Name",
-            "ty":"str"
-        }
-    ],
-    "Attr": [
-        {
-            "name": "op1",
-            "codom": "Operator",
-            "dom": "Op1",
-            "description":null,
-            "title": "Operation"
-        },
-        {
-            "name": "op2",
-            "codom": "Operator",
-            "dom": "Op2",
-            "description":null,
-            "title": "Binary Operation",
-        },
-        {
-            "name": "type",
-            "codom": "Type",
-            "dom": "Var",
-            "description":null,
-            "title": "Variable Type",
-        },
-        {
-            "name": "name",
-            "codom": "Name",
-            "dom": "Var",
-            "description":null,
-            "title": "Variable Name",
-        }
-    ]
+    {
+      "name": "TVar",
+      "description": null,
+      "title": "Tangent Variable"
+    },
+    {
+      "name": "Op1",
+      "description": null,
+      "title": "Unary Operation"
+    },
+    {
+      "name": "Op2",
+      "description": null,
+      "title": "Bianry Operation"
+    },
+    {
+      "name": "Σ",
+      "description": null,
+      "title": "Summation"
+    },
+    {
+      "name": "Summand",
+      "description": null,
+      "title": "Summand"
+    }
+  ],
+  "Hom": [
+    {
+      "name": "src",
+      "codom": "Var",
+      "dom": "Op1",
+      "description": null,
+      "title": "Source"
+    },
+    {
+      "name": "tgt",
+      "codom": "Var",
+      "dom": "Op1",
+      "description": null,
+      "title": "Target"
+    },
+    {
+      "name": "proj1",
+      "codom": "Var",
+      "dom": "Op2",
+      "description": null,
+      "title": "First Argument"
+    },
+    {
+      "name": "proj2",
+      "codom": "Var",
+      "dom": "Op2",
+      "description": null,
+      "title": "Second Argument"
+    },
+    {
+      "name": "res",
+      "codom": "Var",
+      "dom": "Op2",
+      "description": null,
+      "title": "Result"
+    },
+    {
+      "name": "incl",
+      "codom": "Var",
+      "dom": "TVar",
+      "description": null,
+      "title": "Inclusion of Tangent Variables"
+    },
+    {
+      "name": "summand",
+      "codom": "Var",
+      "dom": "Summand",
+      "description": null,
+      "title": "summand"
+    },
+    {
+      "name": "summation",
+      "codom": "Σ",
+      "dom": "Summand",
+      "description": null,
+      "title": "summation"
+    },
+    {
+      "name": "sum",
+      "codom": "Var",
+      "dom": "Σ",
+      "description": null,
+      "title": "result of summation"
+    }
+  ],
+  "AttrType": [
+    {
+      "name": "Type",
+      "description": "The DEC type of a variable, not a python type",
+      "title": "Variable Type",
+      "ty": "str"
+    },
+    {
+      "name": "Operator",
+      "description": "The DEC operator name",
+      "title": "Operator",
+      "ty": "str"
+    },
+    {
+      "name": "Name",
+      "description": null,
+      "title": "Name",
+      "ty": "str"
+    }
+  ],
+  "Attr": [
+    {
+      "name": "op1",
+      "codom": "Operator",
+      "dom": "Op1",
+      "description": null,
+      "title": "Operation"
+    },
+    {
+      "name": "op2",
+      "codom": "Operator",
+      "dom": "Op2",
+      "description": null,
+      "title": "Binary Operation"
+    },
+    {
+      "name": "type",
+      "codom": "Type",
+      "dom": "Var",
+      "description": null,
+      "title": "Variable Type"
+    },
+    {
+      "name": "name",
+      "codom": "Name",
+      "dom": "Var",
+      "description": null,
+      "title": "Variable Name"
+    }
+  ]
 }
