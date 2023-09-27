@@ -12,9 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=03180e26"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -86,12 +88,12 @@
            <div itemprop="articleBody">
              
   <section id="module-acsets.petris">
-<span id="acsets-petris"></span><h1><code class="code docutils literal notranslate"><span class="pre">acsets.petris</span></code><a class="headerlink" href="#module-acsets.petris" title="Permalink to this heading"></a></h1>
+<span id="acsets-petris"></span><h1><code class="code docutils literal notranslate"><span class="pre">acsets.petris</span></code><a class="headerlink" href="#module-acsets.petris" title="Link to this heading"></a></h1>
 <p>In this model, we define a schema for petri nets, and then a subclass of acset
 with some convenience methods.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.petris.Petri">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Petri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name='Petri'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema=&lt;acsets.acsets.Schema</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Petri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name='Petri'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema=&lt;acsets.acsets.Schema</span> <span class="pre">object&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri" title="Link to this definition"></a></dt>
 <dd><p>A subclass of ACSet customized for petri nets.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sir</span> <span class="o">=</span> <span class="n">Petri</span><span class="p">()</span>
 <span class="n">s</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">sir</span><span class="o">.</span><span class="n">add_species</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -105,7 +107,7 @@ with some convenience methods.</p>
 <p>Initialize a new petri net.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.petris.Petri.add_species">
-<span class="sig-name descname"><span class="pre">add_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri.add_species"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri.add_species" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_species</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri.add_species"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri.add_species" title="Link to this definition"></a></dt>
 <dd><p>Add <cite>n</cite> number of species to the petri net</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -122,7 +124,7 @@ with some convenience methods.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.petris.Petri.add_transitions">
-<span class="sig-name descname"><span class="pre">add_transitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transitions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri.add_transitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri.add_transitions" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_transitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transitions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/petris.html#Petri.add_transitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.petris.Petri.add_transitions" title="Link to this definition"></a></dt>
 <dd><p>Add transitions to the petri net</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>

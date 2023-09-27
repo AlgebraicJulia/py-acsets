@@ -11,9 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=03180e26"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -89,14 +91,19 @@
 <span class="n">JSON_SCHEMAS_DIRECTORY</span> <span class="o">=</span> <span class="n">SCHEMAS_DIRECTORY</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s2">&quot;jsonschema&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="HashableBaseModel"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.HashableBaseModel">[docs]</a><span class="k">class</span> <span class="nc">HashableBaseModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="HashableBaseModel">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.HashableBaseModel">[docs]</a>
+<span class="k">class</span> <span class="nc">HashableBaseModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;An extension of BaseModel with an implementation of __hash__&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span></div>
 
 
-<div class="viewcode-block" id="Ob"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob">[docs]</a><span class="k">class</span> <span class="nc">Ob</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Ob">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob">[docs]</a>
+<span class="k">class</span> <span class="nc">Ob</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents objects in schemas. In an acset, there is a table for</span>
 <span class="sd">    each object in the schema.</span>
@@ -109,13 +116,19 @@
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;The human-readable label for the object&quot;</span><span class="p">)</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;A long-form description of the object&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Ob.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<div class="viewcode-block" id="Ob.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Ob.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydantic config&quot;&quot;&quot;</span>
 
-        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div>
+</div>
 
 
-<div class="viewcode-block" id="Hom"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom">[docs]</a><span class="k">class</span> <span class="nc">Hom</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Hom">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom">[docs]</a>
+<span class="k">class</span> <span class="nc">Hom</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents morphisms in schemas. In an acset, the table corresponding</span>
 <span class="sd">    to an object `x` has a foreign key column for every morphism in the schema that</span>
@@ -132,7 +145,9 @@
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;The human-readable label for the morphism&quot;</span><span class="p">)</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;A long-form description of the morphism&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Hom.dom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.dom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="Hom.dom_string">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.dom_string">[docs]</a>
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">dom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate domain inputs to string</span>
 
@@ -144,7 +159,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
-<div class="viewcode-block" id="Hom.codom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.codom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Hom.codom_string">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.codom_string">[docs]</a>
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">codom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate codomain inputs to string</span>
 
@@ -156,10 +174,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
-<div class="viewcode-block" id="Hom.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Hom.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Hom.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
 
-        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div>
+</div>
+
 
 
 <span class="k">def</span> <span class="nf">_look_up_type</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
@@ -172,7 +195,9 @@
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;non-builtin data types are not yet implemented&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="AttrType"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType">[docs]</a><span class="k">class</span> <span class="nc">AttrType</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="AttrType">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType">[docs]</a>
+<span class="k">class</span> <span class="nc">AttrType</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents attribute types in schemas. An attribute type is the &quot;codomain&quot;</span>
 <span class="sd">    of attributes. In an acset, each attrtype is associated with a type. But in general,</span>
@@ -191,21 +216,30 @@
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="AttrType.evaluate_type"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.evaluate_type">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;ty&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="AttrType.evaluate_type">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.evaluate_type">[docs]</a>
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;ty&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">evaluate_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ty</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Populate the parsed value of the type.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_look_up_type</span><span class="p">(</span><span class="n">ty</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ty</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">ty</span></div>
 
-<div class="viewcode-block" id="AttrType.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+
+<div class="viewcode-block" id="AttrType.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.AttrType.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
 
         <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">json_encoders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="nb">type</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">,</span>
-        <span class="p">}</span></div></div>
+        <span class="p">}</span></div>
+</div>
 
 
-<div class="viewcode-block" id="Attr"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr">[docs]</a><span class="k">class</span> <span class="nc">Attr</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Attr">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr">[docs]</a>
+<span class="k">class</span> <span class="nc">Attr</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents attributes in schemas. An attribute corresponds to a</span>
 <span class="sd">    non-foreign-key column in the table for its domain (`dom`).</span>
@@ -220,7 +254,9 @@
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Attr.dom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.dom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="Attr.dom_string">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.dom_string">[docs]</a>
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;dom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">dom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate domain inputs to string</span>
 
@@ -232,7 +268,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="n">Ob</span><span class="p">)</span> <span class="k">else</span> <span class="n">ob</span></div>
 
-<div class="viewcode-block" id="Attr.codom_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.codom_string">[docs]</a>    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Attr.codom_string">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.codom_string">[docs]</a>
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;codom&quot;</span><span class="p">,</span> <span class="n">pre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">codom_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate codomain inputs to string</span>
 
@@ -244,19 +283,26 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="n">AttrType</span><span class="p">)</span> <span class="k">else</span> <span class="n">at</span></div>
 
-<div class="viewcode-block" id="Attr.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Attr.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Attr.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
 
         <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">json_encoders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="nb">type</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">,</span>
-        <span class="p">}</span></div></div>
+        <span class="p">}</span></div>
+</div>
+
 
 
 <span class="n">Property</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Hom</span><span class="p">,</span> <span class="n">Attr</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="VersionSpec"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec">[docs]</a><span class="k">class</span> <span class="nc">VersionSpec</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="VersionSpec">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec">[docs]</a>
+<span class="k">class</span> <span class="nc">VersionSpec</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    We use this version spec to version the serialization format, so that if we</span>
 <span class="sd">    change the serialization format, we can migrate old serializations into new</span>
@@ -266,16 +312,22 @@
     <span class="n">ACSetSchema</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">Catlab</span><span class="p">:</span> <span class="nb">str</span>
 
-<div class="viewcode-block" id="VersionSpec.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<div class="viewcode-block" id="VersionSpec.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.VersionSpec.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
 
-        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div></div>
+        <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span></div>
+</div>
+
 
 
 <span class="n">VERSION_SPEC</span> <span class="o">=</span> <span class="n">VersionSpec</span><span class="p">(</span><span class="n">ACSetSchema</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span> <span class="n">Catlab</span><span class="o">=</span><span class="s2">&quot;0.14.12&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="CatlabSchema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema">[docs]</a><span class="k">class</span> <span class="nc">CatlabSchema</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="CatlabSchema">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema">[docs]</a>
+<span class="k">class</span> <span class="nc">CatlabSchema</span><span class="p">(</span><span class="n">HashableBaseModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This schema is carefully laid out so that the JSON produced/consumed will be</span>
 <span class="sd">    compatible with Catlab schemas. However, the user should not use this; instead</span>
@@ -288,16 +340,22 @@
     <span class="n">Attr</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Attr</span><span class="p">]</span>
     <span class="n">version</span><span class="p">:</span> <span class="n">VersionSpec</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">VERSION_SPEC</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CatlabSchema.Config"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema.Config">[docs]</a>    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<div class="viewcode-block" id="CatlabSchema.Config">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.CatlabSchema.Config">[docs]</a>
+    <span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;pydandic config&quot;&quot;&quot;</span>
 
         <span class="n">allow_mutation</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">json_encoders</span> <span class="o">=</span> <span class="p">{</span>
             <span class="nb">type</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="vm">__qualname__</span><span class="p">,</span>
-        <span class="p">}</span></div></div>
+        <span class="p">}</span></div>
+</div>
 
 
-<div class="viewcode-block" id="Schema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema">[docs]</a><span class="k">class</span> <span class="nc">Schema</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Schema">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema">[docs]</a>
+<span class="k">class</span> <span class="nc">Schema</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is a schema for an acset. Every acset needs a schema, to restrict the allowed</span>
 <span class="sd">    operations to ensure consistency.</span>
@@ -344,7 +402,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">ob_models</span><span class="p">[</span><span class="n">ob</span><span class="p">]],</span> <span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obs</span><span class="p">}</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
 
-<div class="viewcode-block" id="Schema.valtype"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.valtype">[docs]</a>    <span class="k">def</span> <span class="nf">valtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span> <span class="n">Property</span><span class="p">):</span>
+<div class="viewcode-block" id="Schema.valtype">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.valtype">[docs]</a>
+    <span class="k">def</span> <span class="nf">valtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span> <span class="n">Property</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve the python type of a given property</span>
 
 <span class="sd">        Args:</span>
@@ -355,7 +415,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">int</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">Hom</span><span class="p">)</span> <span class="k">else</span> <span class="nb">next</span><span class="p">(</span><span class="n">at</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">AttrType</span> <span class="k">if</span> <span class="n">at</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">prop</span><span class="o">.</span><span class="n">codom</span><span class="p">)</span><span class="o">.</span><span class="n">ty</span></div>
 
-<div class="viewcode-block" id="Schema.valid_value"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.valid_value">[docs]</a>    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Schema.valid_value">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.valid_value">[docs]</a>
+    <span class="k">def</span> <span class="nf">valid_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify if a given value is valid for a given property</span>
 
 <span class="sd">        Args:</span>
@@ -367,7 +430,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">valtype</span><span class="p">(</span><span class="n">prop</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Schema.from_catlab"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.from_catlab">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="Schema.from_catlab">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.from_catlab">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_catlab</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">catlab_schema</span><span class="p">:</span> <span class="n">CatlabSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Schema&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a schema from a CatLab schema.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
@@ -378,7 +444,10 @@
             <span class="n">attrtypes</span><span class="o">=</span><span class="n">catlab_schema</span><span class="o">.</span><span class="n">AttrType</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Schema.make_schema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.make_schema">[docs]</a>    <span class="k">def</span> <span class="nf">make_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Schema.make_schema">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.make_schema">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a JSON schema dictionary object representing this schema.</span>
 
 <span class="sd">        :param uri: The URI where the JSON file that corresponds to this schema lives</span>
@@ -392,7 +461,10 @@
             <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;$id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uri</span>
         <span class="k">return</span> <span class="n">schema</span></div>
 
-<div class="viewcode-block" id="Schema.write_schema"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.write_schema">[docs]</a>    <span class="k">def</span> <span class="nf">write_schema</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Schema.write_schema">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.write_schema">[docs]</a>
+    <span class="k">def</span> <span class="nf">write_schema</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span><span class="p">,</span>
         <span class="n">uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -402,6 +474,7 @@
         <span class="n">schema_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">schema_str</span><span class="p">)</span></div>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">obs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -439,7 +512,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">Attr</span>
 
-<div class="viewcode-block" id="Schema.props_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.props_outof">[docs]</a>    <span class="k">def</span> <span class="nf">props_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+<div class="viewcode-block" id="Schema.props_outof">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.props_outof">[docs]</a>
+    <span class="k">def</span> <span class="nf">props_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the properties with the domain of `ob` in the schema.</span>
 
 <span class="sd">        Args:</span>
@@ -450,7 +525,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">homs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Schema.homs_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.homs_outof">[docs]</a>    <span class="k">def</span> <span class="nf">homs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="Schema.homs_outof">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.homs_outof">[docs]</a>
+    <span class="k">def</span> <span class="nf">homs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the morphisms that the given object `ob` maps to in the schema.</span>
 
 <span class="sd">        Args:</span>
@@ -461,7 +539,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">homs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Schema.attrs_outof"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.attrs_outof">[docs]</a>    <span class="k">def</span> <span class="nf">attrs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="Schema.attrs_outof">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.attrs_outof">[docs]</a>
+    <span class="k">def</span> <span class="nf">attrs_outof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Property</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the attributes that the given object `ob` maps to in the schema.</span>
 
 <span class="sd">        Args:</span>
@@ -472,7 +553,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">dom</span> <span class="o">==</span> <span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Schema.from_string"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.from_string">[docs]</a>    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Schema.from_string">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.Schema.from_string">[docs]</a>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the appropriate object, morphism, attribute type, or attribute from the schema by name.</span>
 
 <span class="sd">        Args:</span>
@@ -492,10 +576,14 @@
             <span class="k">return</span> <span class="n">x</span>
         <span class="n">x</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">s</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">x</span></div></div>
+            <span class="k">return</span> <span class="n">x</span></div>
+</div>
 
 
-<div class="viewcode-block" id="ACSet"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet">[docs]</a><span class="k">class</span> <span class="nc">ACSet</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ACSet">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet">[docs]</a>
+<span class="k">class</span> <span class="nc">ACSet</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An acset consists of a collection of tables, one for every object in the schema.</span>
 
@@ -524,7 +612,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">homs</span> <span class="o">+</span> <span class="n">schema</span><span class="o">.</span><span class="n">attrs</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name_to_ob</span> <span class="o">=</span> <span class="p">{</span><span class="n">ob</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">ob</span> <span class="k">for</span> <span class="n">ob</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">obs</span><span class="p">}</span>
 
-<div class="viewcode-block" id="ACSet.from_obj"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.from_obj">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="ACSet.from_obj">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.from_obj">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_obj</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ACSet&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make an ACSet from a JSON object representing its schema.</span>
 
@@ -550,7 +640,10 @@
         <span class="n">schema</span> <span class="o">=</span> <span class="n">Schema</span><span class="o">.</span><span class="n">from_catlab</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">catlab_schema</span><span class="o">=</span><span class="n">catlab_schema</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.from_file"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.from_file">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="ACSet.from_file">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.from_file">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ACSet&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make an ACSet from a file with the JSON representing its schema.</span>
 
@@ -571,7 +664,10 @@
             <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_obj</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.add_parts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_parts">[docs]</a>    <span class="k">def</span> <span class="nf">add_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ACSet.add_parts">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_parts">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">],</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add `n` parts to an object in the ACset.</span>
 
 <span class="sd">        Args:</span>
@@ -588,7 +684,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">[</span><span class="n">ob</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n</span>
         <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.add_part"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_part">[docs]</a>    <span class="k">def</span> <span class="nf">add_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ACSet.add_part">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.add_part">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_part</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Ob</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a single part to an object in the ACSet</span>
 
 <span class="sd">        Args:</span>
@@ -599,7 +698,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parts</span><span class="p">(</span><span class="n">ob</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ACSet.set_subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.set_subpart">[docs]</a>    <span class="k">def</span> <span class="nf">set_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.set_subpart">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.set_subpart">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Modify a morphism or attribute for a row in a table of the ACSet.</span>
 
 <span class="sd">        Args:</span>
@@ -614,7 +716,10 @@
             <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">valid_value</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span></div>
 
-<div class="viewcode-block" id="ACSet.has_subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.has_subpart">[docs]</a>    <span class="k">def</span> <span class="nf">has_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.has_subpart">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.has_subpart">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a property exists for a given row in a table of the ACSset.</span>
 
 <span class="sd">        Args:</span>
@@ -626,7 +731,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ACSet.subpart"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.subpart">[docs]</a>    <span class="k">def</span> <span class="nf">subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">oneindex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.subpart">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.subpart">[docs]</a>
+    <span class="k">def</span> <span class="nf">subpart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">,</span> <span class="n">oneindex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the subpart of a part in an ACSet</span>
 
 <span class="sd">        Args:</span>
@@ -642,7 +750,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_subparts</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">i</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ACSet.nparts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.nparts">[docs]</a>    <span class="k">def</span> <span class="nf">nparts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ACSet.nparts">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.nparts">[docs]</a>
+    <span class="k">def</span> <span class="nf">nparts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the number of rows in a given table of the ACSet.</span>
 
 <span class="sd">        Args:</span>
@@ -654,7 +765,10 @@
         <span class="k">assert</span> <span class="n">ob</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">obs</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parts</span><span class="p">[</span><span class="n">ob</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ACSet.parts"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.parts">[docs]</a>    <span class="k">def</span> <span class="nf">parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
+
+<div class="viewcode-block" id="ACSet.parts">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.parts">[docs]</a>
+    <span class="k">def</span> <span class="nf">parts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">range</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the row indexes in a given table of the ACSet.</span>
 
 <span class="sd">        Args:</span>
@@ -665,7 +779,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nparts</span><span class="p">(</span><span class="n">ob</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ACSet.incident"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.incident">[docs]</a>    <span class="k">def</span> <span class="nf">incident</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="ACSet.incident">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.incident">[docs]</a>
+    <span class="k">def</span> <span class="nf">incident</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Property</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all of the subparts incident to a part in the ACset.</span>
 
 <span class="sd">        Args:</span>
@@ -683,7 +800,10 @@
             <span class="p">)</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.prop_dict"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.prop_dict">[docs]</a>    <span class="k">def</span> <span class="nf">prop_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+
+<div class="viewcode-block" id="ACSet.prop_dict">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.prop_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">prop_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ob</span><span class="p">:</span> <span class="n">Ob</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dictionary of all subparts for a given row in a table.</span>
 
 <span class="sd">        Args:</span>
@@ -699,7 +819,10 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_subpart</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
         <span class="p">}</span></div>
 
-<div class="viewcode-block" id="ACSet.export_pydantic"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.export_pydantic">[docs]</a>    <span class="k">def</span> <span class="nf">export_pydantic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.export_pydantic">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.export_pydantic">[docs]</a>
+    <span class="k">def</span> <span class="nf">export_pydantic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACSet to a pydantic model.</span>
 
 <span class="sd">        Returns:</span>
@@ -714,7 +837,10 @@
             <span class="p">}</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.import_pydantic"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.import_pydantic">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="ACSet.import_pydantic">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.import_pydantic">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">import_pydantic</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize a pydantic model to an ACSet with a given `Schema`</span>
 
@@ -739,7 +865,10 @@
 
         <span class="k">return</span> <span class="n">acs</span></div>
 
-<div class="viewcode-block" id="ACSet.to_json_obj"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_obj">[docs]</a>    <span class="k">def</span> <span class="nf">to_json_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.to_json_obj">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_obj">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_json_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACSet to a JSON object.</span>
 
 <span class="sd">        Returns:</span>
@@ -747,7 +876,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_pydantic</span><span class="p">()</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ACSet.to_json_file"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_file">[docs]</a>    <span class="k">def</span> <span class="nf">to_json_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.to_json_file">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_json_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACSet to a JSON file.</span>
 
 <span class="sd">        Args:</span>
@@ -756,7 +888,10 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_json_str</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ACSet.to_json_str"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_str">[docs]</a>    <span class="k">def</span> <span class="nf">to_json_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ACSet.to_json_str">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.to_json_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">to_json_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serialize the ACSet to a JSON string.</span>
 
 <span class="sd">        Returns:</span>
@@ -764,7 +899,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_pydantic</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ACSet.read_json"><a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.read_json">[docs]</a>    <span class="nd">@classmethod</span>
+
+<div class="viewcode-block" id="ACSet.read_json">
+<a class="viewcode-back" href="../../usage/acsets.html#acsets.acsets.ACSet.read_json">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Deserialize a JSON string to an ACSet with a given `Schema`.</span>
 
@@ -776,7 +914,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            The deserialized ACSet object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">import_pydantic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parse_obj</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span></div></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">import_pydantic</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">schema</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parse_obj</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span></div>
+</div>
+
 </pre></div>
 
            </div>

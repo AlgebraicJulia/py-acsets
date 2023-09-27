@@ -12,9 +12,11 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=03180e26"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -148,11 +150,11 @@
            <div itemprop="articleBody">
              
   <section id="module-acsets.acsets">
-<span id="acsets-acsets"></span><h1><code class="code docutils literal notranslate"><span class="pre">acsets.acsets</span></code><a class="headerlink" href="#module-acsets.acsets" title="Permalink to this heading"></a></h1>
+<span id="acsets-acsets"></span><h1><code class="code docutils literal notranslate"><span class="pre">acsets.acsets</span></code><a class="headerlink" href="#module-acsets.acsets" title="Link to this heading"></a></h1>
 <p>In this module, we define schemas and acsets.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.HashableBaseModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HashableBaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#HashableBaseModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.HashableBaseModel" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HashableBaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#HashableBaseModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.HashableBaseModel" title="Link to this definition"></a></dt>
 <dd><p>An extension of BaseModel with an implementation of __hash__</p>
 <p>Create a new model by parsing and validating input data from keyword arguments.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
@@ -160,7 +162,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Ob">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Ob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Ob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob" title="Link to this definition"></a></dt>
 <dd><p>This class represents objects in schemas. In an acset, there is a table for
 each object in the schema.</p>
 <p>For instance, in the schema for graphs, there are two objects, <cite>Ob(“V”)</cite> and
@@ -169,7 +171,7 @@ each object in the schema.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Ob.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Ob.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Ob.Config" title="Link to this definition"></a></dt>
 <dd><p>pydantic config</p>
 </dd></dl>
 
@@ -177,7 +179,7 @@ each object in the schema.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Hom">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Hom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Hom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom" title="Link to this definition"></a></dt>
 <dd><p>This class represents morphisms in schemas. In an acset, the table corresponding
 to an object <cite>x</cite> has a foreign key column for every morphism in the schema that
 has a domain (<cite>dom</cite>) of <cite>x</cite>, that has ids that reference rows in the table for
@@ -188,7 +190,7 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Hom.dom_string">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.dom_string" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.dom_string" title="Link to this definition"></a></dt>
 <dd><p>Validate domain inputs to string</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
@@ -200,7 +202,7 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Hom.codom_string">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.codom_string" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.codom_string" title="Link to this definition"></a></dt>
 <dd><p>Validate codomain inputs to string</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
@@ -212,7 +214,7 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Hom.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Hom.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Hom.Config" title="Link to this definition"></a></dt>
 <dd><p>pydandic config</p>
 </dd></dl>
 
@@ -220,7 +222,7 @@ and <cite>Hom(“tgt”, E, V)</cite>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.AttrType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttrType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AttrType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType" title="Link to this definition"></a></dt>
 <dd><p>This class represents attribute types in schemas. An attribute type is the “codomain”
 of attributes. In an acset, each attrtype is associated with a type. But in general,
 acsets are “polymorphic” over the types of their attributes.</p>
@@ -232,13 +234,13 @@ transition, for instance, has a tuple of strings as its name.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.AttrType.evaluate_type">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType.evaluate_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType.evaluate_type" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ty</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType.evaluate_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType.evaluate_type" title="Link to this definition"></a></dt>
 <dd><p>Populate the parsed value of the type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.AttrType.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#AttrType.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.AttrType.Config" title="Link to this definition"></a></dt>
 <dd><p>pydandic config</p>
 </dd></dl>
 
@@ -246,7 +248,7 @@ transition, for instance, has a tuple of strings as its name.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Attr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr" title="Link to this definition"></a></dt>
 <dd><p>This class represents attributes in schemas. An attribute corresponds to a
 non-foreign-key column in the table for its domain (<cite>dom</cite>).</p>
 <p>For instance, in the schema for Petri nets, we have <cite>Attr(“sname”, Species, Name)</cite>
@@ -255,7 +257,7 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Attr.dom_string">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.dom_string" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.dom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.dom_string" title="Link to this definition"></a></dt>
 <dd><p>Validate domain inputs to string</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>ob: either a string of the object name or the object</p>
@@ -267,7 +269,7 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Attr.codom_string">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.codom_string" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">codom_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.codom_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.codom_string" title="Link to this definition"></a></dt>
 <dd><p>Validate codomain inputs to string</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>ob: either a string of the AttrType name or the AttrType object</p>
@@ -279,7 +281,7 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Attr.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#Attr.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Attr.Config" title="Link to this definition"></a></dt>
 <dd><p>pydandic config</p>
 </dd></dl>
 
@@ -287,7 +289,7 @@ which is the attribute that stores the name of a species in a Petri net.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.VersionSpec">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VersionSpec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#VersionSpec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.VersionSpec" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VersionSpec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#VersionSpec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.VersionSpec" title="Link to this definition"></a></dt>
 <dd><p>We use this version spec to version the serialization format, so that if we
 change the serialization format, we can migrate old serializations into new
 ones.</p>
@@ -295,7 +297,7 @@ ones.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.VersionSpec.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#VersionSpec.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.VersionSpec.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#VersionSpec.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.VersionSpec.Config" title="Link to this definition"></a></dt>
 <dd><p>pydandic config</p>
 </dd></dl>
 
@@ -303,7 +305,7 @@ ones.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.CatlabSchema">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CatlabSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#CatlabSchema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.CatlabSchema" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CatlabSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#CatlabSchema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.CatlabSchema" title="Link to this definition"></a></dt>
 <dd><p>This schema is carefully laid out so that the JSON produced/consumed will be
 compatible with Catlab schemas. However, the user should not use this; instead
 the user should use the Schema class, which is below.</p>
@@ -311,7 +313,7 @@ the user should use the Schema class, which is below.</p>
 <p>Raises ValidationError if the input data cannot be parsed to form a valid model.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.CatlabSchema.Config">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#CatlabSchema.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.CatlabSchema.Config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../_modules/acsets/acsets.html#CatlabSchema.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.CatlabSchema.Config" title="Link to this definition"></a></dt>
 <dd><p>pydandic config</p>
 </dd></dl>
 
@@ -319,7 +321,7 @@ the user should use the Schema class, which is below.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.Schema">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrtypes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrtypes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema" title="Link to this definition"></a></dt>
 <dd><p>This is a schema for an acset. Every acset needs a schema, to restrict the allowed
 operations to ensure consistency.</p>
 <p>Initialize a schema object.</p>
@@ -333,7 +335,7 @@ attrs: A list of attributes (<cite>Attr</cite>).</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.valtype">
-<span class="sig-name descname"><span class="pre">valtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valtype" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">valtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valtype" title="Link to this definition"></a></dt>
 <dd><p>Resolve the python type of a given property</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>prop: Either a Hom  object or a AttrTyp object</p>
@@ -345,7 +347,7 @@ attrs: A list of attributes (<cite>Attr</cite>).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.valid_value">
-<span class="sig-name descname"><span class="pre">valid_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valid_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valid_value" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">valid_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.valid_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.valid_value" title="Link to this definition"></a></dt>
 <dd><p>Verify if a given value is valid for a given property</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>val (any): the value to check if valid
@@ -358,7 +360,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.from_catlab">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_catlab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catlab_schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.from_catlab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.from_catlab" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_catlab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catlab_schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.from_catlab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.from_catlab" title="Link to this definition"></a></dt>
 <dd><p>Get a schema from a CatLab schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -369,7 +371,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.make_schema">
-<span class="sig-name descname"><span class="pre">make_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.make_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.make_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">make_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.make_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.make_schema" title="Link to this definition"></a></dt>
 <dd><p>Make a JSON schema dictionary object representing this schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -384,7 +386,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.write_schema">
-<span class="sig-name descname"><span class="pre">write_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.write_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.write_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">write_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.write_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.write_schema" title="Link to this definition"></a></dt>
 <dd><p>Write a JSON schema to a file path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -395,7 +397,7 @@ prop: the Property object</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.obs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">obs</span></span><a class="headerlink" href="#acsets.acsets.Schema.obs" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">obs</span></span><a class="headerlink" href="#acsets.acsets.Schema.obs" title="Link to this definition"></a></dt>
 <dd><p>Get the objects of the schema</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of of <cite>Ob</cite>s</p>
@@ -405,7 +407,7 @@ prop: the Property object</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.homs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">homs</span></span><a class="headerlink" href="#acsets.acsets.Schema.homs" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">homs</span></span><a class="headerlink" href="#acsets.acsets.Schema.homs" title="Link to this definition"></a></dt>
 <dd><p>Get the morphisms of the schema</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of of <cite>Hom</cite>s</p>
@@ -415,7 +417,7 @@ prop: the Property object</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.attrtypes">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attrtypes</span></span><a class="headerlink" href="#acsets.acsets.Schema.attrtypes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attrtypes</span></span><a class="headerlink" href="#acsets.acsets.Schema.attrtypes" title="Link to this definition"></a></dt>
 <dd><p>Get the attribute types of the schema</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of of <cite>AttrType</cite>s</p>
@@ -425,7 +427,7 @@ prop: the Property object</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.attrs">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attrs</span></span><a class="headerlink" href="#acsets.acsets.Schema.attrs" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">attrs</span></span><a class="headerlink" href="#acsets.acsets.Schema.attrs" title="Link to this definition"></a></dt>
 <dd><p>Get the attributes of the schema</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of of <cite>Attr</cite>s</p>
@@ -435,7 +437,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.props_outof">
-<span class="sig-name descname"><span class="pre">props_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.props_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.props_outof" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">props_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.props_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.props_outof" title="Link to this definition"></a></dt>
 <dd><p>Get all of the properties with the domain of <cite>ob</cite> in the schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -452,7 +454,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.homs_outof">
-<span class="sig-name descname"><span class="pre">homs_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.homs_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.homs_outof" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">homs_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.homs_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.homs_outof" title="Link to this definition"></a></dt>
 <dd><p>Get all of the morphisms that the given object <cite>ob</cite> maps to in the schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -469,7 +471,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.attrs_outof">
-<span class="sig-name descname"><span class="pre">attrs_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.attrs_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.attrs_outof" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">attrs_outof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.attrs_outof"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.attrs_outof" title="Link to this definition"></a></dt>
 <dd><p>Get all of the attributes that the given object <cite>ob</cite> maps to in the schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -486,7 +488,7 @@ prop: the Property object</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.Schema.from_string">
-<span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.from_string" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#Schema.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.Schema.from_string" title="Link to this definition"></a></dt>
 <dd><p>Get the appropriate object, morphism, attribute type, or attribute from the schema by name.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>s: The name of the schema element that you want to retrieve.</p>
@@ -500,7 +502,7 @@ prop: the Property object</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ACSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ACSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet" title="Link to this definition"></a></dt>
 <dd><p>An acset consists of a collection of tables, one for every object in the schema.</p>
 <p>The rows of the tables are called “parts”, and the cells of the rows are called “subparts”.</p>
 <p>One can get all of the parts corresponding to an object, add parts, get the subparts,
@@ -513,7 +515,7 @@ schema: The schema of the ACSet.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.from_obj">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.from_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.from_obj" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.from_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.from_obj" title="Link to this definition"></a></dt>
 <dd><p>Make an ACSet from a JSON object representing its schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -544,7 +546,7 @@ and load it over the web with the following code:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.from_file">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.from_file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.from_file" title="Link to this definition"></a></dt>
 <dd><p>Make an ACSet from a file with the JSON representing its schema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -571,7 +573,7 @@ schema, you can load it and start working with:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.add_parts">
-<span class="sig-name descname"><span class="pre">add_parts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.add_parts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.add_parts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_parts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.add_parts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.add_parts" title="Link to this definition"></a></dt>
 <dd><p>Add <cite>n</cite> parts to an object in the ACset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -589,7 +591,7 @@ n: The number of parts to be added.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.add_part">
-<span class="sig-name descname"><span class="pre">add_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.add_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.add_part" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_part</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.add_part"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.add_part" title="Link to this definition"></a></dt>
 <dd><p>Add a single part to an object in the ACSet</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -606,7 +608,7 @@ n: The number of parts to be added.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.set_subpart">
-<span class="sig-name descname"><span class="pre">set_subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.set_subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.set_subpart" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.set_subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.set_subpart" title="Link to this definition"></a></dt>
 <dd><p>Modify a morphism or attribute for a row in a table of the ACSet.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>i: The row index for the property mapping to be added to.
@@ -618,7 +620,7 @@ x: A valid type for the given <cite>Hom</cite> or <cite>Attr</cite> to set the v
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.has_subpart">
-<span class="sig-name descname"><span class="pre">has_subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.has_subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.has_subpart" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">has_subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.has_subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.has_subpart" title="Link to this definition"></a></dt>
 <dd><p>Check if a property exists for a given row in a table of the ACSset.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>i: The row index for the property mapping to be added to.
@@ -631,7 +633,7 @@ f: The <cite>Hom</cite> or <cite>Attr</cite> to check for.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.subpart">
-<span class="sig-name descname"><span class="pre">subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oneindex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.subpart" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">subpart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oneindex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.subpart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.subpart" title="Link to this definition"></a></dt>
 <dd><p>Get the subpart of a part in an ACSet</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>oneindex (boolean): Whether or not to return the index starting at 1 or 0, default is <cite>False</cite> which is zero-indexed
@@ -645,7 +647,7 @@ f: The <cite>Hom</cite> or <cite>Attr</cite> to retrieve.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.nparts">
-<span class="sig-name descname"><span class="pre">nparts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.nparts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.nparts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">nparts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.nparts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.nparts" title="Link to this definition"></a></dt>
 <dd><p>Get the number of rows in a given table of the ACSet.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -662,7 +664,7 @@ f: The <cite>Hom</cite> or <cite>Attr</cite> to retrieve.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.parts">
-<span class="sig-name descname"><span class="pre">parts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.parts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.parts" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">parts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.parts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.parts" title="Link to this definition"></a></dt>
 <dd><p>Get all of the row indexes in a given table of the ACSet.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -679,7 +681,7 @@ f: The <cite>Hom</cite> or <cite>Attr</cite> to retrieve.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.incident">
-<span class="sig-name descname"><span class="pre">incident</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.incident"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.incident" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">incident</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.incident"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.incident" title="Link to this definition"></a></dt>
 <dd><p>Get all of the subparts incident to a part in the ACset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -697,7 +699,7 @@ f: The <cite>Hom</cite> or <cite>Attr</cite> mapping to search.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.prop_dict">
-<span class="sig-name descname"><span class="pre">prop_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.prop_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.prop_dict" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">prop_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ob</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.prop_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.prop_dict" title="Link to this definition"></a></dt>
 <dd><p>Get a dictionary of all subparts for a given row in a table.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -715,7 +717,7 @@ i: The row in <cite>ob</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.export_pydantic">
-<span class="sig-name descname"><span class="pre">export_pydantic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.export_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.export_pydantic" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">export_pydantic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.export_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.export_pydantic" title="Link to this definition"></a></dt>
 <dd><p>Serialize the ACSet to a pydantic model.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The pydantic model of the serialized ACSet.</p>
@@ -725,7 +727,7 @@ i: The row in <cite>ob</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.import_pydantic">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">import_pydantic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.import_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.import_pydantic" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">import_pydantic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.import_pydantic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.import_pydantic" title="Link to this definition"></a></dt>
 <dd><p>Deserialize a pydantic model to an ACSet with a given <cite>Schema</cite></p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>schema: The <cite>Schema</cite> of the ACSet that is defined by the pydantic model.
@@ -738,7 +740,7 @@ d: The pydantic model object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.to_json_obj">
-<span class="sig-name descname"><span class="pre">to_json_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_obj" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_json_obj</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_obj" title="Link to this definition"></a></dt>
 <dd><p>Serialize the ACSet to a JSON object.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The JSON object of the serialized ACSet.</p>
@@ -748,7 +750,7 @@ d: The pydantic model object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.to_json_file">
-<span class="sig-name descname"><span class="pre">to_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_file" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_json_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_file" title="Link to this definition"></a></dt>
 <dd><p>Serialize the ACSet to a JSON file.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>fname: The file name to write the JSON to.</p>
@@ -758,7 +760,7 @@ d: The pydantic model object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.to_json_str">
-<span class="sig-name descname"><span class="pre">to_json_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_str" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_json_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.to_json_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.to_json_str" title="Link to this definition"></a></dt>
 <dd><p>Serialize the ACSet to a JSON string.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The JSON string of the serialized ACSet.</p>
@@ -768,7 +770,7 @@ d: The pydantic model object.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="acsets.acsets.ACSet.read_json">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.read_json" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/acsets/acsets.html#ACSet.read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#acsets.acsets.ACSet.read_json" title="Link to this definition"></a></dt>
 <dd><p>Deserialize a JSON string to an ACSet with a given <cite>Schema</cite>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>name: The name of the ACSset.
