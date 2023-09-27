@@ -1,0 +1,90 @@
+{
+  "version": {
+      "ACSets": "0.0.0",
+      "ACSetSchema": "0.0.1"
+  },
+  "Ob": [
+      {
+          "name": "Flow",
+          "title": "Flow",
+          "description": null
+      },
+      {
+          "name": "Stock",
+          "title": "Stock",
+          "description": null
+      },
+      {
+          "name": "Link",
+          "title": "Link",
+          "description": null
+      }
+  ],
+  "Hom": [
+      {
+          "name": "u",
+          "codom": "Stock",
+          "dom": "Flow",
+          "title" :"upstream",
+          "description": null
+      },
+      {
+          "name": "d",
+          "codom": "Stock",
+          "dom": "Flow",
+          "title" :"downstream",
+          "description": null
+      },
+      {
+          "name": "s",
+          "codom": "Stock",
+          "dom": "Link",
+          "title" :"source",
+          "description": null
+      },
+      {
+          "name": "t",
+          "codom": "Flow",
+          "dom": "Link",
+          "title" :"target",
+          "description": null
+      }
+  ],
+  "AttrType": [
+      {
+          "name": "Name",
+          "title":"Names",
+          "description": "Name of an entity in the model.",
+          "ty": "str"
+      },
+      {
+          "name": "FuncFlow",
+          "title" :"Flow Functions",
+          "description": "A representation of the flow function. Currently a math expression in string form.",
+          "ty": "str"
+      }
+  ],
+  "Attr": [
+      {
+          "title" :"Stock Name",
+          "description": null,
+          "name": "sname",
+          "codom": "Name",
+          "dom": "Stock"
+      },
+      {
+          "title" :"Flow Name",
+          "description": null,
+          "name": "fname",
+          "codom": "Name",
+          "dom": "Flow"
+      },
+      {
+          "title" :"Flow Function",
+          "description": null,
+          "name": "ϕf",
+          "codom": "FuncFlow",
+          "dom": "Flow"
+      }
+  ]
+}
