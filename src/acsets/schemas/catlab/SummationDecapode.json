@@ -107,19 +107,19 @@
             "name": "Type",
             "description":"The DEC type of a variable, not a python type",
             "title": "Variable Type",
-            "type":"str"
+            "ty":"str"
         },
         {
             "name": "Operator",
             "description":"The DEC operator name",
             "title": "Operator",
-            "type":"str"
+            "ty":"str"
         },
         {
             "name": "Name",
             "description":null,
             "title": "Name",
-            "type":"str"
+            "ty":"str"
         }
     ],
     "Attr": [
