@@ -1,0 +1,109 @@
+{
+  "version": {
+    "Catlab": "0.14.12",
+    "ACSetSchema": "0.0.1"
+  },
+  "Ob": [
+    {
+      "name": "Var"
+    },
+    {
+      "name": "TVar"
+    },
+    {
+      "name": "Op1"
+    },
+    {
+      "name": "Op2"
+    },
+    {
+      "name": "Σ"
+    },
+    {
+      "name": "Summand"
+    }
+  ],
+  "Hom": [
+    {
+      "name": "src",
+      "codom": "Var",
+      "dom": "Op1"
+    },
+    {
+      "name": "tgt",
+      "codom": "Var",
+      "dom": "Op1"
+    },
+    {
+      "name": "proj1",
+      "codom": "Var",
+      "dom": "Op2"
+    },
+    {
+      "name": "proj2",
+      "codom": "Var",
+      "dom": "Op2"
+    },
+    {
+      "name": "res",
+      "codom": "Var",
+      "dom": "Op2"
+    },
+    {
+      "name": "incl",
+      "codom": "Var",
+      "dom": "TVar"
+    },
+    {
+      "name": "summand",
+      "codom": "Var",
+      "dom": "Summand"
+    },
+    {
+      "name": "summation",
+      "codom": "Σ",
+      "dom": "Summand"
+    },
+    {
+      "name": "sum",
+      "codom": "Var",
+      "dom": "Σ"
+    }
+  ],
+  "AttrType": [
+    {
+      "name": "Type",
+      "ty": "str"
+    },
+    {
+      "name": "Operator",
+      "ty": "str"
+    },
+    {
+      "name": "Name",
+      "ty": "str"
+    }
+  ],
+  "Attr": [
+    {
+      "name": "op1",
+      "codom": "Operator",
+      "dom": "Op1"
+    },
+    {
+      "name": "op2",
+      "codom": "Operator",
+      "dom": "Op2"
+    },
+    {
+      "name": "type",
+      "codom": "Type",
+      "dom": "Var"
+    },
+    {
+      "name": "name",
+      "codom": "Name",
+      "dom": "Var"
+    }
+  ]
+}

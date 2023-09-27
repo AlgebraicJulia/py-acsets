@@ -1,0 +1,148 @@
+{
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/jsonschema/SummationDecapode.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Op1": {
+      "properties": {
+        "op1": {
+          "title": "Op1",
+          "type": "string"
+        },
+        "src": {
+          "title": "Src",
+          "type": "integer"
+        },
+        "tgt": {
+          "title": "Tgt",
+          "type": "integer"
+        }
+      },
+      "title": "Op1",
+      "type": "object"
+    },
+    "Op2": {
+      "properties": {
+        "op2": {
+          "title": "Op2",
+          "type": "string"
+        },
+        "proj1": {
+          "title": "Proj1",
+          "type": "integer"
+        },
+        "proj2": {
+          "title": "Proj2",
+          "type": "integer"
+        },
+        "res": {
+          "title": "Res",
+          "type": "integer"
+        }
+      },
+      "title": "Op2",
+      "type": "object"
+    },
+    "Summand": {
+      "properties": {
+        "summand": {
+          "title": "Summand",
+          "type": "integer"
+        },
+        "summation": {
+          "title": "Summation",
+          "type": "integer"
+        }
+      },
+      "title": "Summand",
+      "type": "object"
+    },
+    "TVar": {
+      "properties": {
+        "incl": {
+          "title": "Incl",
+          "type": "integer"
+        }
+      },
+      "title": "TVar",
+      "type": "object"
+    },
+    "Var": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "Var",
+      "type": "object"
+    },
+    "_": {
+      "properties": {
+        "sum": {
+          "title": "Sum",
+          "type": "integer"
+        }
+      },
+      "title": "Σ",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "Op1": {
+      "items": {
+        "$ref": "#/definitions/Op1"
+      },
+      "title": "Op1",
+      "type": "array"
+    },
+    "Op2": {
+      "items": {
+        "$ref": "#/definitions/Op2"
+      },
+      "title": "Op2",
+      "type": "array"
+    },
+    "Summand": {
+      "items": {
+        "$ref": "#/definitions/Summand"
+      },
+      "title": "Summand",
+      "type": "array"
+    },
+    "TVar": {
+      "items": {
+        "$ref": "#/definitions/TVar"
+      },
+      "title": "Tvar",
+      "type": "array"
+    },
+    "Var": {
+      "items": {
+        "$ref": "#/definitions/Var"
+      },
+      "title": "Var",
+      "type": "array"
+    },
+    "Σ": {
+      "items": {
+        "$ref": "#/definitions/_"
+      },
+      "title": "Σ",
+      "type": "array"
+    }
+  },
+  "required": [
+    "Var",
+    "TVar",
+    "Op1",
+    "Op2",
+    "Σ",
+    "Summand"
+  ],
+  "title": "SummationDecapode.json",
+  "type": "object"
+}
