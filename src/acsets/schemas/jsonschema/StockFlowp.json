@@ -5,19 +5,19 @@
     "Flow": {
       "properties": {
         "d": {
-          "title": "D",
+          "title": "Flow",
           "type": "integer"
         },
         "fname": {
-          "title": "Fname",
+          "title": "Flow",
           "type": "string"
         },
         "u": {
-          "title": "U",
+          "title": "Flow",
           "type": "integer"
         },
         "ϕf": {
-          "title": "Φf",
+          "title": "Flow",
           "type": "string"
         }
       },
@@ -27,11 +27,11 @@
     "Link": {
       "properties": {
         "s": {
-          "title": "S",
+          "title": "Link",
           "type": "integer"
         },
         "t": {
-          "title": "T",
+          "title": "Link",
           "type": "integer"
         }
       },
@@ -41,7 +41,7 @@
     "Stock": {
       "properties": {
         "sname": {
-          "title": "Sname",
+          "title": "Stock",
           "type": "string"
         }
       },

@@ -259,7 +259,7 @@ class Schema:
             ob: create_model(
                 ob.name,
                 **{
-                    prop.name: (Union[self.valtype(prop), None], None)
+                    prop.name: (Union[self.valtype(prop), None], Field(title=ob.title, description=ob.description))
                     for prop in self.props_outof(ob)
                 },
             )

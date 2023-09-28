@@ -5,11 +5,13 @@
     "F": {
       "properties": {
         "fname": {
-          "title": "Fname",
+          "description": "A flow between stocks",
+          "title": "Flow",
           "type": "string"
         },
         "fv": {
-          "title": "Fv",
+          "description": "A flow between stocks",
+          "title": "Flow",
           "type": "integer"
         }
       },
@@ -19,11 +21,13 @@
     "I": {
       "properties": {
         "ifn": {
-          "title": "Ifn",
+          "description": "The input arcs",
+          "title": "Input",
           "type": "integer"
         },
         "is": {
-          "title": "Is",
+          "description": "The input arcs",
+          "title": "Input",
           "type": "integer"
         }
       },
@@ -33,11 +37,11 @@
     "LS": {
       "properties": {
         "lss": {
-          "title": "Lss",
+          "title": "Linkage",
           "type": "integer"
         },
         "lssv": {
-          "title": "Lssv",
+          "title": "Linkage",
           "type": "integer"
         }
       },
@@ -47,11 +51,11 @@
     "LSV": {
       "properties": {
         "lsvsv": {
-          "title": "Lsvsv",
+          "title": "Linkage Sum Variables?",
           "type": "integer"
         },
         "lsvv": {
-          "title": "Lsvv",
+          "title": "Linkage Sum Variables?",
           "type": "integer"
         }
       },
@@ -61,11 +65,11 @@
     "LV": {
       "properties": {
         "lvs": {
-          "title": "Lvs",
+          "title": "Linkage Variable?",
           "type": "integer"
         },
         "lvv": {
-          "title": "Lvv",
+          "title": "Linkage Variable?",
           "type": "integer"
         }
       },
@@ -75,11 +79,13 @@
     "O": {
       "properties": {
         "ofn": {
-          "title": "Ofn",
+          "description": "The output arcs",
+          "title": "Output",
           "type": "integer"
         },
         "os": {
-          "title": "Os",
+          "description": "The output arcs",
+          "title": "Output",
           "type": "integer"
         }
       },
@@ -89,7 +95,8 @@
     "S": {
       "properties": {
         "sname": {
-          "title": "Sname",
+          "description": "A variable in the model",
+          "title": "Stocks",
           "type": "string"
         }
       },
@@ -99,7 +106,8 @@
     "SV": {
       "properties": {
         "svname": {
-          "title": "Svname",
+          "description": "Sum Auxiliary Variable",
+          "title": "Sum Aux",
           "type": "string"
         }
       },
@@ -109,11 +117,11 @@
     "V": {
       "properties": {
         "funcDynam": {
-          "title": "Funcdynam",
+          "title": "Variable?",
           "type": "string"
         },
         "vname": {
-          "title": "Vname",
+          "title": "Variable?",
           "type": "string"
         }
       },
