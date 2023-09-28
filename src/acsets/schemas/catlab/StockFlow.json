@@ -1,183 +1,184 @@
 {
   "version": {
-      "ACSets": "0.0.0",
-      "ACSetSchema": "0.0.1"
+    "ACSets": "0.0.0",
+    "ACSetSchema": "0.0.1",
+    "Catlab": "0.0.0"
   },
   "Ob": [
-      {
-          "title": "Stocks",
-          "description": "A variable in the model",
-          "name": "S"
-      },
-      {
-          "title": "Sum Aux",
-          "description": "Sum Auxiliary Variable",
-          "name": "SV"
-      },
-      {
-          "title": "Linkage",
-          "description": null,
-          "name": "LS"
-      },
-      {
-          "title": "Flow",
-          "description": "A flow between stocks",
-          "name": "F"
-      },
-      {
-          "title": "Input",
-          "description": "The input arcs",
-          "name": "I"
-      },
-      {
-          "title": "Output",
-          "description": "The output arcs",
-          "name": "O"
-      },
-      {
-          "title": "Variable?",
-          "description": null,
-          "name": "V"
-      },
-      {
-          "title": "Linkage Variable?",
-          "description": null,
-          "name": "LV"
-      },
-      {
-          "title": "Linkage Sum Variables?",
-          "description": null,
-          "name": "LSV"
-      }
+    {
+      "title": "Stocks",
+      "description": "A variable in the model",
+      "name": "S"
+    },
+    {
+      "title": "Sum Aux",
+      "description": "Sum Auxiliary Variable",
+      "name": "SV"
+    },
+    {
+      "title": "Linkage",
+      "description": null,
+      "name": "LS"
+    },
+    {
+      "title": "Flow",
+      "description": "A flow between stocks",
+      "name": "F"
+    },
+    {
+      "title": "Input",
+      "description": "The input arcs",
+      "name": "I"
+    },
+    {
+      "title": "Output",
+      "description": "The output arcs",
+      "name": "O"
+    },
+    {
+      "title": "Variable?",
+      "description": null,
+      "name": "V"
+    },
+    {
+      "title": "Linkage Variable?",
+      "description": null,
+      "name": "LV"
+    },
+    {
+      "title": "Linkage Sum Variables?",
+      "description": null,
+      "name": "LSV"
+    }
   ],
   "Hom": [
-      {
-          "title": "LS to stock",
-          "description": null,
-          "name": "lss",
-          "codom": "S",
-          "dom": "LS"
-      },
-      {
-          "title": "LS to SV",
-          "description": null,
-          "name": "lssv",
-          "codom": "SV",
-          "dom": "LS"
-      },
-      {
-          "title": "Input to Function",
-          "description": null,
-          "name": "ifn",
-          "codom": "F",
-          "dom": "I"
-      },
-      {
-          "title": "Input variable",
-          "description": null,
-          "name": "is",
-          "codom": "S",
-          "dom": "I"
-      },
-      {
-          "title": "Output of Function",
-          "description": null,
-          "name": "ofn",
-          "codom": "F",
-          "dom": "O"
-      },
-      {
-          "title": "Output Variable",
-          "description": null,
-          "name": "os",
-          "codom": "S",
-          "dom": "O"
-      },
-      {
-          "title": "Variable Result of Function",
-          "description": null,
-          "name": "fv",
-          "codom": "V",
-          "dom": "F"
-      },
-      {
-          "title": "S of V",
-          "description": null,
-          "name": "lvs",
-          "codom": "S",
-          "dom": "LV"
-      },
-      {
-          "title": "V of LV",
-          "description": null,
-          "name": "lvv",
-          "codom": "V",
-          "dom": "LV"
-      },
-      {
-          "title": "SV of LSV",
-          "description": null,
-          "name": "lsvsv",
-          "codom": "SV",
-          "dom": "LSV"
-      },
-      {
-          "title": "V of LSV",
-          "description": null,
-          "name": "lsvv",
-          "codom": "V",
-          "dom": "LSV"
-      }
+    {
+      "title": "LS to stock",
+      "description": null,
+      "name": "lss",
+      "codom": "S",
+      "dom": "LS"
+    },
+    {
+      "title": "LS to SV",
+      "description": null,
+      "name": "lssv",
+      "codom": "SV",
+      "dom": "LS"
+    },
+    {
+      "title": "Input to Function",
+      "description": null,
+      "name": "ifn",
+      "codom": "F",
+      "dom": "I"
+    },
+    {
+      "title": "Input variable",
+      "description": null,
+      "name": "is",
+      "codom": "S",
+      "dom": "I"
+    },
+    {
+      "title": "Output of Function",
+      "description": null,
+      "name": "ofn",
+      "codom": "F",
+      "dom": "O"
+    },
+    {
+      "title": "Output Variable",
+      "description": null,
+      "name": "os",
+      "codom": "S",
+      "dom": "O"
+    },
+    {
+      "title": "Variable Result of Function",
+      "description": null,
+      "name": "fv",
+      "codom": "V",
+      "dom": "F"
+    },
+    {
+      "title": "S of V",
+      "description": null,
+      "name": "lvs",
+      "codom": "S",
+      "dom": "LV"
+    },
+    {
+      "title": "V of LV",
+      "description": null,
+      "name": "lvv",
+      "codom": "V",
+      "dom": "LV"
+    },
+    {
+      "title": "SV of LSV",
+      "description": null,
+      "name": "lsvsv",
+      "codom": "SV",
+      "dom": "LSV"
+    },
+    {
+      "title": "V of LSV",
+      "description": null,
+      "name": "lsvv",
+      "codom": "V",
+      "dom": "LSV"
+    }
   ],
   "AttrType": [
-      {
-          "name": "Name",
-          "title": "Name of Entity",
-          "description": null,
-          "ty" : "str"
-      },
-      {
-          "name": "FuncDynam",
-          "title": "Dynamics Function",
-          "description": null,
-          "ty" : "str"
-      }
+    {
+      "name": "Name",
+      "title": "Name of Entity",
+      "description": null,
+      "ty": "str"
+    },
+    {
+      "name": "FuncDynam",
+      "title": "Dynamics Function",
+      "description": null,
+      "ty": "str"
+    }
   ],
   "Attr": [
-      {
-          "title": "Stock Name",
-          "description": null,
-          "name": "sname",
-          "codom": "Name",
-          "dom": "S"
-      },
-      {
-          "title": "SV Name",
-          "description": null,
-          "name": "svname",
-          "codom": "Name",
-          "dom": "SV"
-      },
-      {
-          "title": "Function Name",
-          "description": null,
-          "name": "fname",
-          "codom": "Name",
-          "dom": "F"
-      },
-      {
-          "title": "Variable Name",
-          "description": null,
-          "name": "vname",
-          "codom": "Name",
-          "dom": "V"
-      },
-      {
-          "title": "Dynamics Function of Variable",
-          "description": null,
-          "name": "funcDynam",
-          "codom": "FuncDynam",
-          "dom": "V"
-      }
+    {
+      "title": "Stock Name",
+      "description": null,
+      "name": "sname",
+      "codom": "Name",
+      "dom": "S"
+    },
+    {
+      "title": "SV Name",
+      "description": null,
+      "name": "svname",
+      "codom": "Name",
+      "dom": "SV"
+    },
+    {
+      "title": "Function Name",
+      "description": null,
+      "name": "fname",
+      "codom": "Name",
+      "dom": "F"
+    },
+    {
+      "title": "Variable Name",
+      "description": null,
+      "name": "vname",
+      "codom": "Name",
+      "dom": "V"
+    },
+    {
+      "title": "Dynamics Function of Variable",
+      "description": null,
+      "name": "funcDynam",
+      "codom": "FuncDynam",
+      "dom": "V"
+    }
   ]
 }
