@@ -11,13 +11,13 @@
       "name": "S"
     },
     {
-      "title": "Sum Aux",
+      "title": "Sum Variables",
       "description": "Sum Auxiliary Variable",
       "name": "SV"
     },
     {
-      "title": "Linkage",
-      "description": null,
+      "title": "Link Stock",
+      "description": "Links Stocks and Sum Variables",
       "name": "LS"
     },
     {
@@ -26,34 +26,34 @@
       "name": "F"
     },
     {
-      "title": "Input",
-      "description": "The input arcs",
+      "title": "Inflow",
+      "description": "The inflows",
       "name": "I"
     },
     {
-      "title": "Output",
-      "description": "The output arcs",
+      "title": "Outflows",
+      "description": "The outflows",
       "name": "O"
     },
     {
-      "title": "Variable?",
+      "title": "Variable",
       "description": null,
       "name": "V"
     },
     {
-      "title": "Linkage Variable?",
-      "description": null,
+      "title": "Link Variable",
+      "description": "Links Stocks and Variables",
       "name": "LV"
     },
     {
-      "title": "Linkage Sum Variables?",
-      "description": null,
+      "title": "Link Sum Variables",
+      "description": "Links Sum Variables and Variables",
       "name": "LSV"
     }
   ],
   "Hom": [
     {
-      "title": "LS to stock",
+      "title": "Link Stock stock",
       "description": null,
       "name": "lss",
       "codom": "S",
@@ -67,21 +67,21 @@
       "dom": "LS"
     },
     {
-      "title": "Input to Function",
+      "title": "Inflow to Function",
       "description": null,
       "name": "ifn",
       "codom": "F",
       "dom": "I"
     },
     {
-      "title": "Input variable",
+      "title": "Inflow stock",
       "description": null,
       "name": "is",
       "codom": "S",
       "dom": "I"
     },
     {
-      "title": "Output of Function",
+      "title": "Outflow of Flow",
       "description": null,
       "name": "ofn",
       "codom": "F",
