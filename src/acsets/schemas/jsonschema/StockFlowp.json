@@ -1,0 +1,82 @@
+{
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/StockFlowp.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Flow": {
+      "properties": {
+        "d": {
+          "title": "D",
+          "type": "integer"
+        },
+        "fname": {
+          "title": "Fname",
+          "type": "string"
+        },
+        "u": {
+          "title": "U",
+          "type": "integer"
+        },
+        "ϕf": {
+          "title": "Φf",
+          "type": "string"
+        }
+      },
+      "title": "Flow",
+      "type": "object"
+    },
+    "Link": {
+      "properties": {
+        "s": {
+          "title": "S",
+          "type": "integer"
+        },
+        "t": {
+          "title": "T",
+          "type": "integer"
+        }
+      },
+      "title": "Link",
+      "type": "object"
+    },
+    "Stock": {
+      "properties": {
+        "sname": {
+          "title": "Sname",
+          "type": "string"
+        }
+      },
+      "title": "Stock",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "Flow": {
+      "items": {
+        "$ref": "#/definitions/Flow"
+      },
+      "title": "Flow",
+      "type": "array"
+    },
+    "Link": {
+      "items": {
+        "$ref": "#/definitions/Link"
+      },
+      "title": "Link",
+      "type": "array"
+    },
+    "Stock": {
+      "items": {
+        "$ref": "#/definitions/Stock"
+      },
+      "title": "Stock",
+      "type": "array"
+    }
+  },
+  "required": [
+    "Flow",
+    "Stock",
+    "Link"
+  ],
+  "title": "StockFlowp.json",
+  "type": "object"
+}

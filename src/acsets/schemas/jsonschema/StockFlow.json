@@ -1,0 +1,202 @@
+{
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/StockFlow.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "F": {
+      "properties": {
+        "fname": {
+          "title": "Fname",
+          "type": "string"
+        },
+        "fv": {
+          "title": "Fv",
+          "type": "integer"
+        }
+      },
+      "title": "F",
+      "type": "object"
+    },
+    "I": {
+      "properties": {
+        "ifn": {
+          "title": "Ifn",
+          "type": "integer"
+        },
+        "is": {
+          "title": "Is",
+          "type": "integer"
+        }
+      },
+      "title": "I",
+      "type": "object"
+    },
+    "LS": {
+      "properties": {
+        "lss": {
+          "title": "Lss",
+          "type": "integer"
+        },
+        "lssv": {
+          "title": "Lssv",
+          "type": "integer"
+        }
+      },
+      "title": "LS",
+      "type": "object"
+    },
+    "LSV": {
+      "properties": {
+        "lsvsv": {
+          "title": "Lsvsv",
+          "type": "integer"
+        },
+        "lsvv": {
+          "title": "Lsvv",
+          "type": "integer"
+        }
+      },
+      "title": "LSV",
+      "type": "object"
+    },
+    "LV": {
+      "properties": {
+        "lvs": {
+          "title": "Lvs",
+          "type": "integer"
+        },
+        "lvv": {
+          "title": "Lvv",
+          "type": "integer"
+        }
+      },
+      "title": "LV",
+      "type": "object"
+    },
+    "O": {
+      "properties": {
+        "ofn": {
+          "title": "Ofn",
+          "type": "integer"
+        },
+        "os": {
+          "title": "Os",
+          "type": "integer"
+        }
+      },
+      "title": "O",
+      "type": "object"
+    },
+    "S": {
+      "properties": {
+        "sname": {
+          "title": "Sname",
+          "type": "string"
+        }
+      },
+      "title": "S",
+      "type": "object"
+    },
+    "SV": {
+      "properties": {
+        "svname": {
+          "title": "Svname",
+          "type": "string"
+        }
+      },
+      "title": "SV",
+      "type": "object"
+    },
+    "V": {
+      "properties": {
+        "funcDynam": {
+          "title": "Funcdynam",
+          "type": "string"
+        },
+        "vname": {
+          "title": "Vname",
+          "type": "string"
+        }
+      },
+      "title": "V",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "F": {
+      "items": {
+        "$ref": "#/definitions/F"
+      },
+      "title": "F",
+      "type": "array"
+    },
+    "I": {
+      "items": {
+        "$ref": "#/definitions/I"
+      },
+      "title": "I",
+      "type": "array"
+    },
+    "LS": {
+      "items": {
+        "$ref": "#/definitions/LS"
+      },
+      "title": "Ls",
+      "type": "array"
+    },
+    "LSV": {
+      "items": {
+        "$ref": "#/definitions/LSV"
+      },
+      "title": "Lsv",
+      "type": "array"
+    },
+    "LV": {
+      "items": {
+        "$ref": "#/definitions/LV"
+      },
+      "title": "Lv",
+      "type": "array"
+    },
+    "O": {
+      "items": {
+        "$ref": "#/definitions/O"
+      },
+      "title": "O",
+      "type": "array"
+    },
+    "S": {
+      "items": {
+        "$ref": "#/definitions/S"
+      },
+      "title": "S",
+      "type": "array"
+    },
+    "SV": {
+      "items": {
+        "$ref": "#/definitions/SV"
+      },
+      "title": "Sv",
+      "type": "array"
+    },
+    "V": {
+      "items": {
+        "$ref": "#/definitions/V"
+      },
+      "title": "V",
+      "type": "array"
+    }
+  },
+  "required": [
+    "S",
+    "SV",
+    "LS",
+    "F",
+    "I",
+    "O",
+    "V",
+    "LV",
+    "LSV"
+  ],
+  "title": "StockFlow.json",
+  "type": "object"
+}
