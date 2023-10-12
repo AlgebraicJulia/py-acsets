@@ -3,6 +3,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "I": {
+      "additionalProperties": false,
       "properties": {
         "is": {
           "title": "Is",
@@ -17,6 +18,7 @@
       "type": "object"
     },
     "O": {
+      "additionalProperties": false,
       "properties": {
         "os": {
           "title": "Os",
@@ -31,6 +33,7 @@
       "type": "object"
     },
     "S": {
+      "additionalProperties": false,
       "properties": {
         "concentration": {
           "title": "Concentration",
@@ -49,6 +52,7 @@
       "type": "object"
     },
     "T": {
+      "additionalProperties": false,
       "properties": {
         "rate": {
           "title": "Rate",
