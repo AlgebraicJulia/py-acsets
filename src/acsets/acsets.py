@@ -313,6 +313,8 @@ class Schema:
         """
         # TODO add description
         schema = self.model.schema()
+        for part in schema["definitions"].values():
+            part["additionalProperties"] = False
         schema["$schema"] = "http://json-schema.org/draft-07/schema#"
         if uri is not None:
             schema["$id"] = uri
