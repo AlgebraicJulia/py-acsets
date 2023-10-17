@@ -3,10 +3,11 @@ import sympy
 import re
 
 
-def acset_to_amr():
-    acset = requests.get("https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/jpfairbanks-patch-1/"
-                         "src/acsets/schemas/examples/StockFlowp.json").json()
-
+def acset_to_amr(acset):
+    """
+    A method that takes in a stock and flow JSON acset dictionary object and outputs an equivalent stock and flow
+    JSON amr dictinary object
+    """
     stocks = acset['Stock']
     flows = acset['Flow']
 
@@ -80,7 +81,6 @@ def acset_to_amr():
             'schema_name': 'stockflow',
             'model_version': '0.1',
         },
-        'properties': '',
         'model': {
             'flows': flows_list,
             'stocks': stocks_list,
@@ -91,11 +91,82 @@ def acset_to_amr():
             'parameters': params_list,
             'initials': initials_list,
             'observables': [],
-            'time': ''
+            'time': None
         }},
-        'metadata': '',
+        'metadata': None
+    }
+
+
+def amr_to_acset(amr):
+    """
+    A method that takes in a stock and flow JSON amr dictionary object and outputs an equivalent stock and flow
+    JSON acset dictinary object
+    """
+    flows = amr['model']['flows']
+    stocks = amr['model']['stocks']
+    links = amr['model']['links']
+
+    flows_list = []
+    stocks_list = []
+    links_list = []
+
+    symbols = {}
+    stocks_mapping = {}
+    for parameter in amr['semantics']['ode']['parameters']:
+        if parameter['id'].startswith('p_'):
+            symbols[parameter['id'][2:]] = sympy.Symbol('p.' + parameter['id'][2:])
+
+    for idx, stock in enumerate(stocks):
+        stock_id = idx + 1
+        stock_name = stock['id']
+        stock_dict = {'_id': stock_id, 'sname': stock_name}
+        stocks_list.append(stock_dict)
+        symbols[stock_name] = sympy.Symbol('u.' + stock_name)
+        stocks_mapping[stock_name] = idx + 1
+
+    for idx, flow in enumerate(flows):
+        flow_id = idx + 1
+        upstream_stock = next(filter(lambda stock: stock['sname'] == flow['upstream_stock'], stocks_list)).get(
+            '_id')
+        downstream_stock = next(filter(lambda stock: stock['sname'] == flow['downstream_stock'], stocks_list)).get(
+            '_id')
+        flow_name = flow['name']
+
+        amr_expression_str = flow['rate_expression']
+        acset_expression_str = str(sympy.sympify(amr_expression_str, symbols))
+
+        flow_dict = {}
+
+        flow_dict['_id'] = flow_id
+        flow_dict['u'] = upstream_stock
+        flow_dict['d'] = downstream_stock
+        flow_dict['fname'] = flow_name
+        flow_dict["ϕf"] = acset_expression_str
+
+        flows_list.append(flow_dict)
+
+    link_id = 1
+    for idx, link in enumerate(links):
+        if link['source'] in stocks_mapping:
+            link_dict = {'_id': link_id}
+            link_dict['s'] = stocks_mapping[link['source']]
+            link_dict['t'] = idx
+            link_id += 1
+            links_list.append(link_dict)
+
+    return {
+        'Flow': flows_list,
+        'Stock': stocks_list,
+        'Link': links_list
     }
 
 
 if __name__ == "__main__":
-    amr = acset_to_amr()
+    acset_input = requests.get("https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/jpfairbanks-patch-1/"
+                               "src/acsets/schemas/examples/StockFlowp.json").json()
+    amr_output = acset_to_amr(acset_input)
+
+    amr_input = requests.get("https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/" \
+                             "7f5e377225675259baa6486c64102f559edfd79f/stockflow/examples/sir.json").json()
+
+    acset_output = amr_to_acset(amr_input)
