@@ -15,6 +15,7 @@ def amr_to_acset():
     links_list = []
 
     symbols = {}
+    stocks_mapping = {}
     for parameter in amr['semantics']['ode']['parameters']:
         if parameter['id'].startswith('p_'):
             symbols[parameter['id'][2:]] = sympy.Symbol('p.' + parameter['id'][2:])
@@ -25,6 +26,7 @@ def amr_to_acset():
         stock_dict = {'_id': stock_id, 'sname': stock_name}
         stocks_list.append(stock_dict)
         symbols[stock_name] = sympy.Symbol('u.' + stock_name)
+        stocks_mapping[stock_name] = idx + 1
 
     for idx, flow in enumerate(flows):
         flow_id = idx + 1
@@ -47,12 +49,14 @@ def amr_to_acset():
 
         flows_list.append(flow_dict)
 
-    for idx, link in enumerate(links):
-        link_dict = {'_id': idx + 1}
-        link_dict['s'] = link['source']
-        link_dict['t'] = link['target'][4:]
-
-        links_list.append(link_dict)
+    link_id = 1
+    for link in links:
+        if link['source'] in stocks_mapping:
+            link_dict = {'_id': link_id}
+            link_dict['s'] = stocks_mapping[link['source']]
+            link_dict['t'] = link['target'][4:]
+            link_id += 1
+            links_list.append(link_dict)
 
     return {
         'Flow': flows_list,
