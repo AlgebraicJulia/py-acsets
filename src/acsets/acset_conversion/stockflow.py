@@ -20,21 +20,21 @@ def amr_to_acset():
             symbols[parameter['id'][2:]] = sympy.Symbol('p.' + parameter['id'][2:])
 
     for idx, stock in enumerate(stocks):
-        stock_id = stock['id']
+        stock_id = idx + 1
         stock_name = stock['id']
         stock_dict = {'_id': stock_id, 'sname': stock_name}
         stocks_list.append(stock_dict)
-        symbols[stock_id] = sympy.Symbol('u.' + stock['id'])
+        symbols[stock_name] = sympy.Symbol('u.' + stock_name)
 
     for idx, flow in enumerate(flows):
         flow_id = idx + 1
-        upstream_stock = flow['upstream_stock']
-        downstream_stock = flow['downstream_stock']
+        upstream_stock = list(filter(lambda stock: stock['sname'] == flow['upstream_stock'], stocks_list))[0].get(
+            '_id')
+        downstream_stock = list(filter(lambda stock: stock['sname'] == flow['downstream_stock'], stocks_list))[0].get(
+            '_id')
         flow_name = flow['name']
 
-        # As of now, we d
         amr_expression_str = flow['rate_expression']
-
         acset_expression_str = str(sympy.sympify(amr_expression_str, symbols))
 
         flow_dict = {}
