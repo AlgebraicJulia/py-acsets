@@ -83,7 +83,7 @@ class Hom(HashableBaseModel):
         return ob.name if isinstance(ob, Ob) else ob
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
 
@@ -123,7 +123,7 @@ class AttrType(HashableBaseModel):
         return _look_up_type(ty) if isinstance(ty, str) else ty
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
         json_encoders = {
@@ -171,7 +171,7 @@ class Attr(HashableBaseModel):
         return at.name if isinstance(at, AttrType) else at
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
         json_encoders = {
@@ -193,7 +193,7 @@ class VersionSpec(HashableBaseModel):
     Catlab: str
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
 
@@ -215,7 +215,7 @@ class CatlabSchema(HashableBaseModel):
     version: VersionSpec = Field(default=VERSION_SPEC)
 
     class Config:
-        """pydandic config"""
+        """pydantic config"""
 
         allow_mutation = False
         json_encoders = {
