@@ -4,7 +4,8 @@ import json
 import unittest
 
 import jsonschema
-from acsets.schemas import EXAMPLES, CATLAB, JSONSCHEMA
+
+from acsets.schemas import CATLAB, EXAMPLES, JSONSCHEMA
 
 
 class TestExamples(unittest.TestCase):

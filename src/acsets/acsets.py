@@ -32,8 +32,12 @@ class Ob(HashableBaseModel):
     """
 
     name: str = Field(..., description="The name of the object")
-    title: Optional[str] = Field(description="The human-readable label for the object")
-    description: Optional[str] = Field(description="A long-form description of the object")
+    title: Optional[str] = Field(
+        default=None, description="The human-readable label for the object"
+    )
+    description: Optional[str] = Field(
+        default=None, description="A long-form description of the object"
+    )
 
     class Config:
         """pydantic config"""
@@ -52,11 +56,15 @@ class Hom(HashableBaseModel):
     and `Hom("tgt", E, V)`.
     """
 
-    name: str = Field(description="The name of the morphism.")
-    dom: str = Field(title="domain", description="The object of the domain.")
-    codom: str = Field(title="codomain", description="The object of the codomain.")
-    title: Optional[str] = Field(description="The human-readable label for the morphism")
-    description: Optional[str] = Field(description="A long-form description of the morphism")
+    name: str = Field(..., description="The name of the morphism.")
+    dom: str = Field(..., title="domain", description="The object of the domain.")
+    codom: str = Field(..., title="codomain", description="The object of the codomain.")
+    title: Optional[str] = Field(
+        default=None, description="The human-readable label for the morphism"
+    )
+    description: Optional[str] = Field(
+        default=None, description="A long-form description of the morphism"
+    )
 
     @validator("dom", pre=True)
     def dom_string(cls, ob: Union[str, Ob]):
@@ -110,9 +118,10 @@ class AttrType(HashableBaseModel):
     transition, for instance, has a tuple of strings as its name.
     """
 
-    name: str = Field(description="The name of the attribute type.")
+    name: str = Field(..., description="The name of the attribute type.")
     ty: type = Field(
-        description="The type assigned to the attribute type. Use a string referring to the Python type"
+        ...,
+        description="The type assigned to the attribute type. Use a string referring to the Python type",
     )
     title: Optional[str] = None
     description: Optional[str] = None
@@ -140,9 +149,9 @@ class Attr(HashableBaseModel):
     which is the attribute that stores the name of a species in a Petri net.
     """
 
-    name: str = Field(title="name", description="The name of the attribute.")
-    dom: str = Field(title="domain", description="The object in the domain.")
-    codom: str = Field(title="codomain", description="The attribute type in the codomain")
+    name: str = Field(..., title="name", description="The name of the attribute.")
+    dom: str = Field(..., title="domain", description="The object in the domain.")
+    codom: str = Field(..., title="codomain", description="The attribute type in the codomain")
     title: Optional[str] = None
     description: Optional[str] = None
 
@@ -279,7 +288,11 @@ class Schema:
         Returns:
             The Property value type
         """
-        return int if isinstance(prop, Hom) else next(at for at in self.schema.AttrType if at.name == prop.codom).ty
+        return (
+            int
+            if isinstance(prop, Hom)
+            else next(at for at in self.schema.AttrType if at.name == prop.codom).ty
+        )
 
     def valid_value(self, prop: Property, val):
         """Verify if a given value is valid for a given property
