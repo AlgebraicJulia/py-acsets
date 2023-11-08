@@ -1,8 +1,8 @@
-'''
+"""
 This module contains two methods used for converting between stock and flow
 acsets and amr. Both methods accept an acset/amr JSON dictionary object and
 returns its counterpart JSON dictionary object.
-'''
+"""
 import requests
 import sympy
 import re
