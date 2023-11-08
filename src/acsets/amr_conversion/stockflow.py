@@ -1,3 +1,8 @@
+'''
+This module contains two methods used for converting between stock and flow
+acsets and amr. Both methods accept an acset/amr JSON dictionary object and
+returns its counterpart JSON dictionary object.
+'''
 import requests
 import sympy
 import re
@@ -5,8 +10,8 @@ import re
 
 def acset_to_amr(acset):
     """
-    A method that takes in a stock and flow JSON acset dictionary object and outputs an equivalent stock and flow
-    JSON amr dictinary object
+    A method that takes in a stock and flow JSON acset dictionary object
+    and outputs an equivalent stock and flow JSON amr dictinary object
     """
     stocks = acset['Stock']
     flows = acset['Flow']
@@ -44,8 +49,10 @@ def acset_to_amr(acset):
 
         params_stock_flow_map[flow_id] = []
 
-        params_stock_flow_map[flow_id].extend(re.findall(r'p\.([^()*+-/ ]+)', flow['ϕf']))
-        params_stock_flow_map[flow_id].extend(re.findall(r'u\.([^()*+-/ ]+)', flow['ϕf']))
+        params_stock_flow_map[flow_id].extend(
+            re.findall(r'p\.([^()*+-/ ]+)', flow['ϕf']))
+        params_stock_flow_map[flow_id].extend(
+            re.findall(r'u\.([^()*+-/ ]+)', flow['ϕf']))
 
         flows_list.append(flow_dict)
 
@@ -99,7 +106,8 @@ def acset_to_amr(acset):
 
 def amr_to_acset(amr):
     """
-    A method that takes in a stock and flow JSON amr dictionary object and outputs an equivalent stock and flow
+    A method that takes in a stock and flow JSON amr dictionary
+    object and outputs an equivalent stock and flow
     JSON acset dictinary object
     """
     flows = amr['model']['flows']
@@ -114,7 +122,8 @@ def amr_to_acset(amr):
     stocks_mapping = {}
     for parameter in amr['semantics']['ode']['parameters']:
         if parameter['id'].startswith('p_'):
-            symbols[parameter['id'][2:]] = sympy.Symbol('p.' + parameter['id'][2:])
+            symbols[parameter['id'][2:]] = sympy.Symbol(
+                'p.' + parameter['id'][2:])
 
     for idx, stock in enumerate(stocks):
         stock_id = idx + 1
@@ -126,9 +135,13 @@ def amr_to_acset(amr):
 
     for idx, flow in enumerate(flows):
         flow_id = idx + 1
-        upstream_stock = next(filter(lambda stock: stock['sname'] == flow['upstream_stock'], stocks_list)).get(
+        upstream_stock = next(
+            filter(lambda stock: stock['sname'] == flow['upstream_stock'],
+                   stocks_list)).get(
             '_id')
-        downstream_stock = next(filter(lambda stock: stock['sname'] == flow['downstream_stock'], stocks_list)).get(
+        downstream_stock = next(
+            filter(lambda stock: stock['sname'] == flow['downstream_stock'],
+                   stocks_list)).get(
             '_id')
         flow_name = flow['name']
 
@@ -162,11 +175,13 @@ def amr_to_acset(amr):
 
 
 if __name__ == "__main__":
-    acset_input = requests.get("https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/jpfairbanks-patch-1/"
-                               "src/acsets/schemas/examples/StockFlowp.json").json()
+    acset_input = requests.get(
+        "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/jpfairbanks-patch-1/"
+        "src/acsets/schemas/examples/StockFlowp.json").json()
     amr_output = acset_to_amr(acset_input)
 
-    amr_input = requests.get("https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/" \
-                             "7f5e377225675259baa6486c64102f559edfd79f/stockflow/examples/sir.json").json()
+    amr_input = requests.get(
+        "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/" \
+        "7f5e377225675259baa6486c64102f559edfd79f/stockflow/examples/sir.json").json()
 
     acset_output = amr_to_acset(amr_input)
