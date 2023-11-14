@@ -1,6 +1,7 @@
 """This script turns all the catlab schemata into json schemata"""
 
 from pathlib import Path
+
 from acsets import (
     CATLAB_SCHEMAS_DIRECTORY,
     ACSet,
@@ -9,8 +10,8 @@ from acsets import (
     CatlabSchema,
     Hom,
     Ob,
-    petris,
     Schema,
+    petris,
 )
 
 HERE = Path(__file__).parent.resolve()
