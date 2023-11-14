@@ -2,11 +2,14 @@
 
 """Test serialization."""
 
+import importlib
 import os
 import tempfile
 import unittest
 
 from acsets import ACSet, Attr, AttrType, Hom, Ob, mira, petris
+
+PYDANTIC_1 = importlib.metadata.version("pydantic").startswith("1.")
 
 
 class TestSerialization(unittest.TestCase):
@@ -55,6 +58,9 @@ class TestSerialization(unittest.TestCase):
         self.assertIsInstance(hom1.dom, str)
         self.assertIsInstance(hom1.codom, str)
 
+    @unittest.skipUnless(
+        PYDANTIC_1, reason="This functionality can not be made cross-compatible AFAIK"
+    )
     def test_write_schema(self):
         """Test writing the schema does not error."""
         with tempfile.TemporaryDirectory() as directory:
