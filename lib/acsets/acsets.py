@@ -267,6 +267,7 @@ class Schema:
         ob_models = {
             ob: create_model(
                 ob.name,
+                id_field_internal=(int, Field(alias="_id")),
                 **{
                     prop.name: (Union[self.valtype(prop), None], None)
                     for prop in self.props_outof(ob)
@@ -634,11 +635,13 @@ class ACSet:
         Returns:
             A dictionary mapping property name to the value
         """
-        return {
+        props = {
             f.name: self.subpart(i, f, oneindex=True)
             for f in self.schema.props_outof(ob)
             if self.has_subpart(i, f)
         }
+        props["_id"] = i + 1
+        return props
 
     def export_pydantic(self):
         """Serialize the ACSet to a pydantic model.
@@ -686,7 +689,7 @@ class ACSet:
         Returns:
             The JSON object of the serialized ACSet.
         """
-        return self.export_pydantic().dict()
+        return self.export_pydantic().dict(by_alias=True)
 
     def to_json_file(self, fname, *args, **kwargs):
         """Serialize the ACSet to a JSON file.
@@ -695,7 +698,7 @@ class ACSet:
             fname: The file name to write the JSON to.
         """
         with open(fname, "w") as fh:
-            fh.write(self.to_json_str(*args, **kwargs))
+            fh.write(self.to_json_str(*args, **kwargs, by_alias=True))
 
     def to_json_str(self, *args, **kwargs):
         """Serialize the ACSet to a JSON string.
@@ -703,7 +706,7 @@ class ACSet:
         Returns:
             The JSON string of the serialized ACSet.
         """
-        return self.export_pydantic().json(*args, **kwargs)
+        return self.export_pydantic().json(*args, **kwargs, by_alias=True)
 
     @classmethod
     def read_json(cls, name: str, schema: Schema, s: str):
