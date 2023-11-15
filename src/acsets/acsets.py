@@ -267,7 +267,7 @@ class Schema:
         ob_models = {
             ob: create_model(
                 ob.name,
-                id=(int, Field(alias="_id")),
+                id_field_internal=(int, Field(alias="_id")),
                 **{
                     prop.name: (Union[self.valtype(prop), None], None)
                     for prop in self.props_outof(ob)

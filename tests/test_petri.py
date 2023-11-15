@@ -40,7 +40,7 @@ class TestSerialization(unittest.TestCase):
             inf, rec = sir.add_transitions([([s, i], [i, i]), ([i], [r])])
 
             pd_sir = sir.export_pydantic()
-            self.assertEqual(pd_sir.S[1].id, 2)
+            self.assertEqual(pd_sir.S[1].id_field_internal, 2)
             serialized = sir.to_json_str()
             deserialized = cls.import_pydantic(cls_name, schema, pd_sir)
             pd_sir2 = deserialized.export_pydantic()
