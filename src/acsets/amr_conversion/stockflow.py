@@ -38,12 +38,8 @@ def acset_to_amr(acset):
 
         expression_str = flow['ϕf'].replace('p.', '').replace('u.', '')
 
-        flow_dict = {}
-        flow_dict['id'] = flow_id
-        flow_dict['name'] = flow_name
-        flow_dict['upstream_stock'] = upstream_stock
-        flow_dict['downstream_stock'] = downstream_stock
-        flow_dict['rate_expression'] = expression_str
+        flow_dict = {'id': flow_id, 'name': flow_name, 'upstream_stock': upstream_stock,
+                     'downstream_stock': downstream_stock, 'rate_expression': expression_str}
 
         params.extend(re.findall(r'p\.([^()*+-/ ]+)', flow['ϕf']))
 
@@ -136,34 +132,24 @@ def amr_to_acset(amr):
     for idx, flow in enumerate(flows):
         flow_id = idx + 1
         upstream_stock = next(
-            filter(lambda stock: stock['sname'] == flow['upstream_stock'],
+            filter(lambda stock_: stock_['sname'] == flow['upstream_stock'],
                    stocks_list)).get(
             '_id')
         downstream_stock = next(
-            filter(lambda stock: stock['sname'] == flow['downstream_stock'],
+            filter(lambda stock_: stock_['sname'] == flow['downstream_stock'],
                    stocks_list)).get(
             '_id')
         flow_name = flow['name']
 
-        amr_expression_str = flow['rate_expression']
-        acset_expression_str = str(sympy.sympify(amr_expression_str, symbols))
-
-        flow_dict = {}
-
-        flow_dict['_id'] = flow_id
-        flow_dict['u'] = upstream_stock
-        flow_dict['d'] = downstream_stock
-        flow_dict['fname'] = flow_name
-        flow_dict["ϕf"] = acset_expression_str
+        flow_dict = {'_id': flow_id, 'u': upstream_stock, 'd': downstream_stock, 'fname': flow_name,
+                     "ϕf": flow['rate_expression']}
 
         flows_list.append(flow_dict)
 
     link_id = 1
     for idx, link in enumerate(links):
         if link['source'] in stocks_mapping:
-            link_dict = {'_id': link_id}
-            link_dict['s'] = stocks_mapping[link['source']]
-            link_dict['t'] = idx
+            link_dict = {'_id': link_id, 's': stocks_mapping[link['source']], 't': idx}
             link_id += 1
             links_list.append(link_dict)
 
