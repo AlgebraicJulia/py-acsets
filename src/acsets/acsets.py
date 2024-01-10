@@ -269,7 +269,7 @@ class Schema:
                 ob.name,
                 id_field_internal=(int, Field(alias="_id")),
                 **{
-                    prop.name: (Union[self.valtype(prop), None], None)
+                    prop.name: (Union[self.valtype(prop), None], Field(title=ob.title, description=ob.description))
                     for prop in self.props_outof(ob)
                 },
             )
@@ -277,7 +277,7 @@ class Schema:
         }
         self.ob_models = ob_models
         self.model = create_model(
-            self.name, **{ob.name: (list[ob_models[ob]], ...) for ob in self.obs}  # type: ignore
+            self.name, **{ob.name: (list[ob_models[ob]], Field(default_factory=list)) for ob in self.obs}  # type: ignore
         )
 
     def valtype(self, prop: Property):

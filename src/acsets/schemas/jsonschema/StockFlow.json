@@ -1,0 +1,210 @@
+{
+  "$id": "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/main/src/acsets/jsonschema/StockFlow.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "F": {
+      "properties": {
+        "fname": {
+          "description": "A flow between stocks",
+          "title": "Flow",
+          "type": "string"
+        },
+        "fv": {
+          "description": "A flow between stocks",
+          "title": "Flow",
+          "type": "integer"
+        }
+      },
+      "title": "F",
+      "type": "object"
+    },
+    "I": {
+      "properties": {
+        "ifn": {
+          "description": "The input arcs",
+          "title": "Input",
+          "type": "integer"
+        },
+        "is": {
+          "description": "The input arcs",
+          "title": "Input",
+          "type": "integer"
+        }
+      },
+      "title": "I",
+      "type": "object"
+    },
+    "LS": {
+      "properties": {
+        "lss": {
+          "title": "Linkage",
+          "type": "integer"
+        },
+        "lssv": {
+          "title": "Linkage",
+          "type": "integer"
+        }
+      },
+      "title": "LS",
+      "type": "object"
+    },
+    "LSV": {
+      "properties": {
+        "lsvsv": {
+          "title": "Linkage Sum Variables?",
+          "type": "integer"
+        },
+        "lsvv": {
+          "title": "Linkage Sum Variables?",
+          "type": "integer"
+        }
+      },
+      "title": "LSV",
+      "type": "object"
+    },
+    "LV": {
+      "properties": {
+        "lvs": {
+          "title": "Linkage Variable?",
+          "type": "integer"
+        },
+        "lvv": {
+          "title": "Linkage Variable?",
+          "type": "integer"
+        }
+      },
+      "title": "LV",
+      "type": "object"
+    },
+    "O": {
+      "properties": {
+        "ofn": {
+          "description": "The output arcs",
+          "title": "Output",
+          "type": "integer"
+        },
+        "os": {
+          "description": "The output arcs",
+          "title": "Output",
+          "type": "integer"
+        }
+      },
+      "title": "O",
+      "type": "object"
+    },
+    "S": {
+      "properties": {
+        "sname": {
+          "description": "A variable in the model",
+          "title": "Stocks",
+          "type": "string"
+        }
+      },
+      "title": "S",
+      "type": "object"
+    },
+    "SV": {
+      "properties": {
+        "svname": {
+          "description": "Sum Auxiliary Variable",
+          "title": "Sum Aux",
+          "type": "string"
+        }
+      },
+      "title": "SV",
+      "type": "object"
+    },
+    "V": {
+      "properties": {
+        "funcDynam": {
+          "title": "Variable?",
+          "type": "string"
+        },
+        "vname": {
+          "title": "Variable?",
+          "type": "string"
+        }
+      },
+      "title": "V",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "F": {
+      "items": {
+        "$ref": "#/definitions/F"
+      },
+      "title": "F",
+      "type": "array"
+    },
+    "I": {
+      "items": {
+        "$ref": "#/definitions/I"
+      },
+      "title": "I",
+      "type": "array"
+    },
+    "LS": {
+      "items": {
+        "$ref": "#/definitions/LS"
+      },
+      "title": "Ls",
+      "type": "array"
+    },
+    "LSV": {
+      "items": {
+        "$ref": "#/definitions/LSV"
+      },
+      "title": "Lsv",
+      "type": "array"
+    },
+    "LV": {
+      "items": {
+        "$ref": "#/definitions/LV"
+      },
+      "title": "Lv",
+      "type": "array"
+    },
+    "O": {
+      "items": {
+        "$ref": "#/definitions/O"
+      },
+      "title": "O",
+      "type": "array"
+    },
+    "S": {
+      "items": {
+        "$ref": "#/definitions/S"
+      },
+      "title": "S",
+      "type": "array"
+    },
+    "SV": {
+      "items": {
+        "$ref": "#/definitions/SV"
+      },
+      "title": "Sv",
+      "type": "array"
+    },
+    "V": {
+      "items": {
+        "$ref": "#/definitions/V"
+      },
+      "title": "V",
+      "type": "array"
+    }
+  },
+  "required": [
+    "S",
+    "SV",
+    "LS",
+    "F",
+    "I",
+    "O",
+    "V",
+    "LV",
+    "LSV"
+  ],
+  "title": "StockFlow.json",
+  "type": "object"
+}
