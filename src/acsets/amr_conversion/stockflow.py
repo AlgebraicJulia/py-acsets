@@ -8,6 +8,14 @@ import sympy
 import re
 
 
+def is_number(number):
+    try:
+        float_num = float(number)
+        return True
+    except ValueError:
+        return False
+
+
 def acset_to_amr(acset):
     """
     A method that takes in a stock and flow JSON acset dictionary object
@@ -22,13 +30,16 @@ def acset_to_amr(acset):
     params_list = []
     initials_list = []
     auxiliaries_list = []
+    stock_set = set()
 
-    params = []
+    total_params = set()
     params_stock_flow_map = {}
 
     for stock in stocks:
-        stocks_list.append({'id': stock['sname']})
-        initials_list.append({'target': stock['sname']})
+        stock_name = stock["sname"]
+        stocks_list.append({'id': stock_name})
+        initials_list.append({'target': stock_name})
+        stock_set.add(stock_name)
 
     for idx, flow in enumerate(flows):
         flow_id = 'flow' + str(flow['_id'])
@@ -36,45 +47,43 @@ def acset_to_amr(acset):
         upstream_stock = stocks[int(flow['u']) - 1]['sname']
         downstream_stock = stocks[int(flow['d']) - 1]['sname']
 
-        expression_str = flow['ϕf'].replace('p.', '').replace('u.', '')
-
         flow_dict = {'id': flow_id, 'name': flow_name, 'upstream_stock': upstream_stock,
-                     'downstream_stock': downstream_stock, 'rate_expression': expression_str}
+                     'downstream_stock': downstream_stock, 'rate_expression': flow['ϕf']}
 
-        params.extend(re.findall(r'p\.([^()*+-/ ]+)', flow['ϕf']))
+        # this regex pattern finds all operands
+        flow_operands = re.findall(r'\b\w+(?:\.\w+)*\b', flow['ϕf'])
+
+        # if an operand is not a stock or number then it must be a parameter for current flow
+        flow_params = [param for param in flow_operands if param not in stock_set and not is_number(
+            param)]
+
+        # add the current flow parameters to set of total parameters
+        total_params |= set(flow_params)
 
         params_stock_flow_map[flow_id] = []
-
-        params_stock_flow_map[flow_id].extend(
-            re.findall(r'p\.([^()*+-/ ]+)', flow['ϕf']))
-        params_stock_flow_map[flow_id].extend(
-            re.findall(r'u\.([^()*+-/ ]+)', flow['ϕf']))
+        params_stock_flow_map[flow_id].extend(flow_params)
+        for stock_name in stock_set:
+            params_stock_flow_map[flow_id].extend(re.findall(stock_name, flow['ϕf']))
 
         flows_list.append(flow_dict)
 
-    for param in params:
+    for param in total_params:
         param_dict = {}
-        param_name = 'p_' + param
+
+        # naming convention for parameters in stockflow amr?
+        param_name = "p_" + param
         param_dict['id'] = param_name
         param_dict['name'] = param_name
         param_dict['value'] = 0.0
         params_list.append(param_dict)
 
-        auxiliary_dict = {}
-        auxiliary_dict['id'] = param
-        auxiliary_dict['name'] = param
-        auxiliary_dict['expression'] = param_name
+        auxiliary_dict = {'id': param_name, 'name': param_name, 'expression': param_name}
         auxiliaries_list.append(auxiliary_dict)
 
-    idx = 0
-    for flow_id, stock_param_list in params_stock_flow_map.items():
+    for idx, (flow_id, stock_param_list) in enumerate(params_stock_flow_map.items()):
         for stock_or_param in stock_param_list:
-            link_dict = {'id': 'link' + str(idx + 1)}
-            link_dict['source'] = stock_or_param
-            link_dict['target'] = flow_id
-
+            link_dict = {'id': 'link' + str(idx + 1), 'source': stock_or_param, 'target': flow_id}
             links_list.append(link_dict)
-            idx += 1
 
     return {
         'header': {
@@ -118,30 +127,26 @@ def amr_to_acset(amr):
     stocks_mapping = {}
     for parameter in amr['semantics']['ode']['parameters']:
         if parameter['id'].startswith('p_'):
-            symbols[parameter['id'][2:]] = sympy.Symbol(
-                'p.' + parameter['id'][2:])
+            symbols[parameter['id'][2:]] = sympy.Symbol(parameter['id'][2:])
 
     for idx, stock in enumerate(stocks):
         stock_id = idx + 1
         stock_name = stock['id']
         stock_dict = {'_id': stock_id, 'sname': stock_name}
         stocks_list.append(stock_dict)
-        symbols[stock_name] = sympy.Symbol('u.' + stock_name)
+        symbols[stock_name] = sympy.Symbol(stock_name)
         stocks_mapping[stock_name] = idx + 1
 
     for idx, flow in enumerate(flows):
-        flow_id = idx + 1
         upstream_stock = next(
             filter(lambda stock_: stock_['sname'] == flow['upstream_stock'],
-                   stocks_list)).get(
-            '_id')
+                   stocks_list)).get('_id')
         downstream_stock = next(
             filter(lambda stock_: stock_['sname'] == flow['downstream_stock'],
-                   stocks_list)).get(
-            '_id')
+                   stocks_list)).get('_id')
         flow_name = flow['name']
 
-        flow_dict = {'_id': flow_id, 'u': upstream_stock, 'd': downstream_stock, 'fname': flow_name,
+        flow_dict = {'_id': idx + 1, 'u': upstream_stock, 'd': downstream_stock, 'fname': flow_name,
                      "ϕf": flow['rate_expression']}
 
         flows_list.append(flow_dict)
@@ -149,7 +154,8 @@ def amr_to_acset(amr):
     link_id = 1
     for idx, link in enumerate(links):
         if link['source'] in stocks_mapping:
-            link_dict = {'_id': link_id, 's': stocks_mapping[link['source']], 't': idx}
+            link_dict = {'_id': link_id, 's': stocks_mapping[link['source']],
+                         't': link["target"][4:]}
             link_id += 1
             links_list.append(link_dict)
 
