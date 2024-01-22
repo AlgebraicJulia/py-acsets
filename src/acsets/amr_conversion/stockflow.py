@@ -58,7 +58,7 @@ def acset_to_amr(acset):
                      'downstream_stock': downstream_stock, 'rate_expression': flow['ϕf']}
 
         # this regex pattern finds all operands
-        flow_operands = re.findall(r"\b\w[\w.]*\w\b", flow['ϕf'])
+        flow_operands = re.findall(r"\b\w[\w.]*\b", flow['ϕf'])
 
         # if an operand is not a stock or number then it must be a parameter for current flow
         flow_params = [param for param in flow_operands if param not in stock_set and not is_number(
@@ -171,16 +171,3 @@ def amr_to_acset(amr):
         'Stock': stocks_list,
         'Link': links_list
     }
-
-
-if __name__ == "__main__":
-    acset_input = requests.get(
-        "https://raw.githubusercontent.com/AlgebraicJulia/py-acsets/jpfairbanks-patch-1/"
-        "src/acsets/schemas/examples/StockFlowp.json").json()
-    amr_output = acset_to_amr(acset_input)
-
-    amr_input = requests.get(
-        "https://raw.githubusercontent.com/DARPA-ASKEM/Model-Representations/" \
-        "7f5e377225675259baa6486c64102f559edfd79f/stockflow/examples/sir.json").json()
-
-    acset_output = amr_to_acset(amr_input)
