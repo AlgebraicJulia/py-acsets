@@ -37,9 +37,13 @@ def acset_to_amr(acset):
 
     for stock in stocks:
         stock_name = stock["sname"]
+        param_stock_initial_name = stock_name + "0"
         stocks_list.append({'id': stock_name})
-        initials_list.append({'target': stock_name})
+        initials_list.append({'target': stock_name, "expression": param_stock_initial_name})
         stock_set.add(stock_name)
+
+        param_dict = {'id': param_stock_initial_name, 'name': param_stock_initial_name, 'value': 0.0}
+        params_list.append(param_dict)
 
     for idx, flow in enumerate(flows):
         flow_id = 'flow' + str(flow['_id'])
