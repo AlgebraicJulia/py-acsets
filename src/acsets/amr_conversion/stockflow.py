@@ -58,7 +58,7 @@ def acset_to_amr(acset):
                      'downstream_stock': downstream_stock, 'rate_expression': flow['ϕf']}
 
         # this regex pattern finds all operands
-        flow_operands = re.findall(r'\b\w+(?:\.\w+)*\b', flow['ϕf'])
+        flow_operands = re.findall(r"\b\w[\w.]*\w\b", flow['ϕf'])
 
         # if an operand is not a stock or number then it must be a parameter for current flow
         flow_params = [param for param in flow_operands if param not in stock_set and not is_number(
