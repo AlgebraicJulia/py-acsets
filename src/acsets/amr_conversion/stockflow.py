@@ -9,6 +9,9 @@ import re
 
 
 def is_number(number):
+    """
+    Tests to see if an operand in an expression is a number or not.
+    """
     try:
         float_num = float(number)
         return True
