@@ -3,8 +3,6 @@ This module contains two methods used for converting between stock and flow
 acsets and amr. Both methods accept an acset/amr JSON dictionary object and
 returns its counterpart JSON dictionary object.
 """
-import requests
-import sympy
 import re
 
 
@@ -130,18 +128,13 @@ def amr_to_acset(amr):
     stocks_list = []
     links_list = []
 
-    symbols = {}
     stocks_mapping = {}
-    for parameter in amr['semantics']['ode']['parameters']:
-        if parameter['id'].startswith('p_'):
-            symbols[parameter['id'][2:]] = sympy.Symbol(parameter['id'][2:])
 
     for idx, stock in enumerate(stocks):
         stock_id = idx + 1
         stock_name = stock['id']
         stock_dict = {'_id': stock_id, 'sname': stock_name}
         stocks_list.append(stock_dict)
-        symbols[stock_name] = sympy.Symbol(stock_name)
         stocks_mapping[stock_name] = idx + 1
 
     for idx, flow in enumerate(flows):
